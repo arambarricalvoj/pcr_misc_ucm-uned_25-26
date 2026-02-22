@@ -1,0 +1,48 @@
+\datos{color}{}{}
+\section{\textit{ANYmal}}
+\textit{ANYmal}, desarrollado por el \textit{Robotic Systems Lab} de la \textit{ETH Zürich} y 
+presentado por primera vez en 2016, Figura~\ref{anymal}, es un robot cuadrúpedo avanzado diseñado 
+para la inspección autónoma, la exploración en entornos complejos y la intervención en escenarios 
+industriales y de rescate. Su diseño modular, su locomoción altamente dinámica y su capacidad para
+adaptarse a terrenos irregulares lo han convertido en uno de los robots de patas más influyentes de
+la última década. ANYmal integra cámaras estéreo, sensores de profundidad, un escáner láser 3D, 
+sensores de fuerza en las articulaciones y un ordenador principal de alto rendimiento encargado de
+la percepción, la planificación y la navegación. \\
+
+Sus usos principales incluyen la inspección autónoma en plantas industriales, la exploración de
+túneles y minas, la cartografía tridimensional, la investigación en control locomotor y la 
+participación en competiciones internacionales como la \textit{DARPA Subterranean Challenge}. 
+Gracias a su robustez mecánica y a su capacidad para caminar, trotar, subir escaleras, levantarse
+tras caídas y superar obstáculos complejos, ANYmal se ha convertido en una plataforma de referencia 
+para la investigación en robótica cuadrúpeda. \\
+
+Al igual que otros robots cuadrúpedos modernos como \textit{Spot} o \textit{Unitree Go1}, 
+\textit{ANYmal} implementa una arquitectura de control híbrida. El ordenador central ejecuta los 
+módulos de percepción, integración multisensorial, planificación de trayectorias y navegación global,
+siguiendo la descomposición vertical clásica. Sin embargo, cada articulación dispone de controladores
+locales que procesan directamente la información sensorial y generan respuestas rápidas para mantener
+la estabilidad dinámica, absorber impactos o corregir perturbaciones. Los niveles superiores
+planifican el movimiento global y los objetivos de navegación, mientras que los niveles inferiores
+garantizan la ejecución reactiva y segura del patrón de marcha. Esta combinación de planificación
+deliberativa y control reactivo permite a ANYmal adaptarse rápidamente a cambios del entorno,
+cumpliendo las características de la arquitectura híbrida descrita en la Sección~2.3. \\
+
+\begin{wrapfigure}{r}{0.34\textwidth}
+\centering
+\vspace{-10pt}
+\includegraphics[width=0.34\textwidth]{Images/anymal.jpg}
+\caption{\label{anymal}\textit{ANYmal}.}
+\vspace{-10pt}
+\end{wrapfigure}
+
+\textit{ANYmal} utiliza un sistema de locomoción cuadrúpedo con doce grados de libertad, 
+accionados mediante motores eléctricos de alta potencia y sensores de torque. La combinación
+de control de impedancia, estimación del estado corporal y planificación dinámica permite al
+robot caminar, correr, girar con precisión, levantarse tras caídas y desplazarse por terrenos
+irregulares. Su locomoción reactiva y su capacidad para mantener la estabilidad ante perturbaciones
+lo convierten en un ejemplo representativo de las arquitecturas híbridas modernas aplicadas a robots
+cuadrúpedos de alto rendimiento. \\
+
+\subsection*{Referencias}
+\cite{ANYmal2016} \fullcite{ANYmal2016}.\\
+\cite{ANYmalSubT} \fullcite{ANYmalSubT}.

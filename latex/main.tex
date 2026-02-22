@@ -1,0 +1,59 @@
+% !TEX program = xelatex
+\documentclass{InforMeX}
+
+\begin{document}
+\sloppy
+\portada{Máster en Ingeniería de Sistemas y Control}
+{Prácticas de Computación y Robótica}
+{Javier Arambarri Calvo}
+{2025/2026}
+{\today}
+{Proyecto}
+
+%%%%%%%%%%%%%%%%%%%%
+% \datos{1}{2}{3}
+%  1- color -> imprime logo en color; cc-> imprime logo en B/N
+%  2- Título del documento
+%  3- Nombre del Vicerrectorado
+%%%%%%%%%%%%%%%%%%%%
+\include{autoria}
+
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\listtablename}{Índice de tablas}
+
+
+\datos{color}{}{}
+\tableofcontents
+%\newpage
+\listoffigures
+%\newpage
+\listoftables
+%\lstlistoflistings
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%
+% \adaptar{1}{2}
+% 1- Si -> aumentar tamaño de letra
+% 2- Si -> Adaptado con colores de Baja Visión
+%%%%%%%%%%%%%%%%%%%%
+\adaptar{no}{no}
+
+\include{enunciado}
+\include{tarea1}
+\include{resumen}
+\include{shakey}
+\include{turtlebot4}
+\include{rhex}
+\include{mitCheetah}
+\include{crazyflie}
+\include{pez}
+\include{flirKobra725}
+\include{tiago}
+\include{unitreeG1}
+
+\newpage
+\datos{color}{}{}
+\printbibliography[title={Referencias}]
+\addcontentsline{toc}{section}{Referencias}
+
+\end{document}

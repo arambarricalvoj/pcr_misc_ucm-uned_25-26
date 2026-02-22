@@ -1,2 +1,5 @@
 CoppeliaSim_Edu_V4_10_0_rev0_Ubuntu24_04/
 CoppeliaSim_Edu_V4_10_0_rev0_Ubuntu24_04.tar.xz
+tareas/ros2_ws/build/
+tareas/ros2_ws/install/
+tareas/ros2_ws/log/

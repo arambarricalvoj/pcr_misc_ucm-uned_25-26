@@ -1,0 +1,166 @@
+\datos{color}{}{}
+\section*{Tarea 1: experimento de control de posición de un robot móvil.}
+\addcontentsline{toc}{section}{Tarea 1: experimento de control de posición de un robot móvil.}
+
+El experimento consiste en controlar la posición de un robot móvil con el
+Simulador CoppeliaSim. Los pasos a llevar a cabo son los siguientes:
+
+\subsection*{1. Descargar el simulador y agregar el modelo del robot al mismo como se
+explica en el documento Interfaz de la Práctica.}
+\addcontentsline{toc}{subsection}{1. Descargar el simulador y agregar el modelo del robot al mismo como se
+explica en el documento Interfaz de la Práctica.}
+
+Se ha creado una imagen de \textit{Docker} con el simulador instalado, el modelo del robot
+\textit{Khepera IV}, y el \textit{framework ROS2}. En el apartado \ref{} se detalla la descarga 
+e instalación utilizando \textit{Docker}. En la Figura \ref{fig:t1.2} se observa que el robot se 
+ha cargado correctamente.
+
+\subsection*{2. Al arrastrar el robot desde el panel lateral y soltarlo en el espacio de
+trabajo, el robot quedará agregado a la simulación.}
+\addcontentsline{toc}{subsection}{2. Al arrastrar el robot desde el panel lateral y soltarlo en el espacio de
+trabajo, el robot quedará agregado a la simulación.}
+
+En la Figura \ref{fig:t1.2} se observa que el robot se 
+ha agregado correctamente a la simulación.
+
+\begin{figure}[H]
+    \begin{center}
+    \includegraphics[scale=0.2, angle=0]{Images/tarea1/robot.png}
+    \caption{\label{fig:t1.2} Robot \textit{Khepera IV} y objeto que representa el
+    punto de destino agregados a \textit{Coppelia Sim}.}
+    \end{center}
+\end{figure}
+
+\subsection*{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se
+debe este comportamiento?}
+\addcontentsline{toc}{subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se
+debe este comportamiento?}
+
+\subsection*{4. Abrir el script de programación del robot y observar los valores de las
+velocidades izquierda y derecha.}
+\addcontentsline{toc}{subsection}{4. Abrir el script de programación del robot y observar los valores de las
+velocidades izquierda y derecha.}
+
+El robot se mueve dibujando una trayectoria en arco de circunferencia, Figura \ref{fig:t1.3_2}. Haciendo doble click en el script por defecto del robot,
+Figura \ref{fig:t1.3}, se abre el script que se presenta en el Código \ref{cod:t1.3}. Este comportamiento
+se debe a las velocidades angulares ($w_L,\; w_R$) asignadas a cada motor: 3 rad/s al izquierdo y 5 rad/s al derecho,
+respectivamente. Por tanto, el motor izquierdo gira más lento que el derecho y el robot realiza una trayectoria
+en arco de circunferencia de radio $R = 0.176 \text{ metros}$, que se obtiene mediante la Ecuación (1) conociendo
+la distancia entre los centros de las ruedas (\textit{axle track}), $L = 0.088 \text{ metros}$.
+
+\begin{equation}
+R = \frac{L}{2} \cdot \frac{\omega_R + \omega_L}{\omega_R - \omega_L}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[scale=0.16]{Images/tarea1/trayectoria_por_defecto.png}
+        \caption{\label{fig:t1.3_2} Trayectoria por defecto.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics[scale=0.5]{Images/tarea1/script.png}
+        \caption{\label{fig:t1.3} Script por defecto del robot.}
+    \end{minipage}
+
+\end{figure}
+
+\begin{comment}
+    \begin{figure}[H]
+    \begin{center}
+    \includegraphics[scale=0.5, angle=0]{Images/tarea1/trayectoria_por_defecto.png}
+    \caption{\label{fig:t1.3_2} Trayectoria por defecto.}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+    \includegraphics[scale=0.5, angle=0]{Images/tarea1/script.png}
+    \caption{\label{fig:t1.3} Script por defecto del robot.}
+    \end{center}
+\end{figure}
+\end{comment}
+
+\lstinputlisting[style=luastyle, caption={Script por defecto del robot.}, label={cod:t1.3}]{Code/tarea1/script_por_defecto.lua}
+
+
+\subsection*{5. Agregar a la simulación un objeto que represente el punto de destino del
+robot.}
+\addcontentsline{toc}{subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del
+robot.}
+
+Se ha añadido una esfera con las propiedades descritas en la Figura \ref{fig:t1.5} y en la posición
+$(x,\; y,\; z) = (-0.5,\; 0.5,\; 0.05)$, como se observa en la Figura \ref{fig:t1.2}.
+
+\begin{figure}[H]
+    \begin{center}
+    \includegraphics[scale=0.5, angle=0]{Images/tarea1/esfera.png}
+    \caption{\label{fig:t1.5} Propiedades de la esfera añadida como punto de destino.}
+    \end{center}
+\end{figure}
+
+
+\subsection*{6. Con las coordenadas del punto de destino y las del robot, calcular las
+velocidades angular y lineal para controlar su posición.}
+\addcontentsline{toc}{subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las
+velocidades angular y lineal para controlar su posición.}
+
+\subsection*{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como
+resultado del modelo diferencial. Sugerencia: se puede comenzar solamente
+controlando la velocidad angular del robot a través el ángulo orientación
+hacia el punto y manteniendo la velocidad lineal constante, por medio de un
+control proporcional (P) sencillo. (\textit{v}=cte, \textit{w}=$\boldsymbol{K_{p}}$*(error ángulo)).}
+\addcontentsline{toc}{subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como
+resultado del modelo diferencial.}
+
+\subsection*{8. Implementar una ley de control diferente a la proporcionada y comparar
+ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}
+\addcontentsline{toc}{subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar
+ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}
+
+
+
+
+
+
+
+
+En la Tabla \ref{tab:resumen} se recogen resumidamente las respuestas de la tarea, tal y como 
+se especifica en el enunciado. 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|cc|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Robot}}                                                   & \textbf{\textit{Shakey}} & \textbf{\textit{Turtlebot4}} & \textbf{\textit{RHex}} & \textbf{\textit{MIT Cheetah}} & \textbf{\textit{Crazyflie}}\\ \hline
+\multicolumn{1}{|c|}{\multirow{3}{*}{\textbf{Arquitectura}}} & \textbf{Centralizada}   & X & X &  & & X    \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Distribuida}    & & & X & &  \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Híbrida}        & & & & X &  \\ \hline
+\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{Locomoción}}}   & \textbf{Ruedas}         & X & X & & &    \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Patas}          & & & X & X & \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Cadenas}        & & & & &    \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Marino o aéreo} & & & & & X   \\ \hline
+\multicolumn{2}{|c|}{\textbf{Robot colaborativo}}                                      & & & & &    \\ \hline
+\end{tabular}
+\end{table}
+\vspace{-0.7cm}
+\begin{table}[H]
+\centering
+\begin{tabular}{|cc|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Robot}}                                                   & \textbf{Pez robot \textit{UJI-CIRTESU}} & \textbf{\textit{FLIR Kobra 725}} & \textbf{\textit{TIAGo}} & \textbf{\textit{Unitree G1}} \\ \hline
+\multicolumn{1}{|c|}{\multirow{3}{*}{\textbf{Arquitectura}}} & \textbf{Centralizada}   & X & X & &      \\ \cline{2-6} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Distribuida}    & & & &     \\ \cline{2-6} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Híbrida}        & & & X & X     \\ \hline
+\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{Locomoción}}}   & \textbf{Ruedas}         & & & X &     \\ \cline{2-6} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Patas}          & & & & X    \\ \cline{2-6} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Cadenas}        & & X & &     \\ \cline{2-6} 
+\multicolumn{1}{|c|}{}                                       & \textbf{Marino o aéreo} & X & & &     \\ \hline
+\multicolumn{2}{|c|}{\textbf{Robot colaborativo}}                                      & & & X &     \\ \hline
+\end{tabular}
+\caption{Resumen de respuestas.} \label{tab:resumen}
+\end{table}

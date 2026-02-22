@@ -1,0 +1,21 @@
+\datos{color}{}{}
+\section{\textit{Unitree Go1}}
+\textit{Unitree Go1}, desarrollado por \textit{Unitree Robotics} y presentado en 2021, Figura~\ref{go1}, es un robot cuadrúpedo compacto y asequible orientado a la investigación, la educación y la inspección ligera. Su diseño ligero, su elevada velocidad y su capacidad para ejecutar maniobras dinámicas lo han convertido en una plataforma muy extendida en laboratorios universitarios y grupos de investigación en locomoción y control. El Go1 integra cámaras de profundidad, sensores inerciales, sensores de fuerza en las articulaciones y un ordenador principal encargado de la percepción y la navegación. \\
+
+Sus aplicaciones incluyen la investigación en control de cuadrúpedos, la navegación autónoma, la interacción humano–robot, la inspección en interiores y exteriores, y el desarrollo de algoritmos de locomoción dinámica. Gracias a su bajo coste y a su arquitectura abierta, el Go1 se ha convertido en una plataforma habitual para experimentos de aprendizaje por refuerzo, control predictivo y planificación de movimientos. \\
+
+Al igual que \textit{Spot}, el \textit{Unitree Go1} implementa una arquitectura híbrida. El ordenador central ejecuta los módulos de percepción, integración sensorial, planificación y navegación, siguiendo la descomposición vertical clásica. Sin embargo, cada articulación dispone de controladores locales que procesan directamente la información sensorial y generan respuestas rápidas para mantener la estabilidad, absorber impactos o corregir perturbaciones. Los niveles superiores planifican el movimiento global, mientras que los niveles inferiores garantizan la ejecución reactiva y segura del patrón de marcha. Esta combinación de control deliberativo y reactivo permite al Go1 adaptarse rápidamente a cambios del entorno, cumpliendo las características de la arquitectura híbrida descrita en la Sección~2.3. \\
+
+\begin{wrapfigure}{r}{0.34\textwidth}
+\centering
+\vspace{-10pt}
+\includegraphics[width=0.34\textwidth]{Images/go1.jpg}
+\caption{\label{go1}\textit{Unitree Go1}.}
+\vspace{-10pt}
+\end{wrapfigure}
+
+El \textit{Go1} utiliza un sistema de locomoción cuadrúpedo con doce grados de libertad, accionados mediante motores eléctricos de alta eficiencia y sensores de torque. La combinación de control de impedancia, estimación del estado corporal y planificación dinámica permite al robot caminar, correr, girar con agilidad y adaptarse a superficies irregulares. Su locomoción reactiva y su capacidad para mantener la estabilidad ante perturbaciones lo convierten en un ejemplo representativo de las arquitecturas híbridas modernas. \\
+
+\subsection*{Referencias}
+\cite{UnitreeGo1} \fullcite{UnitreeGo1}.\\
+\cite{UnitreePaper} \fullcite{UnitreePaper}.

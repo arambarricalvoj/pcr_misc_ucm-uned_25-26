@@ -1,0 +1,22 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Enunciado}{5}{section.1}%
+\contentsline {section}{Tarea 1: experimento de control de posición de un robot móvil.}{6}{section*.10}%
+\contentsline {subsection}{1. Descargar el simulador y agregar el modelo del robot al mismo como se explica en el documento Interfaz de la Práctica.}{6}{section*.11}%
+\contentsline {subsection}{2. Al arrastrar el robot desde el panel lateral y soltarlo en el espacio de trabajo, el robot quedará agregado a la simulación.}{6}{section*.12}%
+\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{6}{section*.14}%
+\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{6}{section*.15}%
+\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{7}{section*.17}%
+\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{8}{section*.19}%
+\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{8}{section*.20}%
+\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}{8}{section*.21}%
+\contentsline {section}{\numberline {2}Robots}{9}{section.2}%
+\contentsline {subsection}{\numberline {2.1}\textit {Shakey}}{9}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}\textit {TurtleBot 4}}{10}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}\textit {RHex}}{11}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}\textit {MIT Cheetah}}{12}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}\textit {Crazyflie}}{13}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Pez robot \textit {UJI–CIRTESU}}{14}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}\textit {FLIR Kobra 725}}{15}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}\textit {TIAGo}}{16}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}\textit {Unitree G1}}{17}{subsection.2.9}%
+\contentsline {section}{Referencias}{18}{section*.52}%

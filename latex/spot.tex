@@ -1,0 +1,40 @@
+\datos{color}{}{}
+\section{\textit{Spot}}
+\textit{Spot}, desarrollado por \textit{Boston Dynamics} y presentado comercialmente en 2019, 
+Figura~\ref{spot}, es un robot cuadrúpedo diseñado para la inspección autónoma, la exploración 
+de entornos complejos y la interacción segura con personas y maquinaria. Su diseño bioinspirado,
+su elevada movilidad y su capacidad para mantener el equilibrio dinámico lo han convertido en uno
+de los robots más avanzados y versátiles de la actualidad. Spot integra un conjunto de sensores 
+de percepción tridimensional, cámaras estéreo, sensores de fuerza en las articulaciones y un 
+ordenador principal encargado de la planificación y la navegación. \\
+
+Sus usos principales abarcan la inspección industrial, la monitorización de infraestructuras, 
+la exploración en entornos peligrosos, la cartografía 3D y la investigación en locomoción dinámica.
+Gracias a su estabilidad y capacidad para desplazarse por escaleras, terrenos irregulares y espacios
+estrechos, Spot se ha convertido en una herramienta habitual en plantas industriales, obras civiles,
+instalaciones energéticas y laboratorios de robótica avanzada. \\
+
+A diferencia de robots deliberativos clásicos como \textit{Shakey} o \textit{TurtleBot 4}, 
+\textit{Spot} implementa una arquitectura de control híbrida. El robot mantiene una descomposición
+vertical tradicional —percepción, integración multisensorial, planificación y control— ejecutada 
+en un ordenador central, pero combina esta estructura con controladores locales distribuidos en 
+cada articulación. Estos controladores reaccionan directamente a la información sensorial de bajo
+nivel, permitiendo respuestas rápidas ante perturbaciones, resbalones, impactos o cambios bruscos
+del terreno. Los módulos superiores planifican trayectorias y comportamientos globales, mientras
+que los niveles inferiores garantizan la estabilidad dinámica y la ejecución segura del movimiento.
+Esta combinación de planificación deliberativa y control reactivo encaja plenamente con 
+la arquitectura híbrida descrita en la Sección~2.3. \\
+
+\begin{wrapfigure}{r}{0.34\textwidth}
+\centering
+\vspace{-10pt}
+\includegraphics[width=0.34\textwidth]{Images/spot.jpg}
+\caption{\label{spot}\textit{Spot}.}
+\vspace{-10pt}
+\end{wrapfigure}
+
+\textit{Spot} utiliza un sistema de locomoción cuadrúpedo con doce grados de libertad, tres por cada pata, accionados mediante motores eléctricos de alta potencia y sensores de torque. La combinación de control de impedancia, estimación del estado corporal y planificación dinámica permite al robot caminar, trotar, subir escaleras, recuperar el equilibrio y adaptarse a irregularidades del terreno. Su locomoción, altamente reactiva y estable, es un ejemplo representativo de la integración entre control distribuido de bajo nivel y planificación de alto nivel propia de las arquitecturas híbridas. \\
+
+\subsection*{Referencias}
+\cite{SpotBD} \fullcite{SpotBD}.\\
+\cite{SpotICRA} \fullcite{SpotICRA}.
