@@ -39,6 +39,16 @@ Por estas razones, aunque Python es totalmente compatible con CoppeliaSim, Lua o
 Consecuentemente, se recomienda el uso de Lua para utilizar ROS2, y en la ruta ``tareas/simROS2-master/examples/`` están los ejemplos oficiales. Abrir cada una de las escenas y después clickar en los script dentro de CoppeliaSim.
 <br><br>
 
+# Ejecución del controller para la tarea 1
+```bash
+source /opt/ros/jazzy/setup.bash
+cd /home/javierac/pcr_misc/tareas/ros2_ws/
+colcon build
+source /home/javierac/pcr_misc/tareas/ros2_ws/install/setup.bash
+ros2 run tarea1 icc_controller --ros-args --params-file tarea1/config/params.yaml 
+
+```
+
 # Referencias
 [https://www.coppeliarobotics.com/#](https://www.coppeliarobotics.com/#)
 

@@ -123,9 +123,286 @@ ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}
 ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}
 
 
+\clearpage
+\section{Controladores ICC para un robot diferencial}
+
+En esta práctica se implementan y comparan dos variantes del controlador 
+\textit{Instantaneous Center of Curvature} (ICC) para un robot móvil diferencial.
+Ambos controladores generan velocidades lineales y angulares $(v, \omega)$
+para conducir al robot desde su pose actual $(x_r, y_r, \theta_r)$ hasta un objetivo
+$(x_t, y_t)$.
+
+\subsection{Geometría del problema}
+
+Sea la posición del robot $(x_r, y_r)$ y la del objetivo $(x_t, y_t)$.
+Definimos:
 
 
 
+\[
+d = \sqrt{(x_t - x_r)^2 + (y_t - y_r)^2}
+\]
+
+
+
+
+
+\[
+\theta_d = \operatorname{atan2}(y_t - y_r,\; x_t - x_r)
+\]
+
+
+
+
+
+\[
+e_\theta = \theta_d - \theta_r
+\]
+
+
+
+donde $d$ es la distancia al objetivo y $e_\theta$ el error angular normalizado.
+
+\subsection{Controlador ICC reactivo}
+
+El controlador reactivo utiliza una ley proporcional para la velocidad lineal:
+
+
+
+\[
+v = K_v \cdot d
+\]
+
+
+
+saturada por la velocidad máxima del robot:
+
+
+
+\[
+v = \min(v,\; v_{\max})
+\]
+
+
+
+La velocidad angular se calcula como:
+
+
+
+\[
+\omega = \omega_{\max} \cdot \sin(e_\theta)
+\]
+
+
+
+Este controlador es robusto y sencillo, pero la trayectoria no es necesariamente
+un arco perfecto.
+
+\subsection{Controlador ICC geométrico}
+
+El controlador geométrico impone que el robot siga un arco de circunferencia
+que conecta su pose actual con el objetivo. La curvatura del arco viene dada por:
+
+
+
+\[
+R = \frac{d}{2 \sin(e_\theta)}
+\]
+
+
+
+La velocidad angular se obtiene directamente de la relación cinemática:
+
+
+
+\[
+\omega = \frac{v}{R}
+\]
+
+
+
+donde $v = K_v \cdot d$ como en el controlador reactivo. En este caso,
+$K_v$ afecta únicamente a la rapidez del movimiento, pero no a la forma
+de la trayectoria, que viene determinada por la geometría.
+
+\section{Arquitectura del código en C++}
+
+El proyecto se estructura en varios módulos para mejorar la claridad y la
+reutilización del código:
+
+\begin{itemize}
+    \item \textbf{icc\_controller.hpp / icc\_controller.cpp}: 
+    Implementa el nodo principal de ROS2, gestiona suscripciones, temporizadores,
+    publicación de comandos y ejecución del bucle de control.
+    
+    \item \textbf{service\_utils.hpp / service\_utils.cpp}: 
+    Encapsula la llamada al servicio que proporciona la posición objetivo.
+    
+    \item \textbf{pose\_utils.hpp}: 
+    Funciones auxiliares para extraer la pose del robot y normalizar ángulos.
+    
+    \item \textbf{metrics\_utils.hpp / metrics\_utils.cpp}: 
+    Clase encargada de registrar datos por iteración y calcular métricas globales.
+\end{itemize}
+
+El archivo \texttt{.hpp} contiene las declaraciones de clases y funciones,
+mientras que los archivos \texttt{.cpp} contienen las implementaciones.
+Esta separación permite compilar más rápido y mantener un código más limpio.
+
+\section{Métricas de evaluación}
+
+Para comparar ambos controladores se emplean métricas estándar en control:
+
+\subsection{Integral del Error Absoluto (IAE)}
+
+
+
+\[
+\mathrm{IAE} = \int_0^T |e(t)| \, dt
+\]
+
+
+
+Penaliza el error acumulado sin considerar su magnitud cuadrática.
+
+\subsection{Integral del Error Cuadrático (ISE)}
+
+
+
+\[
+\mathrm{ISE} = \int_0^T e(t)^2 \, dt
+\]
+
+
+
+Penaliza más fuertemente errores grandes.
+
+\subsection{Integral del Error Absoluto Ponderado por el Tiempo (ITAE)}
+
+
+
+\[
+\mathrm{ITAE} = \int_0^T t \, |e(t)| \, dt
+\]
+
+
+
+Penaliza errores que persisten en el tiempo.
+
+\subsection{Integral del Error Cuadrático Ponderado por el Tiempo (ITSE)}
+
+
+
+\[
+\mathrm{ITSE} = \int_0^T t \, e(t)^2 \, dt
+\]
+
+
+
+Penaliza errores grandes y tardíos, siendo útil para evaluar estabilidad.
+
+\subsection{Implementación discreta}
+
+Dado que el controlador opera con un periodo de muestreo $\Delta t$, las métricas
+se aproximan mediante sumas:
+
+
+
+\[
+\mathrm{IAE} \approx \sum_{k=0}^{N} |e_k| \, \Delta t
+\]
+
+
+
+
+
+\[
+\mathrm{ISE} \approx \sum_{k=0}^{N} e_k^2 \, \Delta t
+\]
+
+
+
+
+
+\[
+\mathrm{ITAE} \approx \sum_{k=0}^{N} t_k \, |e_k| \, \Delta t
+\]
+
+
+
+
+
+\[
+\mathrm{ITSE} \approx \sum_{k=0}^{N} t_k \, e_k^2 \, \Delta t
+\]
+
+
+
+Estas métricas permiten comparar objetivamente el rendimiento de ambos controladores
+bajo diferentes valores de $K_v$.
+
+\section{Registro de datos}
+
+En cada iteración del controlador se almacena:
+
+\begin{itemize}
+    \item Tiempo $t$
+    \item Pose del robot $(x_r, y_r, \theta_r)$
+    \item Pose del objetivo $(x_t, y_t)$
+    \item Error de distancia $d$
+    \item Error angular $e_\theta$
+    \item Velocidades $v$ y $\omega$
+\end{itemize}
+
+Al finalizar, se añaden las métricas globales y los parámetros utilizados
+($K_v$, $v_{\max}$, $\omega_{\max}$, tipo de controlador).
+Esto permite realizar comparativas rigurosas mediante tablas y gráficas.
+
+
+\begin{comment}
+    ICC reactivo: Control cinemático proporcional (P-control) hacia un objetivo
+    Control cinemático proporcional (reactivo)
+    1. Roland Siegwart, Illah Nourbakhsh, Davide Scaramuzza  
+Introduction to Autonomous Mobile Robots, MIT Press, 2011.
+Capítulo 6: Control of Mobile Robots.
+→ Presenta controladores proporcionales para robots unicycle.
+
+2. Bruno Siciliano, Lorenzo Sciavicco, et al.  
+Robotics: Modelling, Planning and Control, Springer, 2009.
+→ Sección de control cinemático de robots móviles.
+
+3. Howie Choset et al.  
+Principles of Robot Motion, MIT Press, 2005.
+→ Control reactivo basado en errores de pose.
+
+ICC geométrico: Control geométrico basado en curvatura / arco circular (Pure Pursuit puntual)
+Control geométrico basado en curvatura
+1. Peter Corke  
+Robotics, Vision and Control, Springer, 2017.
+→ Capítulo sobre Pure Pursuit y control geométrico.
+
+2. Morin & Samson  
+Motion Control of Wheeled Mobile Robots, Springer Handbook of Robotics, 2016.
+→ Sección sobre control geométrico y curvatura.
+
+3. Kanayama et al. (1990)  
+“A Stable Tracking Control Method for an Autonomous Mobile Robot”, IEEE ICRA.
+→ Control geométrico basado en errores de pose.
+
+4. Coulter (1992)  
+“Implementation of the Pure Pursuit Path Tracking Algorithm”, CMU.
+→ Control geométrico por arco circular.
+
+@book{otero2005,
+  title={Robots Móviles: Navegación, Percepción y Control},
+  author={Otero, Manuel and Balaguer, Carlos},
+  year={2005},
+  publisher={McGraw-Hill}
+}
+
+
+Tu controlador geométrico es una versión exacta del Pure Pursuit para un objetivo puntual.
+\end{comment}
 
 
 

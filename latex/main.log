@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  22 FEB 2026 12:55
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  22 FEB 2026 19:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -962,14 +962,14 @@ LaTeX Info: Redefining \% on input line 1.
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- (./main.lof
-LaTeX Info: Redefining \sptext on input line 1.
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
  [3
 
 
-])
+] (./main.lof
+LaTeX Info: Redefining \sptext on input line 1.
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
@@ -1047,12 +1047,14 @@ Underfull \hbox (badness 1127) in paragraph at lines 108--108
 [][]\TU/4.ttf(0)/b/n/14.4 6. Con las coordenadas del punto de destino y las del robot, calcular las
  []
 
+[8] [9
 
-Overfull \hbox (3.62965pt too wide) in paragraph at lines 153--165
+] [10] Excluding 'comment' comment.
+Overfull \hbox (3.62965pt too wide) in paragraph at lines 430--442
  [][] 
  []
 
-) [8]
+) [11] [12]
 \openout2 = `resumen.aux'.
 
 
@@ -1114,7 +1116,7 @@ Underfull \hbox (badness 2020) in paragraph at lines 56--60
 \TU/4.ttf(0)/m/n/12 motrices, permitiendo avanzar, retroceder y girar sobre su
  []
 
-Excluding 'comment' comment.) [9
+Excluding 'comment' comment.) [13
 
 
 
@@ -1194,7 +1196,7 @@ Underfull \hbox (badness 3068) in paragraph at lines 59--45
 []\TU/4.ttf(0)/m/n/12 [[]4[]] iRobot Corporation. \TU/4.ttf(0)/m/it/12 iRobot® Create® 3 Educational Robot\TU/4.ttf(0)/m/n/12 . 2022. URL: []$[][][][][] [] [] []
  []
 
-[10
+[14
 
 
 
@@ -1281,7 +1283,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--43
 
  []
 
-) [11
+) [15
 
 
 
@@ -1348,7 +1350,7 @@ Underfull \hbox (badness 3179) in paragraph at lines 49--47
 []\TU/4.ttf(0)/m/n/12 [[]6[]] Jared Di Carlo et al. “Dynamic Locomotion in the MIT Cheetah 3 Through Convex
  []
 
-[12
+[16
 
 
 
@@ -1460,7 +1462,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--48
 
  []
 
-[13
+[17
 
 
 
@@ -1507,7 +1509,7 @@ Underfull \hbox (badness 1005) in paragraph at lines 38--44
 \TU/4.ttf(0)/m/n/12 suaves en el medio acuático. El diseño biomimético
  []
 
-) [14
+) [18
 
 
 
@@ -1544,7 +1546,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--27
 
 File: Images/flirKobra725.jpg Graphic file (type bmp)
 <Images/flirKobra725.jpg>
-) [15
+) [19
 
 
 
@@ -1651,7 +1653,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--33
 
  []
 
-) [16
+) [20
 
 
 
@@ -1748,7 +1750,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--40
 
  []
 
-) [17
+) [21
 
 
 
@@ -1775,7 +1777,7 @@ Underfull \hbox (badness 1052) in paragraph at lines 56--56
 []\TU/4.ttf(0)/m/n/12 James A. Preiss et al. “Crazyswarm: A large nano-quadcopter swarm”. En: \TU/4.ttf(0)/m/it/12 2017 IEEE
  []
 
-[18
+[22
 
 
 ] (./main.aux
@@ -1792,18 +1794,18 @@ L3 programming layer <2024-01-22>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9613B7E1A915BE6E3CB4EB6A18D680EC;7175.
+(rerunfilecheck)             Checksum: A4EA5C117F67C6EE5A448DB6B023E25E;9960.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26053 strings out of 476824
- 504303 string characters out of 5803866
+ 26057 strings out of 476824
+ 504387 string characters out of 5803866
  1973627 words of memory out of 5000000
- 47541 multiletter control sequences out of 15000+600000
+ 47545 multiletter control sequences out of 15000+600000
  566212 words of font info for 94 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
  94i,11n,107p,1097b,4829s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (18 pages).
+Output written on main.pdf (22 pages).

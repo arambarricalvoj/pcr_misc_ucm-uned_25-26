@@ -1,0 +1,9 @@
+icc_controller:
+  ros__parameters:
+    vmax: 0.15
+    wmax: 1.0
+    kv: 0.5
+    controller_type: 1
+
+# controller_type: 0 --> ICC reactivo
+# controller_type: 1 --> ICC geométrico
