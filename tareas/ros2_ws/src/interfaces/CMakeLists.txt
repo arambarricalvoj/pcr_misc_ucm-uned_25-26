@@ -8,6 +8,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -26,7 +27,7 @@ endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "action/ExecuteTrajectory.action"
-  DEPENDENCIES builtin_interfaces
+  DEPENDENCIES builtin_interfaces geometry_msgs
 )
 
 ament_export_dependencies(rosidl_default_runtime)

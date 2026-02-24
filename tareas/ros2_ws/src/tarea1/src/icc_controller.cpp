@@ -37,7 +37,7 @@ ICCController::ICCController()
     std::filesystem::path pkg_path = std::filesystem::path(pkg_share)
         .parent_path().parent_path().parent_path().parent_path();
 
-    std::string results_dir = (pkg_path / "tarea1" / "results").string() + "/";
+    std::string results_dir = (pkg_path / "src" / "tarea1" / "results").string() + "/";
     std::filesystem::create_directories(results_dir);
 
     metrics_ = std::make_unique<MetricsLogger>(
@@ -96,15 +96,41 @@ void ICCController::handleAccepted(
     goal_handle_ = goal_handle;
     target_received_ = false;
 
-    RCLCPP_INFO(get_logger(), "Solicitando target al servicio...");
+    auto goal = goal_handle->get_goal();
 
-    // Llamada ASÍNCRONA al servicio
-    requestTargetPositionAsync(
-        client_,
-        std::bind(&ICCController::onTargetReceived, this, std::placeholders::_1),
-        get_logger()
-    );
+    // Detectar si el target_pose está vacío (NaN)
+    bool target_is_empty =
+        std::isnan(goal->target_pose.position.x) ||
+        std::isnan(goal->target_pose.position.y) ||
+        std::isnan(goal->target_pose.position.z);
+
+    if (target_is_empty)
+    {
+        RCLCPP_INFO(get_logger(), "No se recibió target → solicitándolo al servicio...");
+
+        // Llamada ASÍNCRONA al servicio
+        requestTargetPositionAsync(
+            client_,
+            std::bind(&ICCController::onTargetReceived, this, std::placeholders::_1),
+            get_logger()
+        );
+    }
+    else
+    {
+        RCLCPP_INFO(get_logger(), "Target recibido en la acción → usando target_pose directamente");
+
+        // Guardar el target directamente (igual que hace onTargetReceived)
+        xt_ = goal->target_pose.position.x;
+        yt_ = goal->target_pose.position.y;
+
+        target_received_ = true;
+
+        // NO LLAMAR A executeControlLoop()
+        // El timer controlLoop() se encargará automáticamente
+    }
 }
+
+
 
 // ---------------------------------------------------------------------------
 // CALLBACK DE RESPUESTA DEL SERVICIO (ASÍNCRONO)
@@ -192,6 +218,18 @@ void ICCController::controlLoop()
     feedback->time_elapsed = time_elapsed_;
 
     goal_handle_->publish_feedback(feedback);
+
+    // Registrar métricas acumuladas
+    metrics_->updateMetrics(d, time_elapsed_);
+
+    // Registrar TODA la información de esta iteración
+    metrics_->addSample(
+        time_elapsed_,
+        xr, yr, theta_r,   // pose del robot
+        xt_, yt_,          // objetivo
+        d, e_theta,        // errores
+        v, w               // señales de control
+    );
 
     // Llegada al objetivo
     if (d < 0.05) {
