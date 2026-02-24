@@ -1,0 +1,46 @@
+\datos{color}{}{}
+\section*{ANEXO I: código}
+\addcontentsline{toc}{section}{ANEXO I: código}
+
+\subsection*{Script por defecto del robot}
+\lstinputlisting[style=luastyle, caption={Script por defecto del robot.}, label={cod:t1.3}]{Code/tarea1/script_por_defecto.lua}
+
+\subsection*{Publicador de la posición del robot}
+\lstinputlisting[style=luastyle, caption={Publicador de la posición del robot.}, label={cod:t1_pubRobotPose}]{Code/tarea1/publisher_robotPose.lua}
+
+\subsection*{Suscriptor de la velocidad comandada al robot}
+\lstinputlisting[style=luastyle, caption={Suscriptor de la velocidad comandada al robot.}, label={cod:t1_subsCmdVel}]{Code/tarea1/subscriber_cmdVel.lua}
+
+\subsection*{Servidor del servicio para obtener la posición del objeto que representa el punto de destino}
+\lstinputlisting[style=luastyle, caption={Servidor del servicio para obtener la posición del objeto que representa el punto de destino.}, label={cod:t1_serviceTargetPose}]{Code/tarea1/serviceTargetPose.lua}
+
+\subsection*{Acción personalizada \texttt{ExecuteTrajectory}}
+\lstinputlisting[style=luastyle, caption={Acción personalizada \texttt{ExecuteTrajectory}.}, label={cod:ExecuteTraj}]{Code/tarea1/ExecTraj.txt}
+
+\subsection*{Llamada a la acción personalizada \texttt{ExecuteTrajectory}}
+\lstinputlisting[style=luastyle, caption={Acción personalizada \texttt{ExecuteTrajectory}.}, label={cod:ExecuteTraj}]{Code/tarea1/ExecTraj.txt}
+
+\subsection*{Llamada a la acción personalizada \texttt{ExecuteTrajectory}}
+\begin{lstlisting}[style=luastyle, 
+    caption={Llamada a la acción personalizada \texttt{ExecuteTrajectory}.}, 
+    label={cod:actionClient}]
+ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{}" --feedback
+\end{lstlisting}
+
+\subsection*{Nodo ROS2 del controlador del robot}
+\lstinputlisting[style=cppstyle, caption={Nodo ROS2 del controlador del robot.}, label={cod:t1_controller}]{Code/tarea1/controller.cc}
+
+\subsection*{Cabeceras del módulo encargado de la llamada asíncrona al servicio \texttt{/get\_target\_pose}}
+\lstinputlisting[style=cppstyle, caption={Cabeceras del módulo encargado de la llamada asíncrona al servicio \texttt{/get\_target\_pose}.}, label={cod:serviceHpp}]{Code/tarea1/serviceHpp.hpp}
+
+\subsection*{Módulo encargado de la llamada asíncrona al servicio \texttt{/get\_target\_pose}}
+\lstinputlisting[style=cppstyle, caption={Módulo encargado de la llamada asíncrona al servicio \texttt{/get\_target\_pose}.}, label={cod:serviceCpp}]{Code/tarea1/serviceCpp.cpp}
+
+\subsection*{Cabeceras del módulo encargado de extraer la posición}
+\lstinputlisting[style=cppstyle, caption={Cabeceras del módulo encargado de extraer la posición.}, label={cod:poseHpp}]{Code/tarea1/poseHpp.hpp}
+
+\subsection*{Cabeceras del módulo para calcular las métricas de evaluación}
+\lstinputlisting[style=cppstyle, caption={Cabeceras del módulo para calcular las métricas de evaluación}, label={cod:metricHpp}]{Code/tarea1/metricHpp.hpp}
+
+\subsection*{Módulo para calcular las métricas de evaluación}
+\lstinputlisting[style=cppstyle, caption={Módulo para calcular las métricas de evaluación}, label={cod:metricCpp}]{Code/tarea1/metricCpp.cpp}

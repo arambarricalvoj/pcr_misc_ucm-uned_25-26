@@ -5,8 +5,10 @@ project(tarea1)
 find_package(ament_cmake REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclcpp_action REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(interfaces REQUIRED)
 
 
 include_directories(include)
@@ -20,9 +22,11 @@ add_library(tarea1_lib
 
 ament_target_dependencies(tarea1_lib
     rclcpp
+    rclcpp_action
     std_srvs
     geometry_msgs
     ament_index_cpp
+    interfaces
 )
 
 # Ejecutable principal

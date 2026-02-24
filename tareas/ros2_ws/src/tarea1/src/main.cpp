@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 
     auto node = std::make_shared<ICCController>();
 
-    node->callTargetService(node);
+    // node->callTargetService(node);
 
     rclcpp::spin(node);
     rclcpp::shutdown();

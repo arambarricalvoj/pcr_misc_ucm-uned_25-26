@@ -93,6 +93,25 @@
     numbersep=8pt
 }
 
+\lstdefinestyle{cppstyle}{
+    language=C++,
+    backgroundcolor=\color{gray!15},
+    frame=single,
+    rulecolor=\color{black},
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{orange!90!black},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt
+}
+
+
 
 
 

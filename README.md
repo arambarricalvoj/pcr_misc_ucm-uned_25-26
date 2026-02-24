@@ -46,6 +46,7 @@ cd /home/javierac/pcr_misc/tareas/ros2_ws/
 colcon build
 source /home/javierac/pcr_misc/tareas/ros2_ws/install/setup.bash
 ros2 run tarea1 icc_controller --ros-args --params-file tarea1/config/params.yaml 
+ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{}" --feedback
 
 ```
 

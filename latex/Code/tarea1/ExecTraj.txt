@@ -1,0 +1,12 @@
+# Goal
+---
+# Result
+bool success
+string message
+---
+# Feedback
+float64 distance
+float64 e_theta
+float64 v
+float64 w
+float64 time_elapsed

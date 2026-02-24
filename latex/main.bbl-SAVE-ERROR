@@ -279,6 +279,276 @@
       \verb 10.1109/TMECH.2014.2339013
       \endverb
     \endentry
+    \entry{BitcrazeWebsite}{online}{}
+      \name{author}{1}{}{%
+        {{hash=380ba08a171e4f63f423139ac3c96377}{%
+           family={{Bitcraze AB}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{380ba08a171e4f63f423139ac3c96377}
+      \strng{fullhash}{380ba08a171e4f63f423139ac3c96377}
+      \strng{bibnamehash}{380ba08a171e4f63f423139ac3c96377}
+      \strng{authorbibnamehash}{380ba08a171e4f63f423139ac3c96377}
+      \strng{authornamehash}{380ba08a171e4f63f423139ac3c96377}
+      \strng{authorfullhash}{380ba08a171e4f63f423139ac3c96377}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Bitcraze -- Open Source Crazyflie Platform}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://www.bitcraze.io/
+      \endverb
+      \verb{url}
+      \verb https://www.bitcraze.io/
+      \endverb
+    \endentry
+    \entry{7989376}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=19b68b1560247695c557ee3fb79377e5}{%
+           family={Preiss},
+           familyi={P\bibinitperiod},
+           given={James\bibnamedelima A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=5ceaefe872a46541be830c920bebeb24}{%
+           family={Honig},
+           familyi={H\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod}}}%
+        {{hash=6d430fe2b65c3d9fedd6f2d351604092}{%
+           family={Sukhatme},
+           familyi={S\bibinitperiod},
+           given={Gaurav\bibnamedelima S.},
+           giveni={G\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=1c307d9b859cf07f7eb1337ae5ac9f78}{%
+           family={Ayanian},
+           familyi={A\bibinitperiod},
+           given={Nora},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{c290118771db9d4032a26970d218e470}
+      \strng{fullhash}{31c7bffc0b61e48ff0e65696bc0bf1c6}
+      \strng{bibnamehash}{c290118771db9d4032a26970d218e470}
+      \strng{authorbibnamehash}{c290118771db9d4032a26970d218e470}
+      \strng{authornamehash}{c290118771db9d4032a26970d218e470}
+      \strng{authorfullhash}{31c7bffc0b61e48ff0e65696bc0bf1c6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2017 IEEE International Conference on Robotics and Automation (ICRA)}
+      \field{title}{Crazyswarm: A large nano-quadcopter swarm}
+      \field{year}{2017}
+      \field{pages}{3299\bibrangedash 3304}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICRA.2017.7989376
+      \endverb
+      \keyw{Trajectory;Tracking;Planning;Iterative closest point algorithm;State estimation;Base stations;Three-dimensional displays}
+    \endentry
+    \entry{Puig2025FishRobot}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{hash=9cb70fbd17035b911cd4c9cd5e13908a}{%
+           family={Puig\bibnamedelima Sariñena},
+           familyi={P\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod}}}%
+        {{hash=070452641969d9a51f4f0dd7eeeebc6a}{%
+           family={Pino\bibnamedelima Jarque},
+           familyi={P\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c873afb6b03580d0f2dd5a715dd39b1d}{%
+           family={Solís\bibnamedelima Jiménez},
+           familyi={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Alejandro},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6b8f9862730fe7324f8c80d1a7184b04}{%
+           family={López-Barajas},
+           familyi={L\bibinithyphendelim B\bibinitperiod},
+           given={Salvador},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a42e003975b137e5fb7b56139e40a1ae}{%
+           family={Echagüe\bibnamedelima Guardiola},
+           familyi={E\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={Juan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d60043e85071209a1ed7a4fa5a17d9ba}{%
+           family={Sanz\bibnamedelima Valero},
+           familyi={S\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Pedro\bibnamedelima José},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ca434ca7941704f0df90c3147a819cd1}
+      \strng{fullhash}{1e2676c9175096f6796aa930fb1da452}
+      \strng{bibnamehash}{ca434ca7941704f0df90c3147a819cd1}
+      \strng{authorbibnamehash}{ca434ca7941704f0df90c3147a819cd1}
+      \strng{authornamehash}{ca434ca7941704f0df90c3147a819cd1}
+      \strng{authorfullhash}{1e2676c9175096f6796aa930fb1da452}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Jornadas de Automática}
+      \field{title}{Fish robot alambric teleoperation implemented on ROS2}
+      \field{volume}{46}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.17979/ja-cea.2025.46.12247
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.17979/ja-cea.2025.46.12247
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.17979/ja-cea.2025.46.12247
+      \endverb
+    \endentry
+    \entry{PortCastello2025PezRobot}{online}{}
+      \name{author}{1}{}{%
+        {{hash=6d990a85827ac4f3442d430337018558}{%
+           family={{Port Castelló}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{6d990a85827ac4f3442d430337018558}
+      \strng{fullhash}{6d990a85827ac4f3442d430337018558}
+      \strng{bibnamehash}{6d990a85827ac4f3442d430337018558}
+      \strng{authorbibnamehash}{6d990a85827ac4f3442d430337018558}
+      \strng{authornamehash}{6d990a85827ac4f3442d430337018558}
+      \strng{authorfullhash}{6d990a85827ac4f3442d430337018558}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{El pez robot desarrollado por CIRTESU-UJI y probado en PortCastelló recibe el premio al mejor trabajo en automatización marina a nivel nacional}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.portcastello.com/comunicacion/notas-de-prensa/2025/el-pez-robot-desarrollado-por-cirtesu-uji-y-probado-en-portcastello-recibe-el-premio-al-mejor-trabajo-en-automatizacion-marina-a-nivel-nacional/
+      \endverb
+      \verb{url}
+      \verb https://www.portcastello.com/comunicacion/notas-de-prensa/2025/el-pez-robot-desarrollado-por-cirtesu-uji-y-probado-en-portcastello-recibe-el-premio-al-mejor-trabajo-en-automatizacion-marina-a-nivel-nacional/
+      \endverb
+    \endentry
+    \entry{Kobra725Ref}{online}{}
+      \name{author}{1}{}{%
+        {{hash=9ee2fedefa8ce4d775ca916fbba3740a}{%
+           family={FLIR},
+           familyi={F\bibinitperiod},
+           given={Teledyne},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{9ee2fedefa8ce4d775ca916fbba3740a}
+      \strng{fullhash}{9ee2fedefa8ce4d775ca916fbba3740a}
+      \strng{bibnamehash}{9ee2fedefa8ce4d775ca916fbba3740a}
+      \strng{authorbibnamehash}{9ee2fedefa8ce4d775ca916fbba3740a}
+      \strng{authornamehash}{9ee2fedefa8ce4d775ca916fbba3740a}
+      \strng{authorfullhash}{9ee2fedefa8ce4d775ca916fbba3740a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Kobra 725 Tactical Robot Platform}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.flir.com/products/kobra-725
+      \endverb
+      \verb{url}
+      \verb https://www.flir.com/products/kobra-725
+      \endverb
+    \endentry
+    \entry{Pags2016TIAGoTM}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=7db20258074b774a8153bea10cb67d5d}{%
+           family={Pagès},
+           familyi={P\bibinitperiod},
+           given={Jordi},
+           giveni={J\bibinitperiod}}}%
+        {{hash=dfd006be220148c922f1a2a4050e396e}{%
+           family={Marchionni},
+           familyi={M\bibinitperiod},
+           given={Luca},
+           giveni={L\bibinitperiod}}}%
+        {{hash=42155e40b399c73b645309658d76c47e}{%
+           family={Ferro},
+           familyi={F\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{8048233e018412325a4f4f4362d3932e}
+      \strng{fullhash}{8048233e018412325a4f4f4362d3932e}
+      \strng{bibnamehash}{8048233e018412325a4f4f4362d3932e}
+      \strng{authorbibnamehash}{8048233e018412325a4f4f4362d3932e}
+      \strng{authornamehash}{8048233e018412325a4f4f4362d3932e}
+      \strng{authorfullhash}{8048233e018412325a4f4f4362d3932e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{TIAGo: the modular robot that adapts to different research needs}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://api.semanticscholar.org/CorpusID:218478582
+      \endverb
+      \verb{url}
+      \verb https://api.semanticscholar.org/CorpusID:218478582
+      \endverb
+    \endentry
+    \entry{TiagoRef}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=fa5c8cd4d9cf0158d7053b3504cab793}{%
+           family={Robotics},
+           familyi={R\bibinitperiod},
+           given={PAL},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa5c8cd4d9cf0158d7053b3504cab793}
+      \strng{fullhash}{fa5c8cd4d9cf0158d7053b3504cab793}
+      \strng{bibnamehash}{fa5c8cd4d9cf0158d7053b3504cab793}
+      \strng{authorbibnamehash}{fa5c8cd4d9cf0158d7053b3504cab793}
+      \strng{authornamehash}{fa5c8cd4d9cf0158d7053b3504cab793}
+      \strng{authorfullhash}{fa5c8cd4d9cf0158d7053b3504cab793}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{TIAGo | Robot manipulador móvil}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://pal-robotics.com/robots/tiago
+      \endverb
+      \verb{url}
+      \verb https://pal-robotics.com/robots/tiago
+      \endverb
+    \endentry
+    \entry{UnitreeG1Ref}{online}{}
+      \name{author}{1}{}{%
+        {{hash=08fd2533b9ec44ff68ce8db72d8f45a6}{%
+           family={Robotics},
+           familyi={R\bibinitperiod},
+           given={Unitree},
+           giveni={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{08fd2533b9ec44ff68ce8db72d8f45a6}
+      \strng{fullhash}{08fd2533b9ec44ff68ce8db72d8f45a6}
+      \strng{bibnamehash}{08fd2533b9ec44ff68ce8db72d8f45a6}
+      \strng{authorbibnamehash}{08fd2533b9ec44ff68ce8db72d8f45a6}
+      \strng{authornamehash}{08fd2533b9ec44ff68ce8db72d8f45a6}
+      \strng{authorfullhash}{08fd2533b9ec44ff68ce8db72d8f45a6}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unitree G1 Humanoid agent AI avatar}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.unitree.com/g1
+      \endverb
+      \verb{url}
+      \verb https://www.unitree.com/g1
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
