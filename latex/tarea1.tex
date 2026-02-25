@@ -233,17 +233,18 @@ Consecuentemente, el diseño de la arquitectura planteado es el siguiente:
     \item Una acción para solicitar la ejecución de una trayectoria hacia un punto 
     de destino. La acción se llama \texttt{/execute\_trajectory} y utiliza el tipo 
     personalizado \texttt{interfaces/action/ExecuteTrajectory}, Código \ref{cod:ExecuteTraj}. 
-    Esta de acción está compuesta 
+    Esta acción está compuesta 
     por tres estructuras: \textit{Goal}, \textit{Feedback} y \textit{Result}. Su 
     documentación está accesible en el siguiente enlace:
     \url{https://design.ros2.org/articles/actions.html}.
 
-    La estructura \textit{Goal} de esta acción no contiene campos, ya que el objetivo 
-    de la trayectoria no lo proporciona el cliente de la acción, sino que se obtiene 
-    mediante el servicio \texttt{/get\_target\_pose}. De este modo, cada vez que se 
-    recibe una nueva petición de acción, el nodo controlador solicita de forma 
+    La estructura \textit{Goal} de esta acción contiene un campo de tipo \texttt{geometry\_msgs/msg/Pose}.
+    Si se le indica una posición, el robot inicia la trayectoria a esa posición. Si no se le indica,
+    obtiene la posición de destino mediante el servicio \texttt{/get\_target\_pose}, 
+    solicitando de forma.  
     asíncrona la posición del punto de destino al servidor del servicio, evitando 
-    bloqueos en el \textit{callback} de la acción.
+    bloqueos en el \textit{callback} de la acción. Como el movimiento se desarrolla 
+    en los ejes X e Y, no se tiene en cuenta el valor de Z (poner 0.0 por defecto).
 
     La estructura \textit{Feedback} contiene información relevante sobre la evolución 
     de la trayectoria en tiempo real. En concreto, incluye:
@@ -280,7 +281,11 @@ Consecuentemente, el diseño de la arquitectura planteado es el siguiente:
         una cancelación.
     \end{enumerate}
 
-    Para realizar la solicitud de la acción desde terminal, ejecutar el Código \ref{cod:actionClient}.
+    Para realizar la solicitud de la acción desde terminal, 
+    ejecutar el Código \ref{cod:actionClient}. En dicho código 
+    aparece tanto la llamada indicando una posición como sin indicarla, en 
+    la que es suficiente con establecer el valor de cualquiera de los campos 
+    a ``nan'' para que obtenga mediante el servicio la posición del objeto como punto de destino.
 
     \item Un nodo ROS2 encargado de implementar la lógica de control del robot y 
 coordinar los distintos mecanismos descritos anteriormente. Este nodo, llamado 
@@ -346,9 +351,7 @@ Códigos \ref{cod:serviceHpp} y \ref{cod:serviceCpp}, el módulo \texttt{pose\_u
 extraer y manipular la pose del robot (posición y orientación) a partir de los 
 mensajes recibidos, Código \ref{cod:poseHpp}, y el módulo \texttt{metrics\_utils.hpp/.cpp} 
 implementa el sistema de evaluación y registro de métricas, Códigos \ref{cod:metricHpp}
-y \ref{cod:metricHpp}.
-
-ACTION QUE EN LA REQUEST DEMOS EL PUNTO?
+y \ref{cod:metricCpp}.
     
 \end{itemize}
 

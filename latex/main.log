@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  24 FEB 2026 15:36
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  25 FEB 2026 11:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1105,58 +1105,53 @@ Underfull \hbox (badness 5622) in paragraph at lines 233--240
  []
 
 
-Underfull \hbox (badness 3364) in paragraph at lines 233--240
-\TU/lmtt/m/n/12 interfaces/action/ExecuteTrajectory\TU/4.ttf(0)/m/n/12 , Código []6[]. Esta de acción está compuesta
+Underfull \hbox (badness 2103) in paragraph at lines 233--240
+\TU/lmtt/m/n/12 interfaces/action/ExecuteTrajectory\TU/4.ttf(0)/m/n/12 , Código []6[]. Esta acción está compuesta por
  []
 
 [9]
-Underfull \hbox (badness 1215) in paragraph at lines 241--247
-\TU/4.ttf(0)/m/n/12 no lo proporciona el cliente de la acción, sino que se obtiene mediante el servicio
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 275--277
+Underfull \hbox (badness 10000) in paragraph at lines 276--278
 []\TU/4.ttf(0)/m/n/12 Solicita de forma asíncrona la posición del objetivo mediante el servicio
  []
 
 [10]
-Underfull \hbox (badness 3895) in paragraph at lines 343--350
+Underfull \hbox (badness 3895) in paragraph at lines 348--355
 []\TU/4.ttf(0)/m/n/12 El módulo \TU/lmtt/m/n/12 service_-utils.hpp/.cpp \TU/4.ttf(0)/m/n/12 contiene las funciones auxiliares para realizar
  []
 
 
-Underfull \hbox (badness 6493) in paragraph at lines 343--350
+Underfull \hbox (badness 6493) in paragraph at lines 348--355
 \TU/4.ttf(0)/m/n/12 la llamada asíncrona al servicio \TU/lmtt/m/n/12 /get_-target_-pose\TU/4.ttf(0)/m/n/12 , Códigos []9[] y []10[], el módulo
  []
 
 
-Underfull \hbox (badness 2088) in paragraph at lines 343--350
+Underfull \hbox (badness 2088) in paragraph at lines 348--355
 \TU/lmtt/m/n/12 pose_-utils.hpp \TU/4.ttf(0)/m/n/12 proporciona utilidades para extraer y manipular la pose del robot
  []
 
 
-Underfull \hbox (badness 1728) in paragraph at lines 343--350
+Underfull \hbox (badness 1728) in paragraph at lines 348--355
 \TU/4.ttf(0)/m/n/12 (posición y orientación) a partir de los mensajes recibidos, Código []11[], y el módulo
  []
 
 
-LaTeX Warning: Citation 'choset2005' on page 11 undefined on input line 362.
+LaTeX Warning: Citation 'choset2005' on page 11 undefined on input line 365.
 
 
-LaTeX Warning: Citation 'siegwart2011' on page 11 undefined on input line 362.
+LaTeX Warning: Citation 'siegwart2011' on page 11 undefined on input line 365.
 
 
-LaTeX Warning: Citation 'siciliano2009' on page 11 undefined on input line 362.
+LaTeX Warning: Citation 'siciliano2009' on page 11 undefined on input line 365.
 
 [11]
 
-LaTeX Warning: Citation 'otero2005' on page 12 undefined on input line 386.
+LaTeX Warning: Citation 'otero2005' on page 12 undefined on input line 389.
 
 
-LaTeX Warning: Citation 'morin2016' on page 12 undefined on input line 386.
+LaTeX Warning: Citation 'morin2016' on page 12 undefined on input line 389.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 378--387
+Underfull \hbox (badness 10000) in paragraph at lines 381--390
 
  []
 
@@ -1164,35 +1159,35 @@ File: Images/tarea1/esquema_robot.png Graphic file (type bmp)
 <Images/tarea1/esquema_robot.png>
 [12]
 
-LaTeX Warning: Citation 'choset2005' on page 13 undefined on input line 416.
+LaTeX Warning: Citation 'choset2005' on page 13 undefined on input line 419.
 
 
-LaTeX Warning: Citation 'siegwart2011' on page 13 undefined on input line 416.
+LaTeX Warning: Citation 'siegwart2011' on page 13 undefined on input line 419.
 
 
-LaTeX Warning: Citation 'coulter1992' on page 13 undefined on input line 431.
+LaTeX Warning: Citation 'coulter1992' on page 13 undefined on input line 434.
 
 
-LaTeX Warning: Citation 'otero2005' on page 13 undefined on input line 432.
+LaTeX Warning: Citation 'otero2005' on page 13 undefined on input line 435.
 
 
-LaTeX Warning: Citation 'morin2016' on page 13 undefined on input line 432.
+LaTeX Warning: Citation 'morin2016' on page 13 undefined on input line 435.
 
 
-LaTeX Warning: Citation 'corke2017' on page 13 undefined on input line 432.
+LaTeX Warning: Citation 'corke2017' on page 13 undefined on input line 435.
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 430--434
+Underfull \hbox (badness 2809) in paragraph at lines 433--437
 []\TU/4.ttf(0)/m/n/12 Este enfoque corresponde a la formulación puntual del algoritmo \TU/4.ttf(0)/m/it/12 Pure Pursuit\TU/4.ttf(0)/m/n/12 , descrito
  []
 
 
-Underfull \hbox (badness 2547) in paragraph at lines 440--444
+Underfull \hbox (badness 2547) in paragraph at lines 443--447
 []\TU/4.ttf(0)/b/n/12 Integral del Error Absoluto (IAE)\TU/4.ttf(0)/m/n/12 : mide el error acumulado a lo largo del tiempo,
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 495--498
+Underfull \hbox (badness 10000) in paragraph at lines 498--501
 
  []
 
@@ -1205,7 +1200,7 @@ File: Images/tarea1/traj3.png Graphic file (type bmp)
 File: Images/tarea1/traj4.png Graphic file (type bmp)
 <Images/tarea1/traj4.png>
 
-Overfull \hbox (3.62965pt too wide) in paragraph at lines 542--554
+Overfull \hbox (3.62965pt too wide) in paragraph at lines 545--557
  [][] 
  []
 
@@ -1223,7 +1218,17 @@ Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on in
 ]) (./Code/tarea1/subscriber_cmdVel.lua [17]) (./Code/tarea1/serviceTargetPose.lua)
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 17.
- [18] (./Code/tarea1/ExecTraj.txt) (./Code/tarea1/ExecTraj.txt) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [18] (./Code/tarea1/ExecTraj.txt) (./Code/tarea1/ExecTraj.txt)
+Overfull \hbox (415.67896pt too wide) in paragraph at lines 27--28
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+
+Overfull \hbox (425.27905pt too wide) in paragraph at lines 28--29
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
@@ -1235,12 +1240,12 @@ Overfull \hbox (108.47583pt too wide) in paragraph at lines 37--39
  []
 
 [20])
-Underfull \hbox (badness 10000) in paragraph at lines 33--33
+Underfull \hbox (badness 10000) in paragraph at lines 34--34
 [][]\TU/4.ttf(0)/b/n/14.4 Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
+Underfull \hbox (badness 10000) in paragraph at lines 35--35
 []\TU/4.ttf(0)/m/n/12 Código 9: |Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
 
@@ -2063,7 +2068,7 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  26596 strings out of 476824
  511403 string characters out of 5803866
- 2100627 words of memory out of 5000000
+ 2104627 words of memory out of 5000000
  48030 multiletter control sequences out of 15000+600000
  566455 words of font info for 97 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191

@@ -1,4 +1,5 @@
 # Goal
+geometry_msgs/Pose target_pose
 ---
 # Result
 bool success
@@ -10,3 +11,4 @@ float64 e_theta
 float64 v
 float64 w
 float64 time_elapsed
+string state
