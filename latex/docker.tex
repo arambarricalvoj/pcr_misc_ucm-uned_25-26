@@ -1,0 +1,26 @@
+\datos{color}{}{}
+\section*{Instalación y despliegue}
+\addcontentsline{toc}{section}{Instalación y despliegue}
+
+Con el objetivo de facilitar la instalación y el despliegue del entorno 
+de desarrollo utilizado, se recomienda utilizar la imagen \textit{Docker}
+que se ha preparado. Esta imagen incluye tanto el simulador 
+\textit{CoppeliaSim} como el ecocsistema de \textit{ROS2}. \\
+
+Se puede construir utilizando el fichero \textit{Dockerfile}, 
+Código \ref{cod:dockerfile}, con el comando ``\texttt{docker build -t coppelia\_sim\_ros2:jazzy .}''
+o descargar mediante el comando: ``\texttt{docker pull arambarricalvoj/coppelia\_sim\_ros2:jazzy}''. \\
+
+Una vez descargada la imagen, para crear un contenedor o instancia 
+de la misma ejecutar desde terminal el fichero \textit{run.sh},
+Código \ref{cod:run.sh}. La terminal accederá al contenedor \textit{Docker}
+iniciado y arrancará automáticamente el simulador. \\
+
+Para ejecutar la aplicación programada en \textit{ROS2}, desde 
+otra terminal ejecutar ``\texttt{docker exec -it coppelia\_sim bash}''. 
+La aplicación estará en la ruta 
+\texttt{/home/\$USER/pcr\_misc/tareas/ros2\_ws}. \\
+
+Todo este proceso junto con los comandos específicos para ejecutar
+cada tarea se detalla en más profundidad en el repositorio del 
+proyecto: \url{https://github.com/arambarricalvoj/pcr_misc_ucm-uned_25-26}.

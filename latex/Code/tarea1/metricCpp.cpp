@@ -3,8 +3,8 @@
 #include <cmath>
 
 MetricsLogger::MetricsLogger(const std::string &filename,
-                             double kv, double vmax, double wmax, int controller_type)
-    : kv_(kv), vmax_(vmax), wmax_(wmax), controller_type_(controller_type)
+                             double kp, double vmax, double wmax, int controller_type)
+    : kp_(kp), vmax_(vmax), wmax_(wmax), controller_type_(controller_type)
 {
     filename_ = filename + ".csv";
 }
@@ -51,7 +51,7 @@ void MetricsLogger::saveToCSV()
 
     // Configuración del controlador
     file << "\nParameter,Value\n";
-    file << "kv,"   << kv_   << "\n";
+    file << "kp,"   << kp_   << "\n";
     file << "vmax," << vmax_ << "\n";
     file << "wmax," << wmax_ << "\n";
     file << "controller_type," << controller_type_ << "\n";

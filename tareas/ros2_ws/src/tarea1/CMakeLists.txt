@@ -15,7 +15,7 @@ include_directories(include)
 
 # Biblioteca con la lógica del controlador y utilidades
 add_library(tarea1_lib
-    src/icc_controller.cpp
+    src/khepera_controller.cpp
     src/service_utils.cpp
     src/metrics_utils.cpp
 )
@@ -30,11 +30,11 @@ ament_target_dependencies(tarea1_lib
 )
 
 # Ejecutable principal
-add_executable(icc_controller src/main.cpp)
-target_link_libraries(icc_controller tarea1_lib)
+add_executable(khepera_controller src/main.cpp)
+target_link_libraries(khepera_controller tarea1_lib)
 
 # Instalación
-install(TARGETS icc_controller
+install(TARGETS khepera_controller
     DESTINATION lib/${PROJECT_NAME}
 )
 

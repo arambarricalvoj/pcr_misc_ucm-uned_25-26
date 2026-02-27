@@ -1,0 +1,36 @@
+FROM osrf/ros:jazzy-desktop-full
+
+# --- Dependencias necesarias para CoppeliaSim ---
+RUN apt-get update && apt-get install -y \
+    libglu1-mesa \
+    libxrender1 \
+    libxi6 \
+    libxrandr2 \
+    libxcursor1 \
+    libxinerama1 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar módulos Python necesarios para CoppeliaSim
+RUN apt-get update && apt-get install -y python3-pip && \
+    pip3 install --break-system-packages pyzmq cbor2
+
+
+# --- Crear directorio para CoppeliaSim ---
+WORKDIR /opt
+
+# --- Copiar y descomprimir CoppeliaSim ---
+COPY CoppeliaSim_Edu_V4_10_0_rev0_Ubuntu24_04.tar.xz .
+RUN tar -xf CoppeliaSim_Edu_V4_10_0_rev0_Ubuntu24_04.tar.xz && \
+    rm CoppeliaSim_Edu_V4_10_0_rev0_Ubuntu24_04.tar.xz
+
+# --- Copiar modelos del robot ---
+COPY robot_description/* \
+    /opt/CoppeliaSim_Edu_V4_10_0_rev0_Ubuntu24_04/models/robots/mobile/
+
+# --- Copiar entrypoint de ROS ---
+COPY ./ros_entrypoint.sh /ros_entrypoint.sh
+RUN chmod +x /ros_entrypoint.sh
+
+ENTRYPOINT ["/ros_entrypoint.sh"]
+CMD ["/bin/bash"]

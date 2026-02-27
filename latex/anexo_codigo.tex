@@ -2,6 +2,12 @@
 \section*{ANEXO I: código}
 \addcontentsline{toc}{section}{ANEXO I: código}
 
+\subsection*{\textit{Dockerfile}}
+\lstinputlisting[style=luastyle, caption={\textit{Dockerfile}.}, label={cod:dockerfile}]{Code/dockerfile}
+
+\subsection*{\textit{run.sh}}
+\lstinputlisting[style=luastyle, caption={\textit{run.sh}.}, label={cod:run.sh}]{Code/run.sh}
+
 \subsection*{Script por defecto del robot}
 \lstinputlisting[style=luastyle, caption={Script por defecto del robot.}, label={cod:t1.3}]{Code/tarea1/script_por_defecto.lua}
 
@@ -18,15 +24,19 @@
 \lstinputlisting[style=luastyle, caption={Acción personalizada \texttt{ExecuteTrajectory}.}, label={cod:ExecuteTraj}]{Code/tarea1/ExecTraj.txt}
 
 \subsection*{Llamada a la acción personalizada \texttt{ExecuteTrajectory}}
-\lstinputlisting[style=luastyle, caption={Acción personalizada \texttt{ExecuteTrajectory}.}, label={cod:ExecuteTraj}]{Code/tarea1/ExecTraj.txt}
-
-\subsection*{Llamada a la acción personalizada \texttt{ExecuteTrajectory}}
 \begin{lstlisting}[style=luastyle, 
     caption={Llamada a la acción personalizada \texttt{ExecuteTrajectory}.}, 
     label={cod:actionClient}]
 ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: .75, y: 0.0, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 0.05, w: 1.0}}}" --feedback
 ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: .nan, y: .nan, z: .nan}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}" --feedback
 \end{lstlisting}
+
+\subsection*{Programa principal}
+\lstinputlisting[style=cppstyle, caption={Programa principal.}, label={cod:t1_main}]{Code/tarea1/main.cpp}
+
+
+\subsection*{Cabeceras del nodo \textit{ROS2} del controlador del robot}
+\lstinputlisting[style=cppstyle, caption={Cabeceras del nodo \textit{ROS2} del controlador del robot.}, label={cod:t1_controllerHpp}]{Code/tarea1/controller.hpp}
 
 \subsection*{Nodo ROS2 del controlador del robot}
 \lstinputlisting[style=cppstyle, caption={Nodo ROS2 del controlador del robot.}, label={cod:t1_controller}]{Code/tarea1/controller.cc}

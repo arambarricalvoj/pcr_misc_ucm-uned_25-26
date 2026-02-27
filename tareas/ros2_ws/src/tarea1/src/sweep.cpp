@@ -15,7 +15,7 @@ public:
   SweepNode() : Node("sweep_node")
   {
     param_client_ = std::make_shared<rclcpp::SyncParametersClient>(
-        this, "/icc_controller");
+        this, "/khepera_controller");
 
     action_client_ = rclcpp_action::create_client<ExecuteTrajectory>(
         this, "/execute_trajectory");
@@ -46,11 +46,11 @@ private:
         rclcpp::Parameter("controller_type", controller_type)
       });
 
-      for (double kv = 0.1; kv <= 2.0 + 1e-6; kv += 0.1) {
+      for (double kp = 0.1; kp <= 2.0 + 1e-6; kp += 0.1) {
 
-        RCLCPP_INFO(this->get_logger(), "Nuevo kv = %.2f", kv);
+        RCLCPP_INFO(this->get_logger(), "Nuevo kp = %.2f", kp);
         param_client_->set_parameters({
-          rclcpp::Parameter("kv", kv)
+          rclcpp::Parameter("kp", kp)
         });
 
         std::cout << "\nPulsa ENTER cuando hayas reseteado el simulador...";

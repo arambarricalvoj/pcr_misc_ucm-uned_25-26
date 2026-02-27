@@ -46,7 +46,7 @@ Figura \ref{fig:t1.3}, se abre el script que se presenta en el Código \ref{cod:
 se debe a las velocidades angulares ($w_L,\; w_R$) asignadas a cada motor: 3 rad/s al izquierdo y 5 rad/s al derecho,
 respectivamente. Por tanto, el motor izquierdo gira más lento que el derecho y el robot realiza una trayectoria
 en arco de circunferencia de radio $R = 0.176 \text{ metros}$, que se obtiene mediante la Ecuación (1) conociendo
-la distancia entre los centros de las ruedas (\textit{axle track}), $L = 0.088 \text{ metros}$.
+la distancia entre los centros de las ruedas (\textit{axle track}), $L = 0.088 \text{ metros}$ \cite{kheperaiv_manual_rev3}.
 
 \begin{equation}
 R = \frac{L}{2} \cdot \frac{\omega_R + \omega_L}{\omega_R - \omega_L}
@@ -110,7 +110,7 @@ ambas usando los Índices de Comportamiento (\textit{IAE}, \textit{ISE}, \textit
 ambas usando los Índices de Comportamiento (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}).}
 
 Dado que la implementación propuesta se ha realizado mediante \textit{ROS2}, el primer paso es
-d\textit{ISE}ñar y definir el sistema de comunicación en \textit{CoppeliaSim}. Para ello, se definen 
+diseñar y definir el sistema de comunicación en \textit{CoppeliaSim}. Para ello, se definen 
 los siguiente requisitos:
 \begin{itemize}
     \item Se necesita obtener la posición del punto objetivo. Este destino es fijo, 
@@ -129,15 +129,15 @@ de manera asíncrona, siguiendo el modelo publicador-suscriptor. Cada tópico es
 asociado a un tipo de mensaje específico. Los tópicos se utilizan, por ejemplo,
 para recibir información en tiempo real de los diferentes sensores del robot. \\
 
-Un servicio es un mecanismo de comunicación síncrona basado en el modelo cliente-
-servidor que permite que un cliente envíe una petición a un servidor. El servidor
+Un servicio es un mecanismo de comunicación síncrona basado en el modelo cliente-servidor
+que permite que un cliente envíe una petición a un servidor. El servidor
 procesa la solicitud y devuelve una respuesta al cliente. Son útiles para
 operaciones puntuales que requieren una respuesta inmediata, como pedir el estado de
 un sensor o sacar una foto. La comunicación mediante servicios involucra un mensaje de
 petición y otro de respuesta. \\
 
 Una acción es una interfaz de comunicación asíncrona basada en tópicos y servicios
-d\textit{ISE}ñada para desempeñar operaciones largas y prolongadas en el tiempo que necesitan
+diseñada para desempeñar operaciones largas y prolongadas en el tiempo que necesitan
 seguimiento. Para ejecutar una acción un cliente solicita a un servidor la
 ejecución, recibe retroalimentación periódica sobre el progreso a través de un tópico y
 tiene la opción de cancelar la tarea antes de que finalice. Son ideales para tareas como
@@ -145,7 +145,8 @@ mover un robot a una posición determinada, donde es necesario monitorizar el av
 poder interrumpir la ejecución si es necesario. La comunicación de una acción involucra
 mensajes de objetivo, retroalimentación y resultado final. \\
 
-Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguiente:
+Consecuentemente, el diseño de la arquitectura planteado, Figura \ref{fig:arquitectura_esquema},
+es el siguiente:
 \begin{itemize}
     \item Un tópico para publicar la posición del robot. El tópico se llama 
     \texttt{/robot\_pose} y utiliza el tipo de mensaje estándar \texttt{geometry\_msgs/msg/Pose}.
@@ -156,8 +157,9 @@ Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguien
     está accesible en el siguiente enlace:
     \url{https://docs.ros.org/en/jazzy/p/geometry_msgs/__message_definitions.html}.
 
-    En \textit{CoppeliaSim}, el robot tiene un script Lua llamado \texttt{publisher\_robotPose}
-    que ejerce de publicador de la posición, Código \ref{cod:t1_pubRobotPose}, mientras que el nodo o programa ROS2 
+    En \textit{CoppeliaSim}, el robot tiene un script \textit{Lua} llamado \texttt{publisher\_robotPose}
+    que ejerce de publicador de la posición, Código \ref{cod:t1_pubRobotPose}, mientras 
+    que el nodo o programa \textit{ROS2} 
     \texttt{khepera\_controller}, externo a \textit{CoppeliaSim}, Código \ref{cod:t1_controller},
     se suscribe al tópico.
 
@@ -169,10 +171,10 @@ Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguien
     lineal o angular a aplicar en cada uno de los ejes. Su documentación 
     también está accesible en el enlace anterior.
 
-    En \textit{CoppeliaSim}, el robot tiene un script Lua llamado \texttt{subscriber\_cmdVel}
-    que ejerce de suscriptor de la velocidad, Código \ref{cod:t1_subsCmdVel}, mientras que el nodo o programa ROS2 
-    \texttt{khepera\_controller}, externo a \textit{CoppeliaSim}, Código \ref{cod:t1_controller},
-    publica en el tópico la velocidad deseada para comanda la velocidad al robot.
+    En \textit{CoppeliaSim}, el robot tiene un script \textit{Lua} llamado \texttt{subscriber\_cmdVel}
+    que ejerce de suscriptor de la velocidad, Código \ref{cod:t1_subsCmdVel}, mientras que el nodo o programa 
+    \textit{ROS2} \texttt{khepera\_controller}, externo a \textit{CoppeliaSim}, Código \ref{cod:t1_controller},
+    publica en el tópico la velocidad deseada para comandar la velocidad al robot.
 
     Es importante destacar que el suscriptor implementado en \textit{CoppeliaSim}
     transforma las velocidades lineales y angulares del robot comandadas en el tópico 
@@ -182,7 +184,7 @@ Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguien
     velocidades angulares de las ruedas izquierda, \(\omega_L\), y derecha, \(\omega_R\)
     viene dada por el modelo cinemático, Ecuaciones 2 en caso de utilizar velocidades
     angulares en cada rueda, o Ecuaciones 3 en caso de utilizar velocidades lineales,
-    \(\v_L\) y \(\v_R\), en cada rueda, donde \(r\) es el radio de las ruedas y
+    \(v_L\) y \(v_R\), en cada rueda, donde \(r\) es el radio de las ruedas y
     \(L\) es la distancia entre ruedas. En este caso, se utilizan las Ecuaciones 2 porque
     el robot en uso controla los motores mediante velocidades angulares.
 
@@ -217,10 +219,10 @@ Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguien
     \url{https://docs.ros.org/en/jazzy/p/std_srvs/index.html}.
 
     En \textit{CoppeliaSim}, la esfera que representa el punto de destino 
-    dispone de un script Lua llamado 
+    dispone de un script \textit{Lua} llamado 
     \texttt{serviceServer\_pose} que implementa el servidor del servicio, 
     Código \ref{cod:t1_serviceTargetPose}. Cuando el servicio es invocado desde 
-    el nodo ROS2 externo \texttt{khepera\_controller}, el servidor obtiene la posición y
+    el nodo \textit{ROS2} externo \texttt{khepera\_controller}, el servidor obtiene la posición y
     orientación del objeto. A continuación, empaqueta esta información en formato
     JSON dentro del campo \texttt{message} de la respuesta del servicio.
 
@@ -241,8 +243,7 @@ Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguien
     La estructura \textit{Goal} de esta acción contiene un campo de tipo \texttt{geometry\_msgs/msg/Pose}.
     Si se le indica una posición, el robot inicia la trayectoria a esa posición. Si no se le indica,
     obtiene la posición de destino mediante el servicio \texttt{/get\_target\_pose}, 
-    solicitando de forma.  
-    asíncrona la posición del punto de destino al servidor del servicio, evitando 
+    solicitando de forma asíncrona la posición del punto de destino al servidor del servicio, evitando 
     bloqueos en el \textit{callback} de la acción. Como el movimiento se desarrolla 
     en los ejes X e Y, no se tiene en cuenta el valor de Z (poner 0.0 por defecto).
 
@@ -268,7 +269,7 @@ Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguien
         resultado de la acción.
     \end{itemize}
 
-    El nodo ROS2 externo \texttt{khepera\_controller}, 
+    El nodo \textit{ROS2} externo \texttt{khepera\_controller}, 
     Código \ref{cod:t1_controller}, implementa el servidor de la acción. Cuando un 
     cliente envía una petición a \texttt{/execute\_trajectory}, el servidor:
     \begin{enumerate}
@@ -287,7 +288,7 @@ Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguien
     la que es suficiente con establecer el valor de cualquiera de los campos 
     a ``nan'' para que obtenga mediante el servicio la posición del objeto como punto de destino.
 
-    \item Un nodo ROS2 encargado de implementar la lógica de control del robot y 
+    \item Un nodo \textit{ROS2} encargado de implementar la lógica de control del robot y 
 coordinar los distintos mecanismos descritos anteriormente. Este nodo, llamado 
 \texttt{khepera\_controller}, Código \ref{cod:t1_controller}, actúa como elemento central del sistema, ya que:
 
@@ -302,7 +303,7 @@ coordinar los distintos mecanismos descritos anteriormente. Este nodo, llamado
 El nodo implementa un servidor de la acción \texttt{ExecuteTrajectory}. Cuando un 
 cliente envía una petición, el nodo acepta la meta y solicita de forma asíncrona 
 la posición del objetivo mediante el servicio \texttt{/get\_target\_pose}. Este 
-d\textit{ISE}ño evita bloquear el \textit{callback} de la acción y permite que el nodo 
+diseño evita bloquear el \textit{callback} de la acción y permite que el nodo 
 continúe procesando otros eventos mientras espera la respuesta del servicio.
 
 Una vez recibida la posición del objetivo, el nodo activa un bucle de control 
@@ -312,8 +313,7 @@ hasta alcanzar el objetivo. En cada iteración del bucle:
     \item Se obtiene la pose actual del robot a partir del último mensaje recibido 
     en el tópico \texttt{/robot\_pose}.
     \item Se calcula el error de posición y orientación respecto al objetivo.
-    \item Se aplica la ley de control seleccionada (control reactivo o control 
-    geométrico), generando las velocidades lineal \(v\) y angular \(\omega\).
+    \item Se aplica la ley de control seleccionada, generando las velocidades lineal \(v\) y angular \(\omega\).
     \item Se publican dichas velocidades en el tópico \texttt{/cmd\_vel}.
     \item Se envía al cliente de la acción un mensaje de \textit{feedback} con 
     información sobre la evolución de la trayectoria: distancia al objetivo, 
@@ -325,7 +325,7 @@ de destino es inferior a un umbral predefinido (por ejemplo, 5 centímetros).
 
 Además, este nodo incorpora un módulo específico para la 
 evaluación cuantitativa del rendimiento del controlador. Este módulo, implementado 
-en la clase \texttt{MetricsLogger}, Códigos \ref{cod:metricHpp} y \ref{cod:metricCpp} registra en cada iteración del bucle de control 
+en la clase \texttt{MetricsLogger}, Códigos \ref{cod:metricHpp} y \ref{cod:metricCpp}, registra en cada iteración del bucle de control 
 tanto las variables relevantes del estado del robot (posición, orientación, 
 distancia al objetivo y errores de control) como las velocidades lineal y angular 
 aplicadas. A partir de estos datos, el sistema calcula varias métricas clásicas de 
@@ -335,10 +335,10 @@ Absolute Error} (\textit{ITAE}) y el \textit{Integral of Time-weighted Squared E
 Estas métricas permiten analizar la calidad de la trayectoria ejecutada y comparar 
 el comportamiento de distintos parámetros o estrategias de control.
 
-Al finalizar la acción, el nodo almacena toda esa información en un fichero CSV, 
+Al finalizar la acción, el nodo almacena toda esa información en un fichero \textit{CSV}, 
 incluyendo una fila por cada instante de tiempo con las variables medidas y 
 calculadas, seguida de un bloque final con los valores agregados de las métricas 
-y los parámetros del controlador utilizados (\texttt{kv}, \texttt{vmax}, 
+y los parámetros del controlador utilizados (\texttt{kp}, \texttt{vmax}, 
 \texttt{wmax} y el tipo de controlador seleccionado).
 
 Por último, mencionar que para facilitar la depuración y modularidad del código,
@@ -351,9 +351,15 @@ Códigos \ref{cod:serviceHpp} y \ref{cod:serviceCpp}, el módulo \texttt{pose\_u
 extraer y manipular la pose del robot (posición y orientación) a partir de los 
 mensajes recibidos, Código \ref{cod:poseHpp}, y el módulo \texttt{metrics\_utils.hpp/.cpp} 
 implementa el sistema de evaluación y registro de métricas, Códigos \ref{cod:metricHpp}
-y \ref{cod:metricCpp}.
+y \ref{cod:metricCpp}. 
     
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{Images/tarea1/arquitectura.png}
+    \caption{\label{fig:arquitectura_esquema} Esquema de la arquitectura propuesta.}
+\end{figure}
 
 \subsubsection*{Controladores implementados}
 
@@ -378,7 +384,8 @@ Sea la posición del robot $(x_r, y_r)$ y la del objetivo $(x_t, y_t)$, se defin
     e_\theta = \theta_d - \theta_r
 \end{equation}
 
-donde $d$ es la distancia al objetivo, $e_\theta$ el error angular normalizado,
+donde $d$ es la distancia al objetivo, $e_\theta$ el error de orientación del robot
+respecto del objetivo,
 $\theta_d$ el ángulo absoluto definido en el marco global de la orientación de la línea recta
 que une la posición del robot con la del objetivo y $\theta_r$ la orientación actual del robot. 
 De este modo, $\theta_d$ indica la dirección hacia la que 
@@ -394,8 +401,7 @@ móvil diferencial con ruedas.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.33]{Images/tarea1/esquema_robot.png}
-    \caption{\label{fig:t1_esquemaRobot} Esquema de un robot móvil diferencial con ruedas.
-    Extraído del guión de prácticas de la asignatura.}
+    \caption{\label{fig:t1_esquemaRobot} Esquema de un robot móvil diferencial con ruedas \cite{FARIAS20179150}.}
 \end{figure}
 
 
@@ -416,11 +422,11 @@ La velocidad angular se calcula como:
 \end{equation}
 
 Este tipo de controlador proporcional basado en errores de pose es ampliamente 
-utilizado en robots unicycle y se describe en \cite{choset2005, siegwart2011}.
+utilizado en robots uniciclo y se describe en \cite{choset2005, siegwart2011}.
 
 \subsubsection*{2. Controlador geométrico basado en curvatura o \textit{Pure Pursuit} puntual}
 El controlador geométrico impone que el robot siga un arco de circunferencia que 
-conecta su pose actual con el objetivo. La curvatura del arco viene dada por:
+conecta su pose actual con el objetivo. El radio del arco viene dado por:
 \begin{equation}
     R = \frac{d}{2 \sin(e_\theta)}
 \end{equation}
@@ -429,6 +435,12 @@ La velocidad angular se obtiene mediante la relación cinemática:
 \begin{equation}
     \omega = \frac{v}{R}
 \end{equation}
+
+%Y la velocidad lineal calculada es proporcional a la velocidad
+%lineal de referencia, que en este caso la referencia es la velocidad máxima:
+%\begin{equation}
+%    v = K_p \cdot v_{max}\;,
+%\end{equation}
 
 Este enfoque corresponde a la formulación puntual del algoritmo \textit{Pure Pursuit}, 
 descrito originalmente en \cite{coulter1992} y ampliamente analizado en 
@@ -506,9 +518,9 @@ bajo diferentes valores de $K_p$.
 \subsubsection*{Registro de datos}
 En cada iteración del controlador se almacena el tiempo $t$,
 la pose del robot $(x_r, y_r, \theta_r)$, la pose del objetivo $(x_t, y_t)$,
-error de distancia $d$, error angular $e_\theta$ y velocidades $v$ y $\omega$. \\
+error de distancia $d$, error de orientación $e_\theta$ y velocidades $v$ y $\omega$. \\
 
-Al finalizar la acción, el sistema añade al fichero CSV las métricas globales 
+Al finalizar la acción, el sistema añade al fichero \textit{CSV} las métricas globales 
 calculadas (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}) y los parámetros utilizados ($K_p$, $v_{\max}$, 
 $\omega_{\max}$ y tipo de controlador). Este registro permite realizar comparativas 
 rigurosas mediante tablas y gráficas.
@@ -541,8 +553,17 @@ Esta mayor pendiente de mejora indica que, aunque al principio su desempeño es 
 el controlador geométrico alcanza rápidamente un rendimiento superior. De hecho, para
 $K_p = 0.5$, logra los menores valores en todas las métricas, lo que demuestra que 
 minimiza eficazmente todos los errores, superando al controlador proporcional reactivo
-en precisión y rapidez de convergencia.
+en precisión y rapidez de convergencia. \\
 
+\subsubsection*{Conclusiones}
+La comparación evidencia que el controlador proporcional reactivo es más estable
+y uniforme a lo largo de los valores de la ganancia $K_p$, mientras que el controlador
+geométrico tiene un desempeño más sensible a la ganancia, pero capaz de superar al
+reactivo cuando la ganancia alcanza valores óptimos.
+Esta situación resalta la importancia de ajustar correctamente las ganancias 
+para aprovechar la mayor capacidad de seguimiento del controlador geométrico, 
+especialmente cuando se busca minimizar errores tardíos y grandes y maximizar la
+precisión global en la trayectoria.
 
 \begin{comment}
    \begin{table}[]
@@ -766,7 +787,8 @@ el controlador geométrico y $K_p = 0.55$.}
 el controlador geométrico y $K_p = 0.6$.}
 \end{figure}
 
-Figura \ref{fig:t1.3_2}
+\begin{comment}
+    Figura \ref{fig:t1.3_2}
 
 \begin{figure}[H]
 \centering
@@ -776,40 +798,4 @@ Figura \ref{fig:t1.3_2}
 \includegraphics[scale=0.33]{Images/tarea1/traj4.png}
 \caption{\label{fig:t1.3_2} Trayectoria por defecto.}
 \end{figure}
-
-
-En la Tabla \ref{tab:resumen} se recogen resumidamente las respuestas de la tarea, tal y como 
-se especifica en el enunciado. 
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|cc|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\textbf{Robot}}                                                   & \textbf{\textit{Shakey}} & \textbf{\textit{Turtlebot4}} & \textbf{\textit{RHex}} & \textbf{\textit{MIT Cheetah}} & \textbf{\textit{Crazyflie}}\\ \hline
-\multicolumn{1}{|c|}{\multirow{3}{*}{\textbf{Arquitectura}}} & \textbf{Centralizada}   & X & X &  & & X    \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Distribuida}    & & & X & &  \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Híbrida}        & & & & X &  \\ \hline
-\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{Locomoción}}}   & \textbf{Ruedas}         & X & X & & &    \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Patas}          & & & X & X & \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Cadenas}        & & & & &    \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Marino o aéreo} & & & & & X   \\ \hline
-\multicolumn{2}{|c|}{\textbf{Robot colaborativo}}                                      & & & & &    \\ \hline
-\end{tabular}
-\end{table}
-\vspace{-0.7cm}
-\begin{table}[H]
-\centering
-\begin{tabular}{|cc|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\textbf{Robot}}                                                   & \textbf{Pez robot \textit{UJI-CIRTESU}} & \textbf{\textit{FLIR Kobra 725}} & \textbf{\textit{TIAGo}} & \textbf{\textit{Unitree G1}} \\ \hline
-\multicolumn{1}{|c|}{\multirow{3}{*}{\textbf{Arquitectura}}} & \textbf{Centralizada}   & X & X & &      \\ \cline{2-6} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Distribuida}    & & & &     \\ \cline{2-6} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Híbrida}        & & & X & X     \\ \hline
-\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{Locomoción}}}   & \textbf{Ruedas}         & & & X &     \\ \cline{2-6} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Patas}          & & & & X    \\ \cline{2-6} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Cadenas}        & & X & &     \\ \cline{2-6} 
-\multicolumn{1}{|c|}{}                                       & \textbf{Marino o aéreo} & X & & &     \\ \hline
-\multicolumn{2}{|c|}{\textbf{Robot colaborativo}}                                      & & & X &     \\ \hline
-\end{tabular}
-\caption{Resumen de respuestas.} \label{tab:resumen}
-\end{table}
+\end{comment}

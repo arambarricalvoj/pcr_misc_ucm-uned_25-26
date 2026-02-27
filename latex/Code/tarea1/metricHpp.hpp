@@ -18,7 +18,7 @@ class MetricsLogger
 {
 public:
     MetricsLogger(const std::string &filename,
-              double kv, double vmax, double wmax, int controller_type);
+              double kp, double vmax, double wmax, int controller_type);
 
     void updateMetrics(double error, double time);
     void addSample(double time,
@@ -40,7 +40,7 @@ private:
     std::string filename_;
 
     // Configuración del controlador
-    double kv_, vmax_, wmax_;
+    double kp_, vmax_, wmax_;
     int controller_type_;
 
     std::vector<MetricsSample> samples_;
