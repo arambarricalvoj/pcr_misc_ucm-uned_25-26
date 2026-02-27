@@ -112,6 +112,8 @@
 }
 
 
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
 
 
 

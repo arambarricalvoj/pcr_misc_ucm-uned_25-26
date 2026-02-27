@@ -8,16 +8,16 @@
 \contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{7}{section*.17}%
 \contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{8}{section*.19}%
 \contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{8}{section*.20}%
-\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}{8}{section*.21}%
-\contentsline {section}{ANEXO I: código}{16}{section*.34}%
-\contentsline {section}{\numberline {2}Robots}{25}{section.2}%
-\contentsline {subsection}{\numberline {2.1}\textit {Shakey}}{25}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}\textit {TurtleBot 4}}{26}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}\textit {RHex}}{27}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}\textit {MIT Cheetah}}{28}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}\textit {Crazyflie}}{29}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Pez robot \textit {UJI–CIRTESU}}{30}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}\textit {FLIR Kobra 725}}{31}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}\textit {TIAGo}}{32}{subsection.2.8}%
-\contentsline {subsection}{\numberline {2.9}\textit {Unitree G1}}{33}{subsection.2.9}%
-\contentsline {section}{Referencias}{34}{figure.caption.75}%
+\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{8}{section*.21}%
+\contentsline {section}{ANEXO I: código}{24}{section*.57}%
+\contentsline {section}{\numberline {2}Robots}{33}{section.2}%
+\contentsline {subsection}{\numberline {2.1}\textit {Shakey}}{33}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}\textit {TurtleBot 4}}{34}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}\textit {RHex}}{35}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}\textit {MIT Cheetah}}{36}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}\textit {Crazyflie}}{37}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Pez robot \textit {UJI–CIRTESU}}{38}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}\textit {FLIR Kobra 725}}{39}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}\textit {TIAGo}}{40}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}\textit {Unitree G1}}{41}{subsection.2.9}%
+\contentsline {section}{Referencias}{42}{figure.caption.98}%

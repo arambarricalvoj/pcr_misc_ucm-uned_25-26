@@ -1,8 +1,8 @@
 icc_controller:
   ros__parameters:
-    vmax: 0.15
+    vmax: 1.0
     wmax: 1.0
-    kv: 0.5
+    kv: 0.65
     controller_type: 1
 
 # controller_type: 0 --> ICC reactivo

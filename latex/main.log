@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  25 FEB 2026 11:50
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  27 FEB 2026 17:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -709,7 +709,12 @@ File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
- (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+
+
+LaTeX Warning: Package "xcolor" has already been loaded: ignoring load-time
+(LaTeX)        option "xcdraw".
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
  (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
@@ -1182,15 +1187,143 @@ Underfull \hbox (badness 2809) in paragraph at lines 433--437
  []
 
 
-Underfull \hbox (badness 2547) in paragraph at lines 443--447
-[]\TU/4.ttf(0)/b/n/12 Integral del Error Absoluto (IAE)\TU/4.ttf(0)/m/n/12 : mide el error acumulado a lo largo del tiempo,
+LaTeX Warning: Citation 'kheperaiv_manual_rev3' on page 13 undefined on input line 442.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 439--447
+
+ []
+
+
+Underfull \hbox (badness 2486) in paragraph at lines 452--456
+[]\TU/4.ttf(0)/b/n/12 Integral del Error Absoluto (\TU/4.ttf(0)/b/it/12 IAE\TU/4.ttf(0)/b/n/12 )\TU/4.ttf(0)/m/n/12 : mide el error acumulado a lo largo del tiempo,
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 498--501
+Underfull \hbox (badness 10000) in paragraph at lines 507--510
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 517--520
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 521--524
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 525--528
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 529--534
+
+ []
+
+Excluding 'comment' comment.
+Overfull \hbox (8.06158pt too wide) in paragraph at lines 566--583
+ [][] 
+ []
+
+File: Images/tarea1/graf/icc_reactivo_Kv0.1_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.1_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.1_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.1_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.15_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.15_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.15_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.15_tiempo.png>
+[15]
+File: Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.25_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.25_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.3_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.3_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.3_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.3_tiempo.png>
+ [16]
+File: Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.4_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.4_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.45_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.45_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.45_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.45_tiempo.png>
+ [17]
+File: Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.55_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.55_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.6_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.6_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.6_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.6_tiempo.png>
+ [18]
+File: Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.15_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.15_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.2_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.2_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.2_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.2_tiempo.png>
+ [19]
+File: Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.3_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.3_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.35_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.35_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.35_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.35_tiempo.png>
+ [20]
+File: Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.45_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.45_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.5_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.5_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.5_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.5_tiempo.png>
+ [21]
+File: Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png>
 File: Images/tarea1/traj1.png Graphic file (type bmp)
 <Images/tarea1/traj1.png>
 File: Images/tarea1/traj2.png Graphic file (type bmp)
@@ -1199,26 +1332,26 @@ File: Images/tarea1/traj3.png Graphic file (type bmp)
 <Images/tarea1/traj3.png>
 File: Images/tarea1/traj4.png Graphic file (type bmp)
 <Images/tarea1/traj4.png>
-
-Overfull \hbox (3.62965pt too wide) in paragraph at lines 545--557
+ [22]
+Overfull \hbox (3.62965pt too wide) in paragraph at lines 802--814
  [][] 
  []
 
-[14]) [15]
+) [23]
 \openout2 = `anexo_codigo.aux'.
 
  (./anexo_codigo.tex
 File: Images/ucm_uned.png Graphic file (type bmp)
 <Images/ucm_uned.png>
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 6.
- (./Code/tarea1/script_por_defecto.lua) (./Code/tarea1/publisher_robotPose.lua [16
+ (./Code/tarea1/script_por_defecto.lua) (./Code/tarea1/publisher_robotPose.lua [24
 
 
 
-]) (./Code/tarea1/subscriber_cmdVel.lua [17]) (./Code/tarea1/serviceTargetPose.lua)
+]) (./Code/tarea1/subscriber_cmdVel.lua [25]) (./Code/tarea1/serviceTargetPose.lua)
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 17.
- [18] (./Code/tarea1/ExecTraj.txt) (./Code/tarea1/ExecTraj.txt)
+ [26] (./Code/tarea1/ExecTraj.txt) (./Code/tarea1/ExecTraj.txt)
 Overfull \hbox (415.67896pt too wide) in paragraph at lines 27--28
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
@@ -1234,12 +1367,12 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-) (./Code/tarea1/controller.cc [19]
+) (./Code/tarea1/controller.cc [27]
 Overfull \hbox (108.47583pt too wide) in paragraph at lines 37--39
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
 
-[20])
+[28])
 Underfull \hbox (badness 10000) in paragraph at lines 34--34
 [][]\TU/4.ttf(0)/b/n/14.4 Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
@@ -1249,7 +1382,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--35
 []\TU/4.ttf(0)/m/n/12 Código 9: |Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
 
-(./Code/tarea1/serviceHpp.hpp [21]) (./Code/tarea1/serviceCpp.cpp) (./Code/tarea1/poseHpp.hpp [22]) (./Code/tarea1/metricHpp.hpp) (./Code/tarea1/metricCpp.cpp [23])) [24]
+(./Code/tarea1/serviceHpp.hpp [29]) (./Code/tarea1/serviceCpp.cpp) (./Code/tarea1/poseHpp.hpp [30]) (./Code/tarea1/metricHpp.hpp) (./Code/tarea1/metricCpp.cpp [31])) [32]
 \openout2 = `resumen.aux'.
 
 
@@ -1275,7 +1408,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--30
  []
 
 
-LaTeX Warning: Citation 'Shakey' on page 25 undefined on input line 33.
+LaTeX Warning: Citation 'Shakey' on page 33 undefined on input line 33.
 
 
 Underfull \hbox (badness 3838) in paragraph at lines 31--37
@@ -1315,12 +1448,12 @@ Underfull \hbox (badness 2020) in paragraph at lines 56--60
  []
 
 
-LaTeX Warning: Citation 'Shakey' on page 25 undefined on input line 63.
+LaTeX Warning: Citation 'Shakey' on page 33 undefined on input line 63.
 
 
-LaTeX Warning: Citation 'Shakey' on page 25 undefined on input line 63.
+LaTeX Warning: Citation 'Shakey' on page 33 undefined on input line 63.
 
-Excluding 'comment' comment.) [25
+Excluding 'comment' comment.) [33
 
 
 
@@ -1387,10 +1520,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--37
 
 Excluding 'comment' comment.
 
-LaTeX Warning: Citation 'TurtleBot4Clearpath' on page 26 undefined on input line 55.
+LaTeX Warning: Citation 'TurtleBot4Clearpath' on page 34 undefined on input line 55.
 
 
-LaTeX Warning: Citation 'TurtleBot4Clearpath' on page 26 undefined on input line 55.
+LaTeX Warning: Citation 'TurtleBot4Clearpath' on page 34 undefined on input line 55.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 55--56
@@ -1398,10 +1531,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--56
  []
 
 
-LaTeX Warning: Citation 'TurtleBot4Manual' on page 26 undefined on input line 57.
+LaTeX Warning: Citation 'TurtleBot4Manual' on page 34 undefined on input line 57.
 
 
-LaTeX Warning: Citation 'TurtleBot4Manual' on page 26 undefined on input line 57.
+LaTeX Warning: Citation 'TurtleBot4Manual' on page 34 undefined on input line 57.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 57--58
@@ -1409,12 +1542,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--58
  []
 
 
-LaTeX Warning: Citation 'iRobotCreate3' on page 26 undefined on input line 59.
+LaTeX Warning: Citation 'iRobotCreate3' on page 34 undefined on input line 59.
 
 
-LaTeX Warning: Citation 'iRobotCreate3' on page 26 undefined on input line 59.
+LaTeX Warning: Citation 'iRobotCreate3' on page 34 undefined on input line 59.
 
-) [26
+) [34
 
 
 
@@ -1502,12 +1635,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--43
  []
 
 
-LaTeX Warning: Citation 'doi:10.1177/02783640122067570' on page 27 undefined on input line 45.
+LaTeX Warning: Citation 'doi:10.1177/02783640122067570' on page 35 undefined on input line 45.
 
 
-LaTeX Warning: Citation 'doi:10.1177/02783640122067570' on page 27 undefined on input line 45.
+LaTeX Warning: Citation 'doi:10.1177/02783640122067570' on page 35 undefined on input line 45.
 
-) [27
+) [35
 
 
 
@@ -1570,18 +1703,18 @@ Underfull \hbox (badness 1325) in paragraph at lines 40--47
  []
 
 
-LaTeX Warning: Citation 'Cheetah2018' on page 28 undefined on input line 49.
+LaTeX Warning: Citation 'Cheetah2018' on page 36 undefined on input line 49.
 
 
-LaTeX Warning: Citation 'Cheetah2018' on page 28 undefined on input line 49.
+LaTeX Warning: Citation 'Cheetah2018' on page 36 undefined on input line 49.
 
 
-LaTeX Warning: Citation 'Cheetah2015' on page 28 undefined on input line 50.
+LaTeX Warning: Citation 'Cheetah2015' on page 36 undefined on input line 50.
 
 
-LaTeX Warning: Citation 'Cheetah2015' on page 28 undefined on input line 50.
+LaTeX Warning: Citation 'Cheetah2015' on page 36 undefined on input line 50.
 
-) [28
+) [36
 
 
 
@@ -1684,23 +1817,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--36
  []
 
 
-LaTeX Warning: Citation 'BitcrazeWebsite' on page 29 undefined on input line 38.
+LaTeX Warning: Citation 'BitcrazeWebsite' on page 37 undefined on input line 38.
 
 
-LaTeX Warning: Citation 'BitcrazeWebsite' on page 29 undefined on input line 38.
+LaTeX Warning: Citation 'BitcrazeWebsite' on page 37 undefined on input line 38.
 
 
-LaTeX Warning: Citation '7989376' on page 29 undefined on input line 39.
+LaTeX Warning: Citation '7989376' on page 37 undefined on input line 39.
 
 
-LaTeX Warning: Citation '7989376' on page 29 undefined on input line 39.
+LaTeX Warning: Citation '7989376' on page 37 undefined on input line 39.
 
 )
 Underfull \hbox (badness 10000) in paragraph at lines 38--49
 
  []
 
-[29
+[37
 
 
 
@@ -1748,18 +1881,18 @@ Underfull \hbox (badness 1005) in paragraph at lines 38--44
  []
 
 
-LaTeX Warning: Citation 'Puig2025FishRobot' on page 30 undefined on input line 47.
+LaTeX Warning: Citation 'Puig2025FishRobot' on page 38 undefined on input line 47.
 
 
-LaTeX Warning: Citation 'Puig2025FishRobot' on page 30 undefined on input line 47.
+LaTeX Warning: Citation 'Puig2025FishRobot' on page 38 undefined on input line 47.
 
 
-LaTeX Warning: Citation 'PortCastello2025PezRobot' on page 30 undefined on input line 48.
+LaTeX Warning: Citation 'PortCastello2025PezRobot' on page 38 undefined on input line 48.
 
 
-LaTeX Warning: Citation 'PortCastello2025PezRobot' on page 30 undefined on input line 48.
+LaTeX Warning: Citation 'PortCastello2025PezRobot' on page 38 undefined on input line 48.
 
-) [30
+) [38
 
 
 
@@ -1797,12 +1930,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--27
 File: Images/flirKobra725.jpg Graphic file (type bmp)
 <Images/flirKobra725.jpg>
 
-LaTeX Warning: Citation 'Kobra725Ref' on page 31 undefined on input line 39.
+LaTeX Warning: Citation 'Kobra725Ref' on page 39 undefined on input line 39.
 
 
-LaTeX Warning: Citation 'Kobra725Ref' on page 31 undefined on input line 39.
+LaTeX Warning: Citation 'Kobra725Ref' on page 39 undefined on input line 39.
 
-) [31
+) [39
 
 
 
@@ -1910,18 +2043,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--33
  []
 
 
-LaTeX Warning: Citation 'Pags2016TIAGoTM' on page 32 undefined on input line 43.
+LaTeX Warning: Citation 'Pags2016TIAGoTM' on page 40 undefined on input line 43.
 
 
-LaTeX Warning: Citation 'Pags2016TIAGoTM' on page 32 undefined on input line 43.
+LaTeX Warning: Citation 'Pags2016TIAGoTM' on page 40 undefined on input line 43.
 
 
-LaTeX Warning: Citation 'TiagoRef' on page 32 undefined on input line 44.
+LaTeX Warning: Citation 'TiagoRef' on page 40 undefined on input line 44.
 
 
-LaTeX Warning: Citation 'TiagoRef' on page 32 undefined on input line 44.
+LaTeX Warning: Citation 'TiagoRef' on page 40 undefined on input line 44.
 
-) [32
+) [40
 
 
 
@@ -2019,12 +2152,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--40
  []
 
 
-LaTeX Warning: Citation 'UnitreeG1Ref' on page 33 undefined on input line 43.
+LaTeX Warning: Citation 'UnitreeG1Ref' on page 41 undefined on input line 43.
 
 
-LaTeX Warning: Citation 'UnitreeG1Ref' on page 33 undefined on input line 43.
+LaTeX Warning: Citation 'UnitreeG1Ref' on page 41 undefined on input line 43.
 
-) [33
+) [41
 
 
 
@@ -2035,7 +2168,7 @@ File: Images/ucm_uned.png Graphic file (type bmp)
 
 LaTeX Warning: Empty bibliography on input line 57.
 
-[34
+[42
 
 
 ] (./main.aux
@@ -2055,7 +2188,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 505A5005C2F90AAA4AFC2A98E68C4936;7311.
+(rerunfilecheck)             Checksum: 31560A6543003FEC82804B483857FF8D;7311.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                main
@@ -2066,12 +2199,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26596 strings out of 476824
- 511403 string characters out of 5803866
+ 27021 strings out of 476824
+ 533799 string characters out of 5803866
  2104627 words of memory out of 5000000
- 48030 multiletter control sequences out of 15000+600000
- 566455 words of font info for 97 fonts, out of 8000000 for 9000
+ 48408 multiletter control sequences out of 15000+600000
+ 566471 words of font info for 99 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 94i,11n,107p,935b,4808s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,15n,107p,935b,4808s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (34 pages).
+Output written on main.pdf (42 pages).

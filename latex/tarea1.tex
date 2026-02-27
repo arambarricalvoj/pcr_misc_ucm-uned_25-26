@@ -105,12 +105,12 @@ control proporcional (P) sencillo. (\textit{v}=cte, \textit{w}=$\boldsymbol{K_{p
 \addcontentsline{toc}{subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como
 resultado del modelo diferencial.}
 \subsection*{8. Implementar una ley de control diferente a la proporcionada y comparar
-ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}
+ambas usando los Índices de Comportamiento (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}).}
 \addcontentsline{toc}{subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar
-ambas usando los Índices de Comportamiento (IAE, ISE, ITAE, ITSE).}
+ambas usando los Índices de Comportamiento (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}).}
 
 Dado que la implementación propuesta se ha realizado mediante \textit{ROS2}, el primer paso es
-diseñar y definir el sistema de comunicación en \textit{CoppeliaSim}. Para ello, se definen 
+d\textit{ISE}ñar y definir el sistema de comunicación en \textit{CoppeliaSim}. Para ello, se definen 
 los siguiente requisitos:
 \begin{itemize}
     \item Se necesita obtener la posición del punto objetivo. Este destino es fijo, 
@@ -137,7 +137,7 @@ un sensor o sacar una foto. La comunicación mediante servicios involucra un men
 petición y otro de respuesta. \\
 
 Una acción es una interfaz de comunicación asíncrona basada en tópicos y servicios
-diseñada para desempeñar operaciones largas y prolongadas en el tiempo que necesitan
+d\textit{ISE}ñada para desempeñar operaciones largas y prolongadas en el tiempo que necesitan
 seguimiento. Para ejecutar una acción un cliente solicita a un servidor la
 ejecución, recibe retroalimentación periódica sobre el progreso a través de un tópico y
 tiene la opción de cancelar la tarea antes de que finalice. Son ideales para tareas como
@@ -145,7 +145,7 @@ mover un robot a una posición determinada, donde es necesario monitorizar el av
 poder interrumpir la ejecución si es necesario. La comunicación de una acción involucra
 mensajes de objetivo, retroalimentación y resultado final. \\
 
-Consecuentemente, el diseño de la arquitectura planteado es el siguiente:
+Consecuentemente, el d\textit{ISE}ño de la arquitectura planteado es el siguiente:
 \begin{itemize}
     \item Un tópico para publicar la posición del robot. El tópico se llama 
     \texttt{/robot\_pose} y utiliza el tipo de mensaje estándar \texttt{geometry\_msgs/msg/Pose}.
@@ -302,7 +302,7 @@ coordinar los distintos mecanismos descritos anteriormente. Este nodo, llamado
 El nodo implementa un servidor de la acción \texttt{ExecuteTrajectory}. Cuando un 
 cliente envía una petición, el nodo acepta la meta y solicita de forma asíncrona 
 la posición del objetivo mediante el servicio \texttt{/get\_target\_pose}. Este 
-diseño evita bloquear el \textit{callback} de la acción y permite que el nodo 
+d\textit{ISE}ño evita bloquear el \textit{callback} de la acción y permite que el nodo 
 continúe procesando otros eventos mientras espera la respuesta del servicio.
 
 Una vez recibida la posición del objetivo, el nodo activa un bucle de control 
@@ -329,9 +329,9 @@ en la clase \texttt{MetricsLogger}, Códigos \ref{cod:metricHpp} y \ref{cod:metr
 tanto las variables relevantes del estado del robot (posición, orientación, 
 distancia al objetivo y errores de control) como las velocidades lineal y angular 
 aplicadas. A partir de estos datos, el sistema calcula varias métricas clásicas de 
-evaluación de control, tales como el \textit{Integral of Absolute Error} (IAE), 
-el \textit{Integral of Squared Error} (ISE), el \textit{Integral of Time-weighted 
-Absolute Error} (ITAE) y el \textit{Integral of Time-weighted Squared Error} (ITSE). 
+evaluación de control, tales como el \textit{Integral of Absolute Error} (\textit{IAE}), 
+el \textit{Integral of Squared Error} (\textit{ISE}), el \textit{Integral of Time-weighted 
+Absolute Error} (\textit{ITAE}) y el \textit{Integral of Time-weighted Squared Error} (\textit{ITSE}). 
 Estas métricas permiten analizar la calidad de la trayectoria ejecutada y comparar 
 el comportamiento de distintos parámetros o estrategias de control.
 
@@ -402,7 +402,7 @@ móvil diferencial con ruedas.
 \subsubsection*{1. Controlador proporcional reactivo}
 El controlador reactivo utiliza una ley proporcional para la velocidad lineal,
 \begin{equation}
-    v = K_v \cdot d\;,
+    v = K_p \cdot d\;,
 \end{equation}
 
 saturada por la velocidad máxima del robot:
@@ -418,7 +418,7 @@ La velocidad angular se calcula como:
 Este tipo de controlador proporcional basado en errores de pose es ampliamente 
 utilizado en robots unicycle y se describe en \cite{choset2005, siegwart2011}.
 
-\subsubsection*{Controlador geométrico basado en curvatura o \textit{Pure Pursuit} puntual}
+\subsubsection*{2. Controlador geométrico basado en curvatura o \textit{Pure Pursuit} puntual}
 El controlador geométrico impone que el robot siga un arco de circunferencia que 
 conecta su pose actual con el objetivo. La curvatura del arco viene dada por:
 \begin{equation}
@@ -436,38 +436,47 @@ descrito originalmente en \cite{coulter1992} y ampliamente analizado en
 trayectoria depende únicamente de la geometría del problema.
 
 \subsubsection*{Evaluación}
+Para comparar ambos controladores se han ejecutado trayectorias
+desde la posición inicial del robot, ($x = 0.27887, \; y = 0.525$), 
+hasta la posición de destino, ($x = 0.75, \; y = 1.0$), estableciendo
+la velocidad máxima del robot a $1 m/s$, \cite{kheperaiv_manual_rev3} y realizando un 
+barrido del valor de $K_p$, comenzando en $0.1$ y aumentando 
+en $0.05$ hasta $0.6$, ya que con una ganancia superior la aceleración del robot 
+es excesiva y provoca el volcado del mismo. El control de la aceleración queda 
+fuera del alcance de esta tarea.\\ 
 
-Para comparar ambos controladores se emplean métricas estándar en control:
+La evaluación de los controladores se basa en el cálculo y 
+comparación de las siguientes métricas estándar en control:
 
 \begin{itemize}
-    \item \textbf{Integral del Error Absoluto (IAE)}: mide el error acumulado a lo largo del tiempo, 
+    \item \textbf{Integral del Error Absoluto (\textit{IAE})}: mide el error acumulado a lo largo del tiempo, 
     proporcionando una valoración global del desempeño sin penalizar en exceso los errores grandes. 
     Es adecuada cuando se desea evaluar el comportamiento medio del sistema o cuando los errores 
     puntuales no son críticos.
     \begin{equation}
-        \mathrm{IAE} = \int_0^T |e(t)| \, dt
+        \mathrm{\textit{IAE}} = \int_0^T |e(t)| \, dt
     \end{equation}
 
-    \item \textbf{Integral del Error Cuadrático (ISE)}: penaliza de forma más severa los errores grandes, 
+    \item \textbf{Integral del Error Cuadrático (\textit{ISE})}: penaliza de forma más severa los errores grandes, 
     siendo útil para evaluar controladores que deben minimizar desviaciones significativas o evitar 
     comportamientos agresivos. Es apropiada cuando los errores grandes son especialmente indeseables.
     \begin{equation}
-        \mathrm{ISE} = \int_0^T e(t)^2 \, dt
+        \mathrm{\textit{ISE}} = \int_0^T e(t)^2 \, dt
     \end{equation}
 
-    \item \textbf{Integral del Error Absoluto Ponderado por el Tiempo (ITAE)}: penaliza especialmente 
+    \item \textbf{Integral del Error Absoluto Ponderado por el Tiempo (\textit{ITAE})}: penaliza especialmente 
     los errores que persisten en el tiempo, favoreciendo respuestas rápidas y con menor cola temporal. 
     Se utiliza cuando el objetivo es minimizar el tiempo de asentamiento y mejorar la rapidez de convergencia.
     \begin{equation}
-        \mathrm{ITAE} = \int_0^T t \, |e(t)| \, dt
+        \mathrm{\textit{ITAE}} = \int_0^T t \, |e(t)| \, dt
     \end{equation}
 
-    \item \textbf{Integral del Error Cuadrático Ponderado por el Tiempo (ITSE)}: combina la penalización 
+    \item \textbf{Integral del Error Cuadrático Ponderado por el Tiempo (\textit{ITSE})}: combina la penalización 
     de errores grandes con la penalización de errores tardíos, siendo útil para evaluar estabilidad y 
     convergencia en sistemas no lineales. Es adecuada cuando interesa evitar tanto errores grandes como 
     oscilaciones prolongadas.
     \begin{equation}
-        \mathrm{ITSE} = \int_0^T t \, e(t)^2 \, dt
+        \mathrm{\textit{ITSE}} = \int_0^T t \, e(t)^2 \, dt
     \end{equation}
 
 \end{itemize}
@@ -476,23 +485,23 @@ Para comparar ambos controladores se emplean métricas estándar en control:
 En la práctica, estas métricas deben implementarse de manera discreta,
 por lo que dado el periodo de muestreo $\Delta t$, las métricas se aproximan mediante sumas:
 \begin{equation}
-    \mathrm{IAE} \approx \sum_{k=0}^{N} |e_k| \, \Delta t
+    \mathrm{\textit{IAE}} \approx \sum_{k=0}^{N} |e_k| \, \Delta t
 \end{equation}
 
 \begin{equation}
-    \mathrm{ISE} \approx \sum_{k=0}^{N} e_k^2 \, \Delta t
+    \mathrm{\textit{ISE}} \approx \sum_{k=0}^{N} e_k^2 \, \Delta t
 \end{equation}
 
 \begin{equation}
-    \mathrm{ITAE} \approx \sum_{k=0}^{N} t_k \, |e_k| \, \Delta t
+    \mathrm{\textit{ITAE}} \approx \sum_{k=0}^{N} t_k \, |e_k| \, \Delta t
 \end{equation}
 
 \begin{equation}
-    \mathrm{ITSE} \approx \sum_{k=0}^{N} t_k \, e_k^2 \, \Delta t
+    \mathrm{\textit{ITSE}} \approx \sum_{k=0}^{N} t_k \, e_k^2 \, \Delta t
 \end{equation}
 
 Estas métricas permiten comparar objetivamente el rendimiento de ambos controladores 
-bajo diferentes valores de $K_v$.
+bajo diferentes valores de $K_p$.
 
 \subsubsection*{Registro de datos}
 En cada iteración del controlador se almacena el tiempo $t$,
@@ -500,14 +509,262 @@ la pose del robot $(x_r, y_r, \theta_r)$, la pose del objetivo $(x_t, y_t)$,
 error de distancia $d$, error angular $e_\theta$ y velocidades $v$ y $\omega$. \\
 
 Al finalizar la acción, el sistema añade al fichero CSV las métricas globales 
-calculadas (IAE, ISE, ITAE, ITSE) y los parámetros utilizados ($K_v$, $v_{\max}$, 
+calculadas (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}) y los parámetros utilizados ($K_p$, $v_{\max}$, 
 $\omega_{\max}$ y tipo de controlador). Este registro permite realizar comparativas 
 rigurosas mediante tablas y gráficas.
 
 \subsubsection*{Resultados}
+En las Figuras \ref{fig:rdo_0_0.1} a \ref{fig:rdo_0_0.6} se presentan las gráficas que dibujan 
+las distintas señales medidas durante la ejecución de la trayectoria del primer 
+controlador. \\
+
+En las Figuras \ref{fig:rdo_1_0.1} a \ref{fig:rdo_1_0.6} se presentan las gráficas que dibujan 
+las distintas señales medidas durante la ejecución de la trayectoria del segundo 
+controlador. \\
+
+En la Tabla \ref{tab:controladores_desempeno} se muestran las cuatro métricas de 
+evaluación calculadas para cada controlador y cada configuración, donde se ha 
+coloreado en amarillo los valores más bajos obtenidos para cada métrica. \\
+
+Estos resultados evidencian que el controlador proporcional reactivo mantiene
+un desempeño consistente a lo largo de distintos valores de $K_p$, con reducciones
+progresivas en todas las métricas al aumentar la ganancia, por lo que disminuyen
+tanto los errores acumulados como los errores tardíos y los picos de error, 
+reflejando un comportamiento estable y uniforme. \\
+
+El controlador geométrico basado en curvatura, por su parte, presenta
+inicialmente valores de error mayores, especialmente en \textit{IAE} e \textit{ITAE}, lo
+que refleja errores acumulados y tardíos superiores para valores bajos de 
+$K_p$. Sin embargo, a medida que la ganancia aumenta, la reducción de todas 
+las métricas es más pronunciada que en el controlador proporcional. 
+Esta mayor pendiente de mejora indica que, aunque al principio su desempeño es inferior,
+el controlador geométrico alcanza rápidamente un rendimiento superior. De hecho, para
+$K_p = 0.5$, logra los menores valores en todas las métricas, lo que demuestra que 
+minimiza eficazmente todos los errores, superando al controlador proporcional reactivo
+en precisión y rapidez de convergencia.
 
 
+\begin{comment}
+   \begin{table}[]
+\begin{tabular}{|cc|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{}}                                                                             & \textbf{0.1} & \textbf{0.15} & \textbf{0.2} & \textbf{0.25} & \textbf{0.3} & \textbf{0.35} & \textbf{0.4} & \textbf{0.45} & \textbf{0.5}                 & \textbf{0.55} & \textbf{0.6} \\ \hline
+\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{IAE}}  & 2.83         & 1.91          & 1.46         & 1.18          & 1.03         & 0.92          & 0.81         & 0.74          & 0.76                         & 0.86          & 0.85         \\ \cline{2-13} 
+\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ISE}}  & 1.05         & 0.73          & 0.56         & 0.46          & 0.42         & 0.38          & 0.33         & 0.31          & 0.33                         & 0.39          & 0.43         \\ \cline{2-13} 
+\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ITAE}} & 9.99         & 4.47          & 2.58         & 1.66          & 1.21         & 0.97          & 0.74         & 0.61          & 0.63                         & 0.75          & 0.66         \\ \cline{2-13} 
+\multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{Controlador proporcional reactivo}}}          & \textbf{\textit{ITSE}} & 2.29         & 1.06          & 0.61         & 0.41          & 0.31         & 0.25          & 0.19         & 0.17          & 0.18                         & 0.24          & 0.24         \\ \hline
+\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{IAE}}  & 3.16         & 2.16          & 1.64         & 1.28          & 1.05         & 0.95          & 0.76         & 0.77          & \cellcolor[HTML]{FFFE65}0.7  & 0.75          & 0.88         \\ \cline{2-13} 
+\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ISE}}  & 1.21         & 0.83          & 0.64         & 0.51          & 0.42         & 0.38          & 0.31         & 0.32          & \cellcolor[HTML]{FFFE65}0.3  & 0.34          & 0.45         \\ \cline{2-13} 
+\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ITAE}} & 11.94        & 5.57          & 3.17         & 1.92          & 1.29         & 1.03          & 0.67         & 0.67          & \cellcolor[HTML]{FFFE65}0.55 & 0.59          & 0.7          \\ \cline{2-13} 
+\multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{Controlador geométrico basado en curvatura}}} & \textbf{\textit{ITSE}} & 2.9          & 1.36          & 0.79         & 0.48          & 0.33         & 0.27          & 0.17         & 0.18          & \cellcolor[HTML]{FFFE65}0.15 & 0.18          & 0.26         \\ \hline
+\end{tabular}
+\end{table} 
+\end{comment}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|cc|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{}} & \textbf{0.1} & \textbf{0.15} & \textbf{0.2} & \textbf{0.25} & \textbf{0.3} & \textbf{0.35} & \textbf{0.4} & \textbf{0.45} & \textbf{0.5} & \textbf{0.55} & \textbf{0.6} \\ \hline
+
+% Controlador proporcional reactivo
+\multicolumn{1}{|c|}{} & \textbf{\textit{IAE}}  & 2.83 & 1.91 & 1.46 & 1.18 & 1.03 & 0.92 & 0.81 & 0.74 & 0.76 & 0.86 & 0.85 \\ \cline{2-13} 
+\multicolumn{1}{|c|}{} & \textbf{\textit{ISE}}  & 1.05 & 0.73 & 0.56 & 0.46 & 0.42 & 0.38 & 0.33 & 0.31 & 0.33 & 0.39 & 0.43 \\ \cline{2-13} 
+\multicolumn{1}{|c|}{} & \textbf{\textit{ITAE}} & 9.99 & 4.47 & 2.58 & 1.66 & 1.21 & 0.97 & 0.74 & 0.61 & 0.63 & 0.75 & 0.66 \\ \cline{2-13} 
+\multicolumn{1}{|c|}{\multirow{-4}{*}{\shortstack{\textbf{Cont. prop.}\\\textbf{reactivo}}}} & \textbf{\textit{ITSE}} & 2.29 & 1.06 & 0.61 & 0.41 & 0.31 & 0.25 & 0.19 & 0.17 & 0.18 & 0.24 & 0.24 \\ \hline
+
+% Controlador geométrico basado en curvatura
+\multicolumn{1}{|c|}{} & \textbf{\textit{IAE}}  & 3.16 & 2.16 & 1.64 & 1.28 & 1.05 & 0.95 & 0.76 & 0.77 & \cellcolor[HTML]{FFFE65}0.7  & 0.75 & 0.88 \\ \cline{2-13} 
+\multicolumn{1}{|c|}{} & \textbf{\textit{ISE}}  & 1.21 & 0.83 & 0.64 & 0.51 & 0.42 & 0.38 & 0.31 & 0.32 & \cellcolor[HTML]{FFFE65}0.3  & 0.34 & 0.45 \\ \cline{2-13} 
+\multicolumn{1}{|c|}{} & \textbf{\textit{ITAE}} & 11.94 & 5.57 & 3.17 & 1.92 & 1.29 & 1.03 & 0.67 & 0.67 & \cellcolor[HTML]{FFFE65}0.55 & 0.59 & 0.7 \\ \cline{2-13} 
+\multicolumn{1}{|c|}{\multirow{-4}{*}{\shortstack{\textbf{Cont. geom.}\\\textbf{}}}} & \textbf{\textit{ITSE}} & 2.9 & 1.36 & 0.79 & 0.48 & 0.33 & 0.27 & 0.17 & 0.18 & \cellcolor[HTML]{FFFE65}0.15 & 0.18 & 0.26 \\ \hline
+\end{tabular}
+\caption{Evaluación de los controladores con las cuatro métricas propuestas para 
+distintos valores de $K_p$.}
+\label{tab:controladores_desempeno}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.1_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.1_tiempo.png}
+\caption{\label{fig:rdo_0_0.1} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.1$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.15_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.15_tiempo.png}
+\caption{\label{fig:rdo_0_0.15} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.15$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png}
+\caption{\label{fig:rdo_0_0.2} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.2$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.25_tiempo.png}
+\caption{\label{fig:rdo_0_0.25} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.25$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.3_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.3_tiempo.png}
+\caption{\label{fig:rdo_0_0.3} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.3$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png}
+\caption{\label{fig:rdo_0_0.35} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.35$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.4_tiempo.png}
+\caption{\label{fig:rdo_0_0.4} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.4$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.45_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.45_tiempo.png}
+\caption{\label{fig:rdo_0_0.45} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.45$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png}
+\caption{\label{fig:rdo_0_0.5} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.5$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.55_tiempo.png}
+\caption{\label{fig:rdo_0_0.55} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.55$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.6_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.6_tiempo.png}
+\caption{\label{fig:rdo_0_0.6} Trayectoria y señales de velocidades y error con 
+el controlador reactivo y $K_p = 0.6$.}
+\end{figure}
+
+% --
+% --
+% --
+% --
+% --
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png}
+\caption{\label{fig:rdo_1_0.1} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.1$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.15_tiempo.png}
+\caption{\label{fig:rdo_1_0.15} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.15$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.2_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.2_tiempo.png}
+\caption{\label{fig:rdo_1_0.2} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.2$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png}
+\caption{\label{fig:rdo_1_0.25} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.25$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.3_tiempo.png}
+\caption{\label{fig:rdo_1_0.3} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.3$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.35_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.35_tiempo.png}
+\caption{\label{fig:rdo_1_0.35} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.35$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png}
+\caption{\label{fig:rdo_1_0.4} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.4$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.45_tiempo.png}
+\caption{\label{fig:rdo_1_0.45} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.45$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.5_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.5_tiempo.png}
+\caption{\label{fig:rdo_1_0.5} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.5$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png}
+\caption{\label{fig:rdo_1_0.55} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.55$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png}
+\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png}
+\caption{\label{fig:rdo_1_0.6} Trayectoria y señales de velocidades y error con 
+el controlador geométrico y $K_p = 0.6$.}
+\end{figure}
 
 Figura \ref{fig:t1.3_2}
 

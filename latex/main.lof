@@ -4,13 +4,35 @@
 \contentsline {figure}{\numberline {3}{\ignorespaces Script por defecto del robot.}}{7}{figure.caption.16}%
 \contentsline {figure}{\numberline {4}{\ignorespaces Propiedades de la esfera añadida como punto de destino.}}{7}{figure.caption.18}%
 \contentsline {figure}{\numberline {5}{\ignorespaces Esquema de un robot móvil diferencial con ruedas. Extraído del guión de prácticas de la asignatura.}}{12}{figure.caption.24}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Trayectoria por defecto.}}{14}{figure.caption.30}%
-\contentsline {figure}{\numberline {7}{\ignorespaces \textit {Shakey}.}}{25}{figure.caption.49}%
-\contentsline {figure}{\numberline {8}{\ignorespaces \textit {TurtleBot 4}.}}{26}{figure.caption.52}%
-\contentsline {figure}{\numberline {9}{\ignorespaces \textit {RHex}.}}{27}{figure.caption.55}%
-\contentsline {figure}{\numberline {10}{\ignorespaces \textit {MIT Cheetah 3}.}}{28}{figure.caption.58}%
-\contentsline {figure}{\numberline {11}{\ignorespaces \textit {Crazyflie 2.1}.}}{29}{figure.caption.61}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Pez robot \textit {UJI–CIRTESU}.}}{30}{figure.caption.64}%
-\contentsline {figure}{\numberline {13}{\ignorespaces \textit {FLIR Kobra 725}.}}{31}{figure.caption.67}%
-\contentsline {figure}{\numberline {14}{\ignorespaces \textit {TIAGo}.}}{32}{figure.caption.70}%
-\contentsline {figure}{\numberline {15}{\ignorespaces \textit {Unitree G1}.}}{33}{figure.caption.73}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.1$.}}{15}{figure.caption.31}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.15$.}}{16}{figure.caption.32}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.2$.}}{16}{figure.caption.33}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.25$.}}{16}{figure.caption.34}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.3$.}}{17}{figure.caption.35}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.35$.}}{17}{figure.caption.36}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.4$.}}{17}{figure.caption.37}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.45$.}}{18}{figure.caption.38}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.5$.}}{18}{figure.caption.39}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.55$.}}{18}{figure.caption.40}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.6$.}}{19}{figure.caption.41}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.1$.}}{19}{figure.caption.42}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.15$.}}{19}{figure.caption.43}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.2$.}}{20}{figure.caption.44}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.25$.}}{20}{figure.caption.45}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.3$.}}{20}{figure.caption.46}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.35$.}}{21}{figure.caption.47}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.4$.}}{21}{figure.caption.48}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.45$.}}{21}{figure.caption.49}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.5$.}}{22}{figure.caption.50}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.55$.}}{22}{figure.caption.51}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.6$.}}{22}{figure.caption.52}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Trayectoria por defecto.}}{23}{figure.caption.53}%
+\contentsline {figure}{\numberline {29}{\ignorespaces \textit {Shakey}.}}{33}{figure.caption.72}%
+\contentsline {figure}{\numberline {30}{\ignorespaces \textit {TurtleBot 4}.}}{34}{figure.caption.75}%
+\contentsline {figure}{\numberline {31}{\ignorespaces \textit {RHex}.}}{35}{figure.caption.78}%
+\contentsline {figure}{\numberline {32}{\ignorespaces \textit {MIT Cheetah 3}.}}{36}{figure.caption.81}%
+\contentsline {figure}{\numberline {33}{\ignorespaces \textit {Crazyflie 2.1}.}}{37}{figure.caption.84}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Pez robot \textit {UJI–CIRTESU}.}}{38}{figure.caption.87}%
+\contentsline {figure}{\numberline {35}{\ignorespaces \textit {FLIR Kobra 725}.}}{39}{figure.caption.90}%
+\contentsline {figure}{\numberline {36}{\ignorespaces \textit {TIAGo}.}}{40}{figure.caption.93}%
+\contentsline {figure}{\numberline {37}{\ignorespaces \textit {Unitree G1}.}}{41}{figure.caption.96}%
