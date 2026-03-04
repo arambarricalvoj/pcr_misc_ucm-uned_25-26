@@ -1,0 +1,11 @@
+khepera_controller:
+  ros__parameters:
+    vmax: 1.0
+    wmax: 1.0
+    kp: 0.2
+    controller_type: 1
+    k_front: 0.5
+    k_turn: 20.0
+
+# controller_type: 0 --> ICC reactivo
+# controller_type: 1 --> ICC geométrico
