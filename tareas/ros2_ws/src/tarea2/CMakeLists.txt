@@ -21,6 +21,7 @@ add_library(tarea2_lib
     src/service_utils.cpp
     src/metrics_utils.cpp
     src/tang.cpp
+    src/campo_vectorial.cpp
 )
 
 ament_target_dependencies(tarea2_lib
@@ -39,6 +40,14 @@ target_link_libraries(khepera_controller tarea2_lib)
 
 # Instalación
 install(TARGETS khepera_controller
+    DESTINATION lib/${PROJECT_NAME}
+)
+
+add_executable(campo_vectorial src/main2.cpp)
+target_link_libraries(campo_vectorial tarea2_lib)
+
+# Instalación
+install(TARGETS campo_vectorial
     DESTINATION lib/${PROJECT_NAME}
 )
 

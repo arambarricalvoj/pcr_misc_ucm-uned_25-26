@@ -1,28 +1,56 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Robot \textit {Khepera IV} y objeto que representa el punto de destino agregados a \textit {Coppelia Sim}.}}{6}{figure.caption.13}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Script por defecto del robot.}}{7}{figure.caption.16}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Propiedades de la esfera añadida como punto de destino.}}{7}{figure.caption.18}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Esquema de la arquitectura propuesta.}}{12}{figure.caption.22}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Esquema de un robot móvil diferencial con ruedas \blx@tocontentsinit {0}\cite {FARIAS20179150}.}}{13}{figure.caption.25}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.1$.}}{16}{figure.caption.33}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.15$.}}{16}{figure.caption.34}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.2$.}}{17}{figure.caption.35}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.25$.}}{17}{figure.caption.36}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.3$.}}{17}{figure.caption.37}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.35$.}}{18}{figure.caption.38}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.4$.}}{18}{figure.caption.39}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.45$.}}{18}{figure.caption.40}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.5$.}}{19}{figure.caption.41}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.55$.}}{19}{figure.caption.42}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.6$.}}{19}{figure.caption.43}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.1$.}}{20}{figure.caption.44}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.15$.}}{20}{figure.caption.45}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.2$.}}{20}{figure.caption.46}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.25$.}}{21}{figure.caption.47}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.3$.}}{21}{figure.caption.48}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.35$.}}{21}{figure.caption.49}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.4$.}}{22}{figure.caption.50}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.45$.}}{22}{figure.caption.51}%
-\contentsline {figure}{\numberline {25}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.5$.}}{22}{figure.caption.52}%
-\contentsline {figure}{\numberline {26}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.55$.}}{23}{figure.caption.53}%
-\contentsline {figure}{\numberline {27}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.6$.}}{23}{figure.caption.54}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Robot \textit {Khepera IV} y objeto que representa el punto de destino agregados a \textit {Coppelia Sim}.}}{7}{figure.caption.13}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Script por defecto del robot.}}{8}{figure.caption.16}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Propiedades de la esfera añadida como punto de destino.}}{8}{figure.caption.18}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Esquema de la arquitectura propuesta.}}{13}{figure.caption.22}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Esquema de un robot móvil diferencial con ruedas \blx@tocontentsinit {0}\cite {FARIAS20179150}.}}{14}{figure.caption.25}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.1$.}}{17}{figure.caption.33}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.15$.}}{17}{figure.caption.34}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.2$.}}{18}{figure.caption.35}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.25$.}}{18}{figure.caption.36}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.3$.}}{18}{figure.caption.37}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.35$.}}{19}{figure.caption.38}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.4$.}}{19}{figure.caption.39}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.45$.}}{19}{figure.caption.40}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.5$.}}{20}{figure.caption.41}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.55$.}}{20}{figure.caption.42}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.6$.}}{20}{figure.caption.43}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.1$.}}{21}{figure.caption.44}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.15$.}}{21}{figure.caption.45}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.2$.}}{21}{figure.caption.46}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.25$.}}{22}{figure.caption.47}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.3$.}}{22}{figure.caption.48}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.35$.}}{22}{figure.caption.49}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.4$.}}{23}{figure.caption.50}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.45$.}}{23}{figure.caption.51}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.5$.}}{23}{figure.caption.52}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.55$.}}{24}{figure.caption.53}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.6$.}}{24}{figure.caption.54}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Vehículos de \textit {Braitenberg} \blx@tocontentsinit {0}\cite {dicaro2017behaviors}.}}{25}{figure.caption.59}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Robot \textit {Khepera IV} y objeto que representa el punto de destino agregados a \textit {Coppelia Sim}.}}{29}{figure.caption.72}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Script por defecto del robot.}}{30}{figure.caption.75}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Propiedades de la esfera añadida como punto de destino.}}{30}{figure.caption.77}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Esquema de la arquitectura propuesta.}}{34}{figure.caption.81}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Esquema de un robot móvil diferencial con ruedas \blx@tocontentsinit {0}\cite {FARIAS20179150}.}}{35}{figure.caption.84}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.1$.}}{39}{figure.caption.92}%
+\contentsline {figure}{\numberline {35}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.15$.}}{39}{figure.caption.93}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.2$.}}{39}{figure.caption.94}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.25$.}}{40}{figure.caption.95}%
+\contentsline {figure}{\numberline {38}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.3$.}}{40}{figure.caption.96}%
+\contentsline {figure}{\numberline {39}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.35$.}}{40}{figure.caption.97}%
+\contentsline {figure}{\numberline {40}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.4$.}}{41}{figure.caption.98}%
+\contentsline {figure}{\numberline {41}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.45$.}}{41}{figure.caption.99}%
+\contentsline {figure}{\numberline {42}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.5$.}}{41}{figure.caption.100}%
+\contentsline {figure}{\numberline {43}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.55$.}}{42}{figure.caption.101}%
+\contentsline {figure}{\numberline {44}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador reactivo y $K_p = 0.6$.}}{42}{figure.caption.102}%
+\contentsline {figure}{\numberline {45}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.1$.}}{42}{figure.caption.103}%
+\contentsline {figure}{\numberline {46}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.15$.}}{43}{figure.caption.104}%
+\contentsline {figure}{\numberline {47}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.2$.}}{43}{figure.caption.105}%
+\contentsline {figure}{\numberline {48}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.25$.}}{43}{figure.caption.106}%
+\contentsline {figure}{\numberline {49}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.3$.}}{44}{figure.caption.107}%
+\contentsline {figure}{\numberline {50}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.35$.}}{44}{figure.caption.108}%
+\contentsline {figure}{\numberline {51}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.4$.}}{44}{figure.caption.109}%
+\contentsline {figure}{\numberline {52}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.45$.}}{45}{figure.caption.110}%
+\contentsline {figure}{\numberline {53}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.5$.}}{45}{figure.caption.111}%
+\contentsline {figure}{\numberline {54}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.55$.}}{45}{figure.caption.112}%
+\contentsline {figure}{\numberline {55}{\ignorespaces Trayectoria y señales de velocidades y error con el controlador geométrico y $K_p = 0.6$.}}{46}{figure.caption.113}%

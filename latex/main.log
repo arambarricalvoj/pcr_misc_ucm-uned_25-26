@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  27 FEB 2026 19:04
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  5 MAR 2026 22:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -786,7 +786,92 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (./main.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
- (./autoria.aux) (./docker.aux) (./tarea1.aux) (./anexo_codigo.aux))
+ (./autoria.aux) (./docker.aux) (./tarea1.aux) (./tarea2.aux
+
+LaTeX Warning: Label `fig:t1.2' multiply defined.
+
+
+LaTeX Warning: Label `fig:t1.3' multiply defined.
+
+
+LaTeX Warning: Label `fig:t1.5' multiply defined.
+
+
+LaTeX Warning: Label `fig:arquitectura_esquema' multiply defined.
+
+
+LaTeX Warning: Label `fig:t1_esquemaRobot' multiply defined.
+
+
+LaTeX Warning: Label `tab:controladores_desempeno' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.1' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.15' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.2' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.25' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.3' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.35' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.4' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.45' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.5' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.55' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_0_0.6' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.1' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.15' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.2' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.25' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.3' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.35' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.4' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.45' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.5' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.55' multiply defined.
+
+
+LaTeX Warning: Label `fig:rdo_1_0.6' multiply defined.
+
+) (./anexo_codigo.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -975,7 +1060,7 @@ LaTeX Info: Redefining \% on input line 1.
  [3
 
 
-])
+] [4])
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
@@ -987,7 +1072,7 @@ LaTeX Info: Redefining \% on input line 1.
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- [4]
+ [5]
 \openout2 = `docker.aux'.
 
  (./docker.tex
@@ -1023,7 +1108,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--23
 
  []
 
-) [5
+) [6
 
 ]
 \openout2 = `tarea1.aux'.
@@ -1033,17 +1118,17 @@ File: Images/ucm_uned.png Graphic file (type bmp)
 <Images/ucm_uned.png>
 
 
-LaTeX Warning: Citation 'doi:10.1126/scirobotics.abm6074' on page 6 undefined on input line 14.
+LaTeX Warning: Citation 'doi:10.1126/scirobotics.abm6074' on page 7 undefined on input line 14.
 
 
-LaTeX Warning: Reference `' on page 6 undefined on input line 14.
+LaTeX Warning: Reference `' on page 7 undefined on input line 14.
 
 File: Images/tarea1/robot2.png Graphic file (type bmp)
 <Images/tarea1/robot2.png>
 
-LaTeX Warning: Citation 'kheperaiv_manual_rev3' on page 6 undefined on input line 49.
+LaTeX Warning: Citation 'kheperaiv_manual_rev3' on page 7 undefined on input line 49.
 
-[6
+[7
 
 
 
@@ -1058,7 +1143,7 @@ Underfull \hbox (badness 1127) in paragraph at lines 97--97
 [][]\TU/4.ttf(0)/b/n/14.4 6. Con las coordenadas del punto de destino y las del robot, calcular las
  []
 
-[7]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 124--126
 
  []
@@ -1078,7 +1163,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--147
 
  []
 
-[8]
+[9]
 Underfull \hbox (badness 2828) in paragraph at lines 160--165
 \TU/4.ttf(0)/m/n/12 de publicador de la posición, Código []4[], mientras que el nodo o programa \TU/4.ttf(0)/m/it/12 ROS2
  []
@@ -1089,160 +1174,160 @@ Underfull \hbox (badness 2384) in paragraph at lines 174--178
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 212--220
+Underfull \hbox (badness 1097) in paragraph at lines 214--222
 []\TU/4.ttf(0)/m/n/12 Un servicio para solicitar la posición del objeto que representa el punto de destino
  []
 
 
-Underfull \hbox (badness 2762) in paragraph at lines 212--220
+Underfull \hbox (badness 2762) in paragraph at lines 214--222
 \TU/4.ttf(0)/m/n/12 en la trayectoria. El servicio se llama \TU/lmtt/m/n/12 /get_-target_-pose \TU/4.ttf(0)/m/n/12 y utiliza el tipo estándar
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 235--242
+Underfull \hbox (badness 10000) in paragraph at lines 237--244
 []\TU/4.ttf(0)/m/n/12 Una acción para solicitar la ejecución de una trayectoria hacia un punto de
  []
 
 
-Underfull \hbox (badness 5622) in paragraph at lines 235--242
+Underfull \hbox (badness 5622) in paragraph at lines 237--244
 \TU/4.ttf(0)/m/n/12 destino. La acción se llama \TU/lmtt/m/n/12 /execute_-trajectory \TU/4.ttf(0)/m/n/12 y utiliza el tipo personalizado
  []
 
 
-Underfull \hbox (badness 2359) in paragraph at lines 235--242
+Underfull \hbox (badness 2359) in paragraph at lines 237--244
 \TU/lmtt/m/n/12 interfaces/action/ExecuteTrajectory\TU/4.ttf(0)/m/n/12 , Código []7[]. Esta acción está compuesta por
  []
 
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 277--279
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 279--281
 []\TU/4.ttf(0)/m/n/12 Solicita de forma asíncrona la posición del objetivo mediante el servicio
  []
 
-[10]
-Underfull \hbox (badness 3895) in paragraph at lines 348--355
+[11]
+Underfull \hbox (badness 3895) in paragraph at lines 350--357
 []\TU/4.ttf(0)/m/n/12 El módulo \TU/lmtt/m/n/12 service_-utils.hpp/.cpp \TU/4.ttf(0)/m/n/12 contiene las funciones auxiliares para realizar
  []
 
 
-Underfull \hbox (badness 5939) in paragraph at lines 348--355
+Underfull \hbox (badness 5939) in paragraph at lines 350--357
 \TU/4.ttf(0)/m/n/12 la llamada asíncrona al servicio \TU/lmtt/m/n/12 /get_-target_-pose\TU/4.ttf(0)/m/n/12 , Códigos []12[] y []13[], el módulo
  []
 
 
-Underfull \hbox (badness 2088) in paragraph at lines 348--355
+Underfull \hbox (badness 2088) in paragraph at lines 350--357
 \TU/lmtt/m/n/12 pose_-utils.hpp \TU/4.ttf(0)/m/n/12 proporciona utilidades para extraer y manipular la pose del robot
  []
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 348--355
+Underfull \hbox (badness 1502) in paragraph at lines 350--357
 \TU/4.ttf(0)/m/n/12 (posición y orientación) a partir de los mensajes recibidos, Código []14[], y el módulo
  []
 
 File: Images/tarea1/arquitectura.png Graphic file (type bmp)
 <Images/tarea1/arquitectura.png>
-[11]
+[12]
 
-LaTeX Warning: Citation 'choset2005' on page 12 undefined on input line 371.
-
-
-LaTeX Warning: Citation 'siegwart2011' on page 12 undefined on input line 371.
+LaTeX Warning: Citation 'choset2005' on page 13 undefined on input line 373.
 
 
-LaTeX Warning: Citation 'siciliano2009' on page 12 undefined on input line 371.
+LaTeX Warning: Citation 'siegwart2011' on page 13 undefined on input line 373.
 
 
-LaTeX Warning: Citation 'otero2005' on page 12 undefined on input line 396.
+LaTeX Warning: Citation 'siciliano2009' on page 13 undefined on input line 373.
 
 
-LaTeX Warning: Citation 'morin2016' on page 12 undefined on input line 396.
+LaTeX Warning: Citation 'otero2005' on page 13 undefined on input line 398.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--397
+LaTeX Warning: Citation 'morin2016' on page 13 undefined on input line 398.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--399
 
  []
 
 File: Images/tarea1/esquema_robot.png Graphic file (type bmp)
 <Images/tarea1/esquema_robot.png>
 
-LaTeX Warning: Citation 'FARIAS20179150' on page 12 undefined on input line 404.
+LaTeX Warning: Citation 'FARIAS20179150' on page 13 undefined on input line 406.
 
 
-LaTeX Warning: Citation 'FARIAS20179150' on page 12 undefined on input line 404.
+LaTeX Warning: Citation 'FARIAS20179150' on page 13 undefined on input line 406.
 
-[12]
+[13]
 
-LaTeX Warning: Citation 'choset2005' on page 13 undefined on input line 425.
-
-
-LaTeX Warning: Citation 'siegwart2011' on page 13 undefined on input line 425.
+LaTeX Warning: Citation 'choset2005' on page 14 undefined on input line 427.
 
 
-LaTeX Warning: Citation 'coulter1992' on page 13 undefined on input line 446.
+LaTeX Warning: Citation 'siegwart2011' on page 14 undefined on input line 427.
 
 
-LaTeX Warning: Citation 'otero2005' on page 13 undefined on input line 447.
+LaTeX Warning: Citation 'coulter1992' on page 14 undefined on input line 448.
 
 
-LaTeX Warning: Citation 'morin2016' on page 13 undefined on input line 447.
+LaTeX Warning: Citation 'otero2005' on page 14 undefined on input line 449.
 
 
-LaTeX Warning: Citation 'corke2017' on page 13 undefined on input line 447.
+LaTeX Warning: Citation 'morin2016' on page 14 undefined on input line 449.
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 445--449
+LaTeX Warning: Citation 'corke2017' on page 14 undefined on input line 449.
+
+
+Underfull \hbox (badness 2809) in paragraph at lines 447--451
 []\TU/4.ttf(0)/m/n/12 Este enfoque corresponde a la formulación puntual del algoritmo \TU/4.ttf(0)/m/it/12 Pure Pursuit\TU/4.ttf(0)/m/n/12 , descrito
  []
 
 
-LaTeX Warning: Citation 'kheperaiv_manual_rev3' on page 13 undefined on input line 454.
+LaTeX Warning: Citation 'kheperaiv_manual_rev3' on page 14 undefined on input line 456.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--459
+Underfull \hbox (badness 10000) in paragraph at lines 453--461
 
- []
-
-[13]
-Underfull \hbox (badness 2486) in paragraph at lines 464--468
-[]\TU/4.ttf(0)/b/n/12 Integral del Error Absoluto (\TU/4.ttf(0)/b/it/12 IAE\TU/4.ttf(0)/b/n/12 )\TU/4.ttf(0)/m/n/12 : mide el error acumulado a lo largo del tiempo,
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 519--522
+Underfull \hbox (badness 2486) in paragraph at lines 466--470
+[]\TU/4.ttf(0)/b/n/12 Integral del Error Absoluto (\TU/4.ttf(0)/b/it/12 IAE\TU/4.ttf(0)/b/n/12 )\TU/4.ttf(0)/m/n/12 : mide el error acumulado a lo largo del tiempo,
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 521--524
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 529--532
+Underfull \hbox (badness 10000) in paragraph at lines 531--534
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 533--536
+Underfull \hbox (badness 10000) in paragraph at lines 535--538
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 537--540
+Underfull \hbox (badness 10000) in paragraph at lines 539--542
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 541--546
+Underfull \hbox (badness 10000) in paragraph at lines 543--548
 
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 547--557
+Underfull \hbox (badness 1132) in paragraph at lines 549--559
 \TU/4.ttf(0)/m/n/12 reducción de todas las métricas es más pronunciada que en el controlador proporcional.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 547--557
+Underfull \hbox (badness 10000) in paragraph at lines 549--559
 
  []
 
-[15] Excluding 'comment' comment.
-Overfull \hbox (8.06158pt too wide) in paragraph at lines 587--604
+[16] Excluding 'comment' comment.
+Overfull \hbox (8.06158pt too wide) in paragraph at lines 589--606
  [][] 
  []
 
@@ -1258,7 +1343,7 @@ File: Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png Graphic file (type b
 <Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png>
 File: Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png>
-[16]
+[17]
 File: Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png>
 File: Images/tarea1/graf/icc_reactivo_Kv0.25_tiempo.png Graphic file (type bmp)
@@ -1271,7 +1356,7 @@ File: Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png Graphic file (type 
 <Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png>
 File: Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png>
- [17]
+ [18]
 File: Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png>
 File: Images/tarea1/graf/icc_reactivo_Kv0.4_tiempo.png Graphic file (type bmp)
@@ -1284,7 +1369,7 @@ File: Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png Graphic file (type b
 <Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png>
 File: Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png>
- [18]
+ [19]
 File: Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png>
 File: Images/tarea1/graf/icc_reactivo_Kv0.55_tiempo.png Graphic file (type bmp)
@@ -1297,7 +1382,7 @@ File: Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png Graphic file (type
 <Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png>
- [19]
+ [20]
 File: Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.15_tiempo.png Graphic file (type bmp)
@@ -1310,7 +1395,7 @@ File: Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png Graphic file (typ
 <Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png>
- [20]
+ [21]
 File: Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.3_tiempo.png Graphic file (type bmp)
@@ -1323,7 +1408,7 @@ File: Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png Graphic file (type
 <Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png>
- [21]
+ [22]
 File: Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.45_tiempo.png Graphic file (type bmp)
@@ -1336,26 +1421,422 @@ File: Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png Graphic file (typ
 <Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png>
- [22]
+ [23]
 File: Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png>
 File: Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png Graphic file (type bmp)
 <Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png>
- Excluding 'comment' comment.) [23]
+ Excluding 'comment' comment.) [24]
+\openout2 = `tarea2.aux'.
+
+ (./tarea2.tex
+File: Images/ucm_uned.png Graphic file (type bmp)
+<Images/ucm_uned.png>
+
+
+LaTeX Warning: Citation 'braitenberg1984vehicles' on page 25 undefined on input line 25.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--30
+\TU/4.ttf(0)/m/n/12 ganancias simples, generando comportamientos complejos a partir de reglas locales
+ []
+
+
+Underfull \hbox (badness 6927) in paragraph at lines 22--30
+\TU/4.ttf(0)/m/n/12 [[]]. En otras palabras, el concepto de vehículos de \TU/4.ttf(0)/m/it/12 Braitenberg
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--30
+
+ []
+
+
+Underfull \hbox (badness 1983) in paragraph at lines 31--35
+[]\TU/4.ttf(0)/m/n/12 Este esquema describe comportamientos reactivos y en la práctica, esto se implementa
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--35
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--42
+
+ []
+
+File: Images/tarea2/braitenberg.png Graphic file (type bmp)
+<Images/tarea2/braitenberg.png>
+
+LaTeX Warning: Citation 'dicaro2017behaviors' on page 25 undefined on input line 47.
+
+
+LaTeX Warning: Citation 'dicaro2017behaviors' on page 25 undefined on input line 47.
+
+[25
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 55--60
+
+ []
+
+Missing character: There is no ‑ (U+2011) in font [Core/1.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+
+Underfull \hbox (badness 1931) in paragraph at lines 89--90
+[]\TU/4.ttf(0)/b/n/12 Híbridos y arquitecturas de comportamiento\TU/4.ttf(0)/m/n/12 : usar Braitenberg como uno de varios
+ []
+
+
+Underfull \hbox (badness 1533) in paragraph at lines 89--90
+\TU/4.ttf(0)/m/n/12 comportamientos en una arquitectura de subsunción o en un arbitrador basado en
+ []
+
+
+Underfull \hbox (badness 5316) in paragraph at lines 90--91
+[]\TU/4.ttf(0)/b/n/12 Aprendido / adaptativo\TU/4.ttf(0)/m/n/12 : ajustar las ganancias $\OML/cmm/m/it/12 G$ \TU/4.ttf(0)/m/n/12 mediante aprendizaje (regresión,
+ []
+
+[26]
+Overfull \hbox (185.47356pt too wide) detected at line 133
+\OML/cmm/m/it/12 G[] \OT1/cmr/m/n/12 = [] = []
+ []
+
+Missing character: There is no ‑ (U+2011) in font [Core/4.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no ‑ (U+2011) in font [Core/4.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+
+Underfull \hbox (badness 2865) in paragraph at lines 184--185
+[]\TU/4.ttf(0)/b/n/12 Bloqueo en pasillos (mínimos locales): \TU/4.ttf(0)/m/n/12 romper simetría con un \TU/4.ttf(0)/m/it/12 bias \TU/4.ttf(0)/m/n/12 lateral, modo
+ []
+
+
+Underfull \hbox (badness 3281) in paragraph at lines 185--186
+[]\TU/4.ttf(0)/b/n/12 Choques por atracción dominante: \TU/4.ttf(0)/m/n/12 mezclar con controlador objetivo con factor $\OML/cmm/m/it/12 ^^K$
+ []
+
+[27]
+Missing character: There is no ‑ (U+2011) in font [Core/1.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+
+Underfull \hbox (badness 2035) in paragraph at lines 226--227
+[]\TU/4.ttf(0)/m/n/12 Registrar para cada variante: tiempo a meta, distancia mínima a obstáculos, número de
+ []
+
+File: Images/tarea1/robot2.png Graphic file (type bmp)
+<Images/tarea1/robot2.png>
+[28]
+
+LaTeX Warning: Citation 'kheperaiv_manual_rev3' on page 29 undefined on input line 260.
+
+File: Images/tarea1/script.png Graphic file (type bmp)
+<Images/tarea1/script.png>
+[29] Excluding 'comment' comment.
+File: Images/tarea1/esfera.png Graphic file (type bmp)
+<Images/tarea1/esfera.png>
+
+Underfull \hbox (badness 1127) in paragraph at lines 308--308
+[][]\TU/4.ttf(0)/b/n/14.4 6. Con las coordenadas del punto de destino y las del robot, calcular las
+ []
+
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 335--337
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--342
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 343--349
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 350--358
+
+ []
+
+
+Underfull \hbox (badness 2828) in paragraph at lines 371--376
+\TU/4.ttf(0)/m/n/12 de publicador de la posición, Código []4[], mientras que el nodo o programa \TU/4.ttf(0)/m/it/12 ROS2
+ []
+
+
+Underfull \hbox (badness 2384) in paragraph at lines 385--389
+\TU/4.ttf(0)/m/n/12 de suscriptor de la velocidad, Código []5[], mientras que el nodo o programa \TU/4.ttf(0)/m/it/12 ROS2
+ []
+
+[31]
+Underfull \hbox (badness 1097) in paragraph at lines 423--431
+[]\TU/4.ttf(0)/m/n/12 Un servicio para solicitar la posición del objeto que representa el punto de destino
+ []
+
+
+Underfull \hbox (badness 2762) in paragraph at lines 423--431
+\TU/4.ttf(0)/m/n/12 en la trayectoria. El servicio se llama \TU/lmtt/m/n/12 /get_-target_-pose \TU/4.ttf(0)/m/n/12 y utiliza el tipo estándar
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 446--453
+[]\TU/4.ttf(0)/m/n/12 Una acción para solicitar la ejecución de una trayectoria hacia un punto de
+ []
+
+
+Underfull \hbox (badness 5622) in paragraph at lines 446--453
+\TU/4.ttf(0)/m/n/12 destino. La acción se llama \TU/lmtt/m/n/12 /execute_-trajectory \TU/4.ttf(0)/m/n/12 y utiliza el tipo personalizado
+ []
+
+
+Underfull \hbox (badness 2359) in paragraph at lines 446--453
+\TU/lmtt/m/n/12 interfaces/action/ExecuteTrajectory\TU/4.ttf(0)/m/n/12 , Código []7[]. Esta acción está compuesta por
+ []
+
+[32]
+Underfull \hbox (badness 10000) in paragraph at lines 488--490
+[]\TU/4.ttf(0)/m/n/12 Solicita de forma asíncrona la posición del objetivo mediante el servicio
+ []
+
+[33]
+Underfull \hbox (badness 3895) in paragraph at lines 559--566
+[]\TU/4.ttf(0)/m/n/12 El módulo \TU/lmtt/m/n/12 service_-utils.hpp/.cpp \TU/4.ttf(0)/m/n/12 contiene las funciones auxiliares para realizar
+ []
+
+
+Underfull \hbox (badness 5939) in paragraph at lines 559--566
+\TU/4.ttf(0)/m/n/12 la llamada asíncrona al servicio \TU/lmtt/m/n/12 /get_-target_-pose\TU/4.ttf(0)/m/n/12 , Códigos []12[] y []13[], el módulo
+ []
+
+
+Underfull \hbox (badness 2088) in paragraph at lines 559--566
+\TU/lmtt/m/n/12 pose_-utils.hpp \TU/4.ttf(0)/m/n/12 proporciona utilidades para extraer y manipular la pose del robot
+ []
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 559--566
+\TU/4.ttf(0)/m/n/12 (posición y orientación) a partir de los mensajes recibidos, Código []14[], y el módulo
+ []
+
+File: Images/tarea1/arquitectura.png Graphic file (type bmp)
+<Images/tarea1/arquitectura.png>
+
+LaTeX Warning: Citation 'choset2005' on page 34 undefined on input line 582.
+
+
+LaTeX Warning: Citation 'siegwart2011' on page 34 undefined on input line 582.
+
+
+LaTeX Warning: Citation 'siciliano2009' on page 34 undefined on input line 582.
+
+[34]
+
+LaTeX Warning: Citation 'otero2005' on page 35 undefined on input line 607.
+
+
+LaTeX Warning: Citation 'morin2016' on page 35 undefined on input line 607.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 598--608
+
+ []
+
+File: Images/tarea1/esquema_robot.png Graphic file (type bmp)
+<Images/tarea1/esquema_robot.png>
+
+LaTeX Warning: Citation 'FARIAS20179150' on page 35 undefined on input line 615.
+
+
+LaTeX Warning: Citation 'FARIAS20179150' on page 35 undefined on input line 615.
+
+
+LaTeX Warning: Citation 'choset2005' on page 35 undefined on input line 636.
+
+
+LaTeX Warning: Citation 'siegwart2011' on page 35 undefined on input line 636.
+
+[35]
+
+LaTeX Warning: Citation 'coulter1992' on page 36 undefined on input line 657.
+
+
+LaTeX Warning: Citation 'otero2005' on page 36 undefined on input line 658.
+
+
+LaTeX Warning: Citation 'morin2016' on page 36 undefined on input line 658.
+
+
+LaTeX Warning: Citation 'corke2017' on page 36 undefined on input line 658.
+
+
+Underfull \hbox (badness 2809) in paragraph at lines 656--660
+[]\TU/4.ttf(0)/m/n/12 Este enfoque corresponde a la formulación puntual del algoritmo \TU/4.ttf(0)/m/it/12 Pure Pursuit\TU/4.ttf(0)/m/n/12 , descrito
+ []
+
+
+LaTeX Warning: Citation 'kheperaiv_manual_rev3' on page 36 undefined on input line 665.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 662--670
+
+ []
+
+
+Underfull \hbox (badness 2486) in paragraph at lines 675--679
+[]\TU/4.ttf(0)/b/n/12 Integral del Error Absoluto (\TU/4.ttf(0)/b/it/12 IAE\TU/4.ttf(0)/b/n/12 )\TU/4.ttf(0)/m/n/12 : mide el error acumulado a lo largo del tiempo,
+ []
+
+[36]
+Underfull \hbox (badness 10000) in paragraph at lines 730--733
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 740--743
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 744--747
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 748--751
+
+ []
+
+[37]
+Underfull \hbox (badness 10000) in paragraph at lines 752--757
+
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 758--768
+\TU/4.ttf(0)/m/n/12 reducción de todas las métricas es más pronunciada que en el controlador proporcional.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 758--768
+
+ []
+
+Excluding 'comment' comment.
+Overfull \hbox (8.06158pt too wide) in paragraph at lines 798--815
+ [][] 
+ []
+
+File: Images/tarea1/graf/icc_reactivo_Kv0.1_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.1_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.1_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.1_tiempo.png>
+[38]
+File: Images/tarea1/graf/icc_reactivo_Kv0.15_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.15_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.15_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.15_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.25_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.25_tiempo.png>
+ [39]
+File: Images/tarea1/graf/icc_reactivo_Kv0.3_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.3_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.3_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.3_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.4_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.4_tiempo.png>
+ [40]
+File: Images/tarea1/graf/icc_reactivo_Kv0.45_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.45_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.45_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.45_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.55_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.55_tiempo.png>
+ [41]
+File: Images/tarea1/graf/icc_reactivo_Kv0.6_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.6_trayectoria.png>
+File: Images/tarea1/graf/icc_reactivo_Kv0.6_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_reactivo_Kv0.6_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.15_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.15_tiempo.png>
+ [42]
+File: Images/tarea1/graf/icc_geometrico_Kv0.2_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.2_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.2_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.2_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.3_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.3_tiempo.png>
+ [43]
+File: Images/tarea1/graf/icc_geometrico_Kv0.35_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.35_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.35_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.35_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.45_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.45_tiempo.png>
+ [44]
+File: Images/tarea1/graf/icc_geometrico_Kv0.5_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.5_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.5_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.5_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png>
+File: Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png Graphic file (type bmp)
+<Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png>
+ [45] Excluding 'comment' comment.) [46]
 \openout2 = `anexo_codigo.aux'.
 
  (./anexo_codigo.tex
 File: Images/ucm_uned.png Graphic file (type bmp)
 <Images/ucm_uned.png>
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 6.
- (./Code/dockerfile) (./Code/run.sh) [24
+ (./Code/dockerfile) (./Code/run.sh) [47
 
 
 
-] (./Code/tarea1/script_por_defecto.lua) (./Code/tarea1/publisher_robotPose.lua [25]) (./Code/tarea1/subscriber_cmdVel.lua [26]) (./Code/tarea1/serviceTargetPose.lua)
+] (./Code/tarea1/script_por_defecto.lua) (./Code/tarea1/publisher_robotPose.lua [48]) (./Code/tarea1/subscriber_cmdVel.lua [49]) (./Code/tarea1/serviceTargetPose.lua)
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 23.
- (./Code/tarea1/ExecTraj.txt [27])
+ (./Code/tarea1/ExecTraj.txt [50])
 Overfull \hbox (415.67896pt too wide) in paragraph at lines 30--31
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
@@ -1371,7 +1852,7 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-) (./Code/tarea1/main.cpp) (./Code/tarea1/controller.hpp [28]) (./Code/tarea1/controller.cc [29] [30] [31] [32])
+) (./Code/tarea1/main.cpp) (./Code/tarea1/controller.hpp [51]) (./Code/tarea1/controller.cc [52] [53] [54] [55])
 Underfull \hbox (badness 10000) in paragraph at lines 44--44
 [][]\TU/4.ttf(0)/b/n/14.4 Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
@@ -1381,21 +1862,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 45--45
 []\TU/4.ttf(0)/m/n/12 Código 12: |Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
 
-(./Code/tarea1/serviceHpp.hpp) (./Code/tarea1/serviceCpp.cpp [33]) (./Code/tarea1/poseHpp.hpp) (./Code/tarea1/metricHpp.hpp [34]) (./Code/tarea1/metricCpp.cpp [35])) [36]
+(./Code/tarea1/serviceHpp.hpp) (./Code/tarea1/serviceCpp.cpp [56]) (./Code/tarea1/poseHpp.hpp) (./Code/tarea1/metricHpp.hpp [57]) (./Code/tarea1/metricCpp.cpp [58])) [59]
 File: Images/ucm_uned.png Graphic file (type bmp)
 <Images/ucm_uned.png>
 
 
-LaTeX Warning: Empty bibliography on input line 47.
+LaTeX Warning: Empty bibliography on input line 48.
 
-[37
+[60
 
 
 ] (./main.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
- (./autoria.aux) (./docker.aux) (./tarea1.aux) (./anexo_codigo.aux))
+ (./autoria.aux) (./docker.aux) (./tarea1.aux) (./tarea2.aux) (./anexo_codigo.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1404,8 +1885,11 @@ L3 programming layer <2024-01-22>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: AC7DC8AA504781955AC1481D10D84A87;6321.
+(rerunfilecheck)             Checksum: A415D9A3ECE3309AC5D8F60D40C88705;12473.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                main
@@ -1416,12 +1900,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26772 strings out of 476824
- 527158 string characters out of 5803866
+ 26821 strings out of 476824
+ 528267 string characters out of 5803866
  2102627 words of memory out of 5000000
- 48224 multiletter control sequences out of 15000+600000
+ 48264 multiletter control sequences out of 15000+600000
  566471 words of font info for 99 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 94i,15n,107p,935b,6636s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,15n,107p,1247b,6640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (37 pages).
+Output written on main.pdf (60 pages).
