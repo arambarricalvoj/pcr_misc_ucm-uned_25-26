@@ -8,6 +8,9 @@
 #include "tarea2/pose_utils.hpp"
 #include "tarea2/braitenberg.hpp"
 
+#include <iostream>
+#include <iomanip>
+
 using namespace std::chrono_literals;
 
 ICCController::ICCController()
@@ -72,7 +75,7 @@ ICCController::ICCController()
             {
                 double r = msg->range;
                 //if (r < msg->min_range) r = msg->min_range;
-                if (r < msg->min_range) r = msg->max_range;
+                if (r < msg->min_range) r = msg->min_range;
                 if (r > msg->max_range) r = msg->max_range;
                 ir_ranges_[i] = r;
                 //RCLCPP_INFO(this->get_logger(), "ir%d, r = %.5f", 
@@ -266,7 +269,8 @@ void ICCController::controlLoop()
 
     //double v = v_goal * (1 - b.v_react);
     //double w = w_goal * (1- b.w_react);
-    double v = v_goal; //+ b.v_react;
+    //double v = v_goal + b.v_react;
+    double v = std::max(0.0, v_goal + b.v_react);
     double w = w_goal + b.w_react;
 
     RCLCPP_INFO(this->get_logger(), "v_goal = %.3f, w_goal = %.3f", 

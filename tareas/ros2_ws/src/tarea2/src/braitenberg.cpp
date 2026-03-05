@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 static double activation(double r)
 {
@@ -38,9 +39,10 @@ BraitenbergOutput compute_braitenberg(
     double A_right = (a_fr + a_rear_r + a_r) / 3.0;
 
     BraitenbergOutput out;
-    out.v_react = -k_front * A_front;
-    //out.w_react =  k_turn  * (A_right - A_left);
-    out.w_react = k_turn * A_front;
+    //out.v_react = -k_front * A_front;
+    out.v_react = -k_front * pow(A_front, 1.5);
+    out.w_react =  k_turn  * (A_right - A_left);
+    //out.w_react = k_turn * A_front;
 
     return out;
 }
