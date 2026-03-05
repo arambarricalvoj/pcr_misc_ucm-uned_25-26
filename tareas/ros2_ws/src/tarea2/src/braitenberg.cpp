@@ -35,14 +35,17 @@ BraitenbergOutput compute_braitenberg(
     double a_rear = activation(ir[7]); //rear
 
     double A_front = (a_fl + a_f + a_fr) / 3.0;
-    double A_left  = (a_fl + a_rear_l + a_l) / 3.0;
-    double A_right = (a_fr + a_rear_r + a_r) / 3.0;
+    double A_left  = (a_fl + a_l) / 2.0;
+    double A_right = (a_fr + a_r) / 2.0;
 
     BraitenbergOutput out;
-    //out.v_react = -k_front * A_front;
     out.v_react = -k_front * pow(A_front, 1.5);
-    out.w_react =  k_turn  * (A_right - A_left);
-    //out.w_react = k_turn * A_front;
+    //out.w_react =  k_turn  * (A_right - A_left);
+    out.w_react = k_turn * std::tanh(A_right - A_left);
+
+    out.A_front = A_front;
+    out.A_left  = A_left;
+    out.A_right = A_right;
 
     return out;
 }

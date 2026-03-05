@@ -73,7 +73,7 @@ private:
     // -------------------------
     // PARÁMETROS
     // -------------------------
-    double kp_, vmax_, wmax_;
+    double kp_, vmax_, wmax_, ks_, k_tan_;
     int controller_type_;
 
     // Parámetros Braitenberg (NUEVO)

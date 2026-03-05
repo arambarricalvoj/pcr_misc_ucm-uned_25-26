@@ -7,6 +7,7 @@
 #include "tarea2/service_utils.hpp"
 #include "tarea2/pose_utils.hpp"
 #include "tarea2/braitenberg.hpp"
+#include "tarea2/tang.hpp"
 
 #include <iostream>
 #include <iomanip>
@@ -25,6 +26,7 @@ ICCController::ICCController()
     this->declare_parameter("controller_type", 0);
 
     // Parámetros Braitenberg
+    this->declare_parameter("ks", 1.0);
     this->declare_parameter("k_front", 0.8);
     this->declare_parameter("k_turn", 1.2);
 
@@ -33,8 +35,13 @@ ICCController::ICCController()
     wmax_ = get_parameter("wmax").as_double();
     controller_type_ = get_parameter("controller_type").as_int();
 
+    ks_   = get_parameter("ks").as_double();
     k_front_ = get_parameter("k_front").as_double();
     k_turn_  = get_parameter("k_turn").as_double();
+
+    this->declare_parameter("k_tan", 0.8);
+    k_tan_ = get_parameter("k_tan").as_double();
+
 
     // -------------------------
     // NOMBRE DEL CONTROLADOR
@@ -248,30 +255,28 @@ void ICCController::controlLoop()
 
     double w_goal = 0.0;
 
-    if (controller_type_ == 0)
-    {
-        // ICC reactivo
-        w_goal = wmax_ * std::sin(e_theta);
-    }
-    else
-    {
-        // Geométrico (pure pursuit puntual)
-        double R = d / (2 * std::sin(e_theta));
-        w_goal = v_goal / R;
-        if (w_goal > wmax_)  w_goal = wmax_;
-        if (w_goal < -wmax_) w_goal = -wmax_;
-    }
+    // ICC reactivo
+    w_goal = wmax_ * std::sin(e_theta);
 
     // -------------------------
     // BRAITENBERG (MÓDULO EXTERNO)
     // -------------------------
     auto b = compute_braitenberg(ir_ranges_, k_front_, k_turn_);
 
-    //double v = v_goal * (1 - b.v_react);
-    //double w = w_goal * (1- b.w_react);
-    //double v = v_goal + b.v_react;
-    double v = std::max(0.0, v_goal + b.v_react);
-    double w = w_goal + b.w_react;
+    double factor = std::clamp(d / ks_, 0.0, 1.0);
+    double v = v_goal + factor * b.v_react;
+    double w = w_goal + factor * b.w_react;
+
+    if (controller_type_ == 1){
+        auto t = compute_tangential_escape(
+            e_theta, d,
+            b.A_front, b.A_left, b.A_right,
+            k_tan_);
+
+        if (t.active) {
+            w += t.w_tang;
+        }
+    }
 
     RCLCPP_INFO(this->get_logger(), "v_goal = %.3f, w_goal = %.3f", 
             v_goal, w_goal);

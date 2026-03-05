@@ -20,6 +20,7 @@ add_library(tarea2_lib
     src/braitenberg.cpp
     src/service_utils.cpp
     src/metrics_utils.cpp
+    src/tang.cpp
 )
 
 ament_target_dependencies(tarea2_lib

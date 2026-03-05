@@ -4,7 +4,11 @@
 struct BraitenbergOutput {
     double v_react;
     double w_react;
+    double A_front;
+    double A_left;
+    double A_right;
 };
+
 
 BraitenbergOutput compute_braitenberg(
     const std::array<double,8>& ir,
