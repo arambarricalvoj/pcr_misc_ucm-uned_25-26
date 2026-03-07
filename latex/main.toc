@@ -11,14 +11,14 @@
 \contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{9}{section*.21}%
 \contentsline {section}{Tarea 2: control de posición con evitación de obstáculos.}{25}{section*.56}%
 \contentsline {subsection}{1. Agregar obstáculos al espacio de trabajo, pueden ser paredes, cilindros, etc... \textbf {nota}: habilitar la propiedad “detectable” de los obstáculos para que el robot los pueda detectar con los sensores.}{25}{section*.57}%
-\contentsline {subsection}{2. Implementar el algoritmo de \textit {Braitenberg} por medio de la manipulación de las velocidades del robot.}{25}{section*.58}%
-\contentsline {paragraph}{Formalización}{26}{section*.61}%
-\contentsline {paragraph}{Fórmulas concretas usadas}{28}{section*.69}%
-\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{29}{section*.73}%
-\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{29}{section*.74}%
-\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{30}{section*.76}%
-\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{30}{section*.78}%
-\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{30}{section*.79}%
-\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{30}{section*.80}%
-\contentsline {section}{ANEXO I: código}{47}{section*.115}%
-\contentsline {section}{Referencias}{60}{figure.caption.132}%
+\contentsline {subsection}{2. Implementar el algoritmo de \textit {Braitenberg} por medio de la manipulación de las velocidades del robot.}{26}{section*.60}%
+\contentsline {paragraph}{Formalización}{30}{section*.64}%
+\contentsline {paragraph}{Fórmulas concretas usadas}{31}{section*.72}%
+\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{32}{section*.76}%
+\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{32}{section*.77}%
+\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{33}{section*.79}%
+\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{34}{section*.81}%
+\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{34}{section*.82}%
+\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{34}{section*.83}%
+\contentsline {section}{ANEXO I: código}{50}{section*.118}%
+\contentsline {section}{Referencias}{63}{figure.caption.136}%

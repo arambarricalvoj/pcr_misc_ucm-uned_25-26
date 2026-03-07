@@ -2381,20 +2381,21 @@
     <bcf:citekey order="15" intorder="1">dicaro2017behaviors</bcf:citekey>
     <bcf:citekey order="16" intorder="1">dicaro2017behaviors</bcf:citekey>
     <bcf:citekey order="17" intorder="1">kheperaiv_manual_rev3</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">choset2005</bcf:citekey>
-    <bcf:citekey order="18" intorder="2">siegwart2011</bcf:citekey>
-    <bcf:citekey order="18" intorder="3">siciliano2009</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">otero2005</bcf:citekey>
-    <bcf:citekey order="19" intorder="2">morin2016</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">FARIAS20179150</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">kheperaiv_manual_rev3</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">choset2005</bcf:citekey>
+    <bcf:citekey order="19" intorder="2">siegwart2011</bcf:citekey>
+    <bcf:citekey order="19" intorder="3">siciliano2009</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">otero2005</bcf:citekey>
+    <bcf:citekey order="20" intorder="2">morin2016</bcf:citekey>
     <bcf:citekey order="21" intorder="1">FARIAS20179150</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">choset2005</bcf:citekey>
-    <bcf:citekey order="22" intorder="2">siegwart2011</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">coulter1992</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">otero2005</bcf:citekey>
-    <bcf:citekey order="24" intorder="2">morin2016</bcf:citekey>
-    <bcf:citekey order="24" intorder="3">corke2017</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">kheperaiv_manual_rev3</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">FARIAS20179150</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">choset2005</bcf:citekey>
+    <bcf:citekey order="23" intorder="2">siegwart2011</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">coulter1992</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">otero2005</bcf:citekey>
+    <bcf:citekey order="25" intorder="2">morin2016</bcf:citekey>
+    <bcf:citekey order="25" intorder="3">corke2017</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">kheperaiv_manual_rev3</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

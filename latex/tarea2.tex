@@ -12,7 +12,31 @@ robot los pueda detectar con los sensores.}
 etc... \textbf{nota}: habilitar la propiedad “detectable” de los obstáculos para que el
 robot los pueda detectar con los sensores.}
 
-IMAGEN XX para ver dónde poner detectable y imágenes escenarios.
+Al hacer doble click en un obstáculo en la jerarquía de la escena se abre 
+una ventana emergente con sus propiedades. En dicha ventana, desplazarse 
+a la pestaña \textit{Object}, donde aparece la casilla \textit{Detectable}.
+Este proceso se muestra en la Figura \ref{fig:t2.detectable}. \\
+
+En la Figura \ref{fig:t2.escenario} se muestran los escenarios propuestos 
+para esta tarea.
+
+\begin{figure}[H]
+    \begin{center}
+    \includegraphics[scale=1.0, angle=0]{Images/tarea2/detectable_1.png} \\
+    \includegraphics[scale=0.48, angle=0]{Images/tarea2/detectable_2.png}
+    \includegraphics[scale=0.42, angle=0]{Images/tarea2/detectable_3.png}
+    \caption{\label{fig:t2.detectable} Cómo marcar un objeto como detectable.}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+    \includegraphics[scale=0.346, angle=0]{Images/tarea2/escenario1.png}
+    \includegraphics[scale=0.175, angle=0]{Images/tarea2/escenario2.png}
+    \includegraphics[scale=0.125, angle=0]{Images/tarea2/escenario3.png}
+    \caption{\label{fig:t2.escenario} Escenarios propuestos para la segunda tarea.}
+    \end{center}
+\end{figure}
 
 \subsection*{2. Implementar el algoritmo de \textit{Braitenberg} por medio de la manipulación de
 las velocidades del robot.}
@@ -52,6 +76,7 @@ Un esquema \textit{Braitenberg} clásico para un robot diferencial se expresa co
 \begin{equation}
   v_L \;=\; \sum_{i} G_{L,i}\,f(s_i), \qquad
   v_R \;=\; \sum_{i} G_{R,i}\,f(s_i),
+  \label{eq:braitenberg}
 \end{equation}
 donde \(G_{L,i},G_{R,i}\) son las ganancias que conectan el 
 sensor \(i\) con las ruedas, \(f(\cdot)\) es el preprocesado
@@ -71,24 +96,169 @@ obteniendo así las Ecuaciones \ref{eq:2}.
   \label{eq:22}
 \end{equation}
 
-\subsubsection*{Métodos comunes de implementación}
+Existen dos estrategias principales para la implementación de este enfoque:
 \begin{itemize}
-  \item \textbf{Conexión directa (clásica)}: cada sensor contribuye linealmente a las ruedas; muy simple y reactivo.
-  \item \textbf{Cross‑coupled / contralateral}: sensores frontales izquierdos conectan a la rueda derecha (y viceversa) para producir evasión frontal más efectiva.
-  \item \textbf{Ipsilateral con inversión}: sensor izquierdo a rueda izquierda con signo invertido para comportamientos de atracción (seguir fuente).
-  \item \textbf{Normalizado y ponderado}: normalizar activaciones y aplicar pesos dependientes de la posición del sensor para evitar que una lectura domine.
-  \item \textbf{Mezcla con controlador global}: combinar la salida Braitenberg con un controlador de objetivo (campo potencial, PID, etc.) mediante un factor \(\alpha\):
-    
+  \item \textbf{Conexión directa (clásica)}: cada sensor contribuye linealmente a las ruedas.
+  \item \textbf{Contralateral}: sensores frontales izquierdos conectan a la rueda derecha y viceversa.
+\end{itemize}
+
+Asimismo, en función del caso de uso se pueden sugerir variantes, como la conexión de un sensor 
+a su correspondiente rueda lateral con signo invertido para comportamientos de atracción, 
+ponderación de cada sensor para evitar que una lectura domine o la combinación con controladores de
+objetivo con sintonización de las ganancias. \\
+
+De esta manera, en esta tarea se implementan tres controladores con esquivación del obstáculos. 
+El primero es una esquivación de obstáculos sin un objetivo de posición a alcanzar, al que se ha llamado
+``\textit{Braitenberg} puro''. El segundo corresponde con el controlador reactivo de la tarea 1 al que 
+se le ha añadido una capa que le permite sortear obstáculos. Por último, el tercero se basa 
+en un enfoque de campos potenciales o vectoriales con fuerzas de atracción al punto de destino y 
+fuerzas de repulsión de los obstáculos. \\
+
+La información de posición de los obstáculos respecto del robot viene dada por los 
+ocho sensores infrarrojos que incorpora el robot en uso. Estos sensores generan 
+un valor de distancia comprendido en el rango $[0.002, 0.25]$ metros \cite{kheperaiv_manual_rev3}.
+Los sensores están distribuidos alrededor del chasis separados angularmente por 45$^\circ$, 
+de forma que es capaz de obtener información en 360$^\circ$. \\
+
+En \textit{CoppeliaSim}, cuando se solicita a uno de los sensores su lectura,
+devuelve dos valores: \textit{detected}, \textit{distance}. El primero de ellos
+puede tomar los valores $0$ o $1$, e indica si se ha producido una detección o no, es 
+decir, si no hay ningún objeto dentro del rango de operación del sensor, este valor 
+será $0$. También podría ocurrir que el objeto esté dentro de dicho rango, 
+pero que por luminosidad o reflectancia, por ejemplo, no sea capaz de detectarlo,
+aunque esta situación queda fuera del alcance de este trabajo. En cuanto al segundo,
+contiene la distancia detectada al obstáculo. \\
+
+Continuando con la arquitectura presentada en la primera tarea, se ha definido en el 
+robot del simulador el script \textit{Lua} \texttt{publisher\_infrared},
+Código \ref{cod:t2_pubInfrared}, que genera un tópico
+\textit{ROS2} por cada sensor infrarrojo. Estos tópicos, \texttt{/khepera/ir1},
+\texttt{/khepera/ir2}, \texttt{/khepera/ir3}, \texttt{/khepera/ir4}, 
+\texttt{/khepera/ir5}, \texttt{/khepera/ir6}, \texttt{/khepera/ir7} y 
+\texttt{/khepera/ir8}, transportan el mensaje de tipo \texttt{sensor\_msgs/msg/Range}.
+Su documentación está en el enlace \url{https://docs.ros.org/en/jazzy/p/sensor_msgs/msg/Range.html}. \\
+
+Los campos de dicho mensaje más relevantes para este trabajo son los siguientes:
+\textit{radiation\_type}, $0$ si se usan sensores ultrasónicos y $1$ si se usan infrarrojos;
+\textit{min\_range} y \textit{max\_range}, límites del rango de operación de los sensores 
+en uso; y \textit{range}, distancia obtenida por el sensor. \\
+
+Además, es fundamental procesar los valores de aquellos sensores que no detecten 
+obstáculos, puesto que el simulador los establece a cero. Este comportamiento 
+supone un problema a la hora de esquivar obstáculos, por lo que se debe establecer 
+el campo \textit{range} de estos sensores al límite superior de detección, en este caso,
+$0.25$ metros.
+
+
+\subsubsection*{2.1 Controlador \textit{Braitenberg} sin posición objetivo.}
+Este controlador sigue el esquema reactivo clásico de las Ecuaciones \ref{eq:braitenberg}. 
+Está diseñado para evitar obstáculos sin perseguir una meta explícita, esto es,
+que el robot esté en movimiento continuo sin colisionarse mediante la 
+esquivación eficaz de los objetos y las paredes. Por ello, 
+este sistema opera sobre el escenario de la Figura \ref{fig:t2.escenario1}, 
+que consta de un entorno cerrado por paredes y cuatro obstáculos repartidos 
+por el terreno.
+
+\begin{figure}[H]
+    \begin{center}
+    \includegraphics[scale=0.3, angle=0]{Images/tarea2/escenario3.png}
+    \caption{\label{fig:t2.escenario1} Escenario para el primer controlador.}
+    \end{center}
+\end{figure}
+
+La entrada sensorial proviene de ocho sensores IR que entregan distancias \(d_i\). Cada lectura se preprocesa y normaliza a una señal de detección \(\mathrm{detect}_i\in[0,1]\) mediante una inversión lineal entre el umbral mínimo y máximo de detección:
+
 
 \[
-      v = \alpha\,v_{\text{goal}} + (1-\alpha)\,v_{\text{brait}},\quad
-      w = \alpha\,w_{\text{goal}} + (1-\alpha)\,w_{\text{brait}}.
-    \]
+\mathrm{detect}_i \;=\; \operatorname{clamp}\!\left(1 - \frac{d_i - d_{\min}}{d_{\max}-d_{\min}},\,0,1\right),
+\]
 
 
-  \item \textbf{Híbridos y arquitecturas de comportamiento}: usar Braitenberg como uno de varios comportamientos en una arquitectura de subsunción o en un arbitrador basado en utilidades.
-  \item \textbf{Aprendido / adaptativo}: ajustar las ganancias \(G\) mediante aprendizaje (regresión, optimización) para adaptar el comportamiento a la dinámica real del robot.
-\end{itemize}
+donde \(d_{\min}=\) \texttt{max\_detection\_dist} y \(d_{\max}=\) \texttt{max\_range\_default}. Lecturas inválidas o fuera de rango se sustituyen por \(d_{\max}\) para mantener estabilidad al arrancar.
+
+El mapeo Braitenberg calcula las velocidades lineales de rueda como una velocidad base \(v_0\) más la combinación lineal de las señales de detección por las ganancias:
+
+
+\[
+v_{L,\text{lin}} \;=\; v_0 \;+\; \sum_{i=1}^{8} G_{L,i}\,\mathrm{detect}_i,\qquad
+v_{R,\text{lin}} \;=\; v_0 \;+\; \sum_{i=1}^{8} G_{R,i}\,\mathrm{detect}_i.
+\]
+
+
+Para garantizar seguridad operativa estas velocidades se saturan con los límites configurados:
+
+
+\[
+v_{L,\text{lin}} \leftarrow \operatorname{clamp}(v_{L,\text{lin}},\, v_{\min},\, v_{\max}),\qquad
+v_{R,\text{lin}} \leftarrow \operatorname{clamp}(v_{R,\text{lin}},\, v_{\min},\, v_{\max}).
+\]
+
+
+
+La cinemática diferencial del chasis convierte las velocidades de rueda en velocidad lineal \(V\) y velocidad angular \(\omega\) del robot mediante
+
+
+\[
+V \;=\; \frac{v_{R,\text{lin}} + v_{L,\text{lin}}}{2},\qquad
+\omega \;=\; \frac{v_{R,\text{lin}} - v_{L,\text{lin}}}{b},
+\]
+
+
+donde \(b=\) \texttt{wheel\_base}. Como el actuador del robot acepta velocidades angulares de rueda, las velocidades lineales de rueda se transforman a velocidades angulares mediante el radio de rueda \(r=\) \texttt{wheel\_radius}:
+
+
+\[
+\omega_L \;=\; \frac{v_{L,\text{lin}}}{r},\qquad
+\omega_R \;=\; \frac{v_{R,\text{lin}}}{r}.
+\]
+
+
+El comando final se publica como un mensaje \texttt{geometry\_msgs::msg::Twist} con \(\text{linear.x}=V\) y \(\text{angular.z}=\omega\).
+
+Para facilitar reglas reactivas adicionales se dispone de una función que calcula la distancia mínima desde una posición \((x,y)\) a un conjunto de obstáculos circulares \(\{(x_o,y_o,r_o)\}\); para cada obstáculo la distancia al borde se obtiene como
+
+
+\[
+d_{\text{edge}}(x,y;x_o,y_o,r_o) \;=\; \sqrt{(x-x_o)^2 + (y-y_o)^2}\;-\; r_o,
+\]
+
+
+y la distancia mínima sobre todos los obstáculos es \(\min_{o} d_{\text{edge}}(x,y;x_o,y_o,r_o)\). Esta cantidad puede emplearse posteriormente para políticas de seguridad o métricas. En términos de ingeniería, el modelo prioriza la separación clara entre adquisición y preprocesado de sensores, combinación por ganancias y conversión cinemática, y contempla saturaciones para evitar comportamientos no deseados; además las ganancias y la lista de obstáculos son parámetros configurables para permitir ajuste iterativo y experimentación.
+
+
+En la fase de inicialización se declaran y leen parámetros configurables que incluyen las dimensiones físicas del robot (\textbf{wheel\_radius}, \textbf{wheel\_base}), velocidades y límites (\textbf{v0}, \textbf{vmin}, \textbf{vmax}), parámetros de sensores (\textbf{max\_detection\_dist}, \textbf{max\_range\_default}) y la frecuencia de control (\textbf{control\_hz}). Las ganancias del esquema Braitenberg se cargan desde parámetros \textbf{braitenbergL} y \textbf{braitenbergR} y se normalizan a una longitud de ocho entradas, permitiendo afinado desde YAML sin recompilar. Opcionalmente se lee una lista plana de obstáculos \(\{x,y,r\}\) y un umbral seguro \textbf{d\_safe} para usos posteriores.
+
+La arquitectura sensorial consta de ocho suscriptores a tópicos IR que actualizan un arreglo de rangos \texttt{ir\_ranges\_}. Además se suscribe a la pose del robot para disponer de la posición cuando sea necesario. En cada iteración del bucle de control (implementado mediante un \textit{timer} con periodo \(1/\text{control\_hz}\)) las lecturas IR se preprocesan y normalizan a señales de detección \(\text{detect}_i\in[0,1]\). La normalización aplicada corresponde a una inversión lineal entre \(\text{max\_detection\_dist}\) y \(\text{max\_range\_default}\), equivalente a
+
+
+\[
+\text{detect}_i=\operatorname{clamp}\!\left(1-\frac{d_i-d_{\min}}{d_{\max}-d_{\min}},0,1\right),
+\]
+
+
+con \(d_{\min}=\) \texttt{max\_detection\_dist} y \(d_{\max}=\) \texttt{max\_range\_default}. Lecturas inválidas se sustituyen por el rango por defecto para evitar comportamientos indeseados al arrancar.
+
+Las velocidades lineales de rueda se calculan como una velocidad base \(v_0\) más la suma ponderada de las señales de detección por las ganancias Braitenberg:
+
+
+\[
+v_{L,\text{lin}} = v_0 + \sum_{i=1}^{8} G_{L,i}\,\text{detect}_i,\qquad
+v_{R,\text{lin}} = v_0 + \sum_{i=1}^{8} G_{R,i}\,\text{detect}_i.
+\]
+
+
+Estas velocidades se saturan con \(\text{vmin}\) y \(\text{vmax}\) para garantizar límites seguros. A continuación se convierten a velocidad lineal \(V\) y velocidad angular \(\omega\) del chasis mediante
+
+
+\[
+V=\frac{v_{R,\text{lin}}+v_{L,\text{lin}}}{2},\qquad
+\omega=\frac{v_{R,\text{lin}}-v_{L,\text{lin}}}{b},
+\]
+
+
+donde \(b\) es la distancia entre ruedas (\texttt{wheel\_base}). El comando resultante se publica como un mensaje \texttt{geometry\_msgs::msg::Twist} en \texttt{/cmd\_vel}.
+
+En cuanto a aspectos de ingeniería, la implementación incorpora inicialización segura de rangos, \texttt{clamp} para evitar velocidades fuera de rango y una función auxiliar que calcula la distancia mínima desde una posición \((x,y)\) a los obstáculos circulares configurados, lo que facilita añadir reglas reactivas adicionales si se desea. Las ganancias cargables desde YAML y la separación clara entre lectura de sensores, preprocesado, combinación por ganancias y publicación hacen que el controlador sea fácilmente extensible y susceptible de ajuste iterativo. Finalmente, se integra un \texttt{MetricsLogger} para registrar resultados en un directorio \texttt{results} preparado al inicio, lo que permite evaluar métricas como distancia mínima a obstáculos, número de colisiones y velocidad media durante las pruebas.
 
 
 
