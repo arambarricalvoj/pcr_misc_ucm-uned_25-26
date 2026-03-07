@@ -8,10 +8,13 @@ braitenberg_controller:
     max_detection_dist: 0.15
     max_range_default: 0.25
     control_hz: 20.0
+    max_accel_linear: 1e6
+    max_accel_angular: 1e6
+    save_after_seconds: 60.0
 
     # Pesos: 8 valores cada uno (izquierda->derecha)
-    braitenbergL: [0.0,0.0,0.0,0.0,-0.025,-0.0375,-0.05,-0.000625]
-    braitenbergR: [-0.000625,-0.05,-0.0375,-0.025,0.0,0.0,0.0,0.0]
+    braitenbergL: [0.0,0.0,0.0,0.0,-0.05,-0.075,-0.1,-0.00125]
+    braitenbergR: [-0.00125,-0.1,-0.075,-0.05,0.0,0.0,0.0,0.0]
 
 # controller_type: 0 --> ICC reactivo
 # controller_type: 1 --> ICC geométrico
