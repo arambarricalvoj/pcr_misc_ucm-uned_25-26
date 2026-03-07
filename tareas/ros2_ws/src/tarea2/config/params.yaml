@@ -1,8 +1,28 @@
+braitenberg_controller:
+  ros__parameters:
+    wheel_radius: 0.021
+    wheel_base: 0.088
+    v0: 0.1
+    vmin: 0.0
+    vmax: 0.2
+    max_detection_dist: 0.15
+    max_range_default: 0.25
+    control_hz: 20.0
+
+    # Pesos: 8 valores cada uno (izquierda->derecha)
+    braitenbergL: [0.0,0.0,0.0,0.0,-0.025,-0.0375,-0.05,-0.000625]
+    braitenbergR: [-0.000625,-0.05,-0.0375,-0.025,0.0,0.0,0.0,0.0]
+
+# controller_type: 0 --> ICC reactivo
+# controller_type: 1 --> ICC geométrico
+
 khepera_controller:
   ros__parameters:
+    max_accel_lin: 0.14
+    max_accel_ang: 0.14
     vmax: 1.0
     wmax: 1.0
-    kp: 0.25
+    kp: 0.15
     controller_type: 0
     ks: 1.0
     k_front: 1.6
@@ -14,7 +34,4 @@ khepera_controller:
     d_dead: 0.6
     d_min: 0.08
     F_max: 0.2
-    filter_beta: 0.85 
-
-# controller_type: 0 --> ICC reactivo
-# controller_type: 1 --> ICC geométrico
+    filter_beta: 0.85

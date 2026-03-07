@@ -22,6 +22,7 @@ add_library(tarea2_lib
     src/metrics_utils.cpp
     src/tang.cpp
     src/campo_vectorial.cpp
+    src/braitenberg_puro.cpp
 )
 
 ament_target_dependencies(tarea2_lib
@@ -48,6 +49,14 @@ target_link_libraries(campo_vectorial tarea2_lib)
 
 # Instalación
 install(TARGETS campo_vectorial
+    DESTINATION lib/${PROJECT_NAME}
+)
+
+add_executable(braitenberg_puro src/main3.cpp)
+target_link_libraries(braitenberg_puro tarea2_lib)
+
+# Instalación
+install(TARGETS braitenberg_puro
     DESTINATION lib/${PROJECT_NAME}
 )
 
