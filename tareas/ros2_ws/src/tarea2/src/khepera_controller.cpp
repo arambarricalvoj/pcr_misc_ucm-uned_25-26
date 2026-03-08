@@ -300,39 +300,31 @@ void BraitenbergTargetController::controlLoop()
     // --- Señal objetivo desde el módulo controller_ ---
     ControllerInput in{xr, yr, theta_r, xt_, yt_, dt};
     auto [v_goal, w_goal] = controller_->computeCommand(in);
+    //RCLCPP_INFO(get_logger(), "V GOALS: v=%.3f w=%.3f", v_goal, w_goal);
 
     // Convertir objetivo a velocidades de rueda (espacio de ruedas)
     double vL_g = v_goal - (w_goal * wheel_base_ / 2.0);
     double vR_g = v_goal + (w_goal * wheel_base_ / 2.0);
 
     // --- Señal repulsiva desde BraitenbergRepulsion ---
-    double vL_b = 0.0, vR_b = 0.0;
+    /*double vL_b = 0.0, vR_b = 0.0;
     double dmin = std::numeric_limits<double>::infinity();
     if (repulsion_) {
+        for (size_t i = 0; i < ir_ranges_.size(); ++i) {
+            double r = ir_ranges_[i];
+            repulsion_->updateRange(i, r, 0.02, 0.25);
+        }
         auto p = repulsion_->computeWheelSpeeds(); // {vL, vR}
         vL_b = p.first;
         vR_b = p.second;
         dmin = repulsion_->getMinDetection();
         RCLCPP_INFO(get_logger(), "BRAIT: vl=%.3f vr=%.3f", vL_b, vR_b);
-    }
+    }*/
 
-    // --- Calcular alpha blending lineal ---
-    // Usa d_safe_ y d_blend (puedes exponer d_blend_ como parámetro)
-    double d_blend = std::max(d_safe_ + 0.10, max_detection_dist_);
-    double alpha = 1.0;
-    if (std::isfinite(dmin)) {
-        if (dmin <= d_safe_) alpha = 0.0;
-        else if (dmin >= d_blend) alpha = 1.0;
-        else {
-            double denom = d_blend - d_safe_;
-            alpha = (denom > 1e-6) ? std::clamp((dmin - d_safe_) / denom, 0.0, 1.0) : 1.0;
-        }
-    }
-
-    // --- Mezcla en espacio de ruedas ---
-    double vL = alpha * vL_g + (1.0 - alpha) * vL_b;
-    double vR = alpha * vR_g + (1.0 - alpha) * vR_b;
-
+    double vR, vL;
+    vL = vL_g;
+    vR = vR_g;
+    
     // --- Convertir a V,W y saturar ---
     double V = (vR + vL) / 2.0;
     double W = (vR - vL) / wheel_base_;
@@ -367,14 +359,6 @@ void BraitenbergTargetController::controlLoop()
         result->message = "Objetivo alcanzado";
         goal_handle_->succeed(result);
         goal_handle_.reset();
-        return;
-    }
-
-    // Safety stop opcional si dmin extremadamente pequeño
-    double d_critical = 0.02; // ajustar según robot
-    if (dmin < d_critical) {
-        RCLCPP_WARN(get_logger(), "Detección crítica (dmin=%.3f). Parada de emergencia.", dmin);
-        cmd_pub_->publish(geometry_msgs::msg::Twist()); // stop
         return;
     }
 
