@@ -45,12 +45,24 @@ source /opt/ros/jazzy/setup.bash
 cd /home/javierac/pcr_misc/tareas/ros2_ws/
 colcon build
 source /home/javierac/pcr_misc/tareas/ros2_ws/install/setup.bash
-ros2 run tarea1 icc_controller --ros-args --params-file tarea1/config/params.yaml 
-ros2 run tarea2 braitenberg_puro --ros-args --params-file src/tarea2/config/params.yaml 
+ros2 run tarea1 pose_controller --ros-args --params-file src/tarea1/config/params.yaml 
+ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: .nan, y: .nan, z: .nan}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}"
+```
+
+# Ejecución del controller para la tarea 2
+```bash
+source /opt/ros/jazzy/setup.bash
+cd /home/javierac/pcr_misc/tareas/ros2_ws/
+colcon build
+source /home/javierac/pcr_misc/tareas/ros2_ws/install/setup.bash
+
+ros2 run tarea2 braitenberg_controller --ros-args --params-file src/tarea2/config/params.yaml 
+
+ros2 run tarea2 braitenberg_target_controller --ros-args --params-file src/tarea2/config/params.yaml
+ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: 1.25, y: 0.750, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 0.05, w: 1.0}}}" --feedback
 ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{}" --feedback
 ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: .75, y: 0.0, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 0.05, w: 1.0}}}" --feedback
 ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: .nan, y: .nan, z: .nan}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}"
-
 ```
 
 # Referencias

@@ -162,7 +162,8 @@ por el terreno.
 \begin{figure}[H]
     \begin{center}
     \includegraphics[scale=0.3, angle=0]{Images/tarea2/escenario3.png}
-    \caption{\label{fig:t2.escenario1} Escenario para el primer controlador.}
+    \caption{\label{fig:t2.escenario1} Escenario para el primer controlador
+    \textit{Braitenberg}.}
     \end{center}
 \end{figure}
 
@@ -274,17 +275,299 @@ y la simulación en ejecución, ejecutar el siguiente comando:
 %%%%%
 
 \subsubsection*{2.2 Controlador \textit{Braitenberg} con posición objetivo.}
-Este controlador sigue el esquema reactivo clásico de las Ecuaciones \ref{eq:braitenberg}. 
-Está diseñado para evitar obstáculos sin perseguir una meta explícita, esto es,
-que el robot esté en movimiento continuo sin colisionarse mediante la 
-esquivación eficaz de los objetos y las paredes. Por ello, 
-este sistema opera sobre el escenario de la Figura \ref{fig:t2.escenario1}, 
+Este controlador buscar combinar el control de posición de la primera tarea 
+con la esquivación de obstáculos mediante el algoritmo de \textit{Braitenberg}.
+Por tanto, su objetivo es desplazarse hasta una posición objetivo esquivando
+obstáculos. Este sistema opera sobre los escenarios de la Figura \ref{fig:t2.escenario2}, 
 que consta de un entorno cerrado por paredes y cuatro obstáculos repartidos 
 por el terreno.
 
 \begin{figure}[H]
     \begin{center}
-    \includegraphics[scale=0.3, angle=0]{Images/tarea2/escenario3.png}
-    \caption{\label{fig:t2.escenario1} Escenario para el primer controlador.}
+    \includegraphics[scale=0.4, angle=0]{Images/tarea2/escenario1.png}
+    \includegraphics[scale=0.203, angle=0]{Images/tarea2/escenario2.png}
+    \caption{\label{fig:t2.escenario2} Escenario para el segundo controlador
+    \textit{Braitenberg}.}
     \end{center}
 \end{figure}
+
+Un aspecto fundamental de este controlador respecto del anterior es la modificación
+en el esquema de \textit{Braitenberg}. El controlador de posición genera una
+intención de movimiento \((V_{\text{goal}},\omega_{\text{goal}})\) que busca reducir
+el error de posición y orientación. El esquema clásico de \textit{Braitenberg} que 
+actúa directamente sobre las velocidades de rueda introduce una corrección de alta
+frecuencia y granular que puede contradecir instantáneamente la intención del
+controlador de posición. Esa contradicción se manifiesta como un lazo de 
+realimentación no deseado donde la corrección reactiva cambia la orientación y posición, 
+el controlador de posición responde cambiando la intención, y la repulsión vuelve
+a reaccionar, produciendo oscilaciones alrededor de la trayectoria prevista e incluso 
+estancamientos. \\
+
+Asimismo, los conexión directa clásica de los sensores con los actuadores lo hace 
+especialmente sensible al ruido pudiendo generar picos aislados, lo que se traduce 
+en giros bruscos y rápidos cambios de signo en la velocidad angular. \\
+
+También existen incompatibilidades entre magnitudes. El enfoque clásico 
+actúa sobre las velocidades lineales de los actuadores, mientras que el 
+controlador de posición implementado en la primera tarea actúa sobre la 
+velocidad lineal y angular del chasis del robot. Por tanto, es altamente 
+recomendable diseñar un esquema de \textit{Braitenberg} que funcione 
+sobre las velocidades del chasis del robot. \\
+
+Consecuentemente, se propone el siguiente esquema.
+
+\paragraph{Funciones de activación}
+Sea \(r_i\) la lectura del sensor \(i\) (orden: rear-left, left, front-left, front, front-right, right, rear-right, rear). Definimos la activación normalizada por sensor como
+\begin{equation}
+a_i \;=\; \operatorname{clamp}\!\left(1 - \frac{r_i}{r_{\max}},\,0,1\right),
+\label{eq:act}
+\end{equation}
+donde \(r_{\max}=0.25\ \mathrm{m}\). Lecturas inválidas se sustituyen por \(r_{\max}\).
+
+\paragraph{Agregación zonal}
+Se agrupan las activaciones en tres zonas:
+\begin{equation}
+A_{\text{front}}=\frac{a_{fl}+a_f+a_{fr}}{3},\qquad
+A_{\text{left}}=\frac{a_{fl}+a_l}{2},\qquad
+A_{\text{right}}=\frac{a_{fr}+a_r}{2}.
+\label{eq:agreg}
+\end{equation}
+
+\paragraph{Componentes reactivas no lineales}
+Las salidas reactivas en el espacio de chasis se definen como
+\begin{equation}
+v_{\text{react}} \;=\; -\,k_{\text{front}}\;A_{\text{front}}^{p},
+\qquad
+\omega_{\text{react}} \;=\; k_{\text{turn}}\;\tanh\!\big(A_{\text{right}}-A_{\text{left}}\big),
+\label{eq:react}
+\end{equation}
+con \(k_{\text{front}}>0,\;k_{\text{turn}}>0\) y exponente \(p\geq 1\) (en la implementación \(p=1.5\)). La potencia en \(A_{\text{front}}\) prioriza reacciones fuertes sólo en proximidades críticas; \(\tanh\) limita la salida angular evitando saturaciones abruptas.
+
+\paragraph{Escalado por intención de avance}
+Para mantener coherencia de magnitudes con el controlador de posición se aplica un factor de escala dependiente de la intención de avanzar:
+\begin{equation}
+\mathrm{scale} \;=\; \operatorname{clamp}\!\left(\frac{|V_{\text{goal}}|}{v_{\text{ref}}},\,0,1\right),
+\label{eq:scale}
+\end{equation}
+y las componentes reactivas escaladas son
+\begin{equation}
+v_b \;=\; \operatorname{sign}(v_{\text{react}})\,|v_{\text{react}}|\cdot\mathrm{scale},\qquad
+\omega_b \;=\; \omega_{\text{react}}\cdot\mathrm{scale}.
+\label{eq:vb}
+\end{equation}
+
+\paragraph{Arbitraje híbrido (umbral + blending)}
+Se emplea una política híbrida que prioriza la repulsión en situaciones críticas y mezcla suavemente en el resto. Definimos dos umbrales \(A_{\text{blend}}\) y \(A_{\text{crit}}\) con \(A_{\text{blend}}<A_{\text{crit}}\). El factor de mezcla \(\alpha\in[0,1]\) se determina como:
+
+
+\[
+\alpha =
+\begin{cases}
+0, & \text{si } A_{\text{front}} \geq A_{\text{crit}},\\
+\text{valor suavizado en }(0,1), & \text{si } A_{\text{blend}} < A_{\text{front}} < A_{\text{crit}},\\
+1, & \text{si } A_{\text{front}} \leq A_{\text{blend}}.
+\end{cases}
+\]
+
+
+En la práctica \(\alpha\) se filtra temporalmente mediante EMA y se dota de histéresis para evitar conmutaciones por ruido.
+
+La mezcla final en el espacio de chasis es
+\begin{equation}
+V \;=\; \alpha\,V_{\text{goal}} + (1-\alpha)\,v_b,\qquad
+\omega \;=\; \alpha\,\omega_{\text{goal}} + (1-\alpha)\,\omega_b.
+\label{eq:mix}
+\end{equation}
+
+\paragraph{Limitación y conversión a ruedas}
+Finalmente se aplican saturaciones y limitadores de aceleración sobre \(V,\omega\) para garantizar seguridad y suavidad. Si se requiere convertir a velocidades de rueda:
+\begin{equation}
+v_L \;=\; V - \frac{\omega\,L}{2},\qquad
+v_R \;=\; V + \frac{\omega\,L}{2},
+\label{eq:wheels}
+\end{equation}
+donde \(L\) es la distancia entre ruedas.
+
+\paragraph{Comentarios sobre el diseño}
+El esquema propuesto evita la lucha entre lazo de trayectoria y lazo reactivo porque:
+\begin{itemize}
+  \item opera en el mismo espacio \((V,\omega)\) que el controlador de posición (evita conversiones inconsistentes),
+  \item atenúa picos y ruido mediante agregación zonal y filtrado,
+  \item prioriza reacciones sólo en proximidades críticas gracias a la no linealidad,
+  \item permite un blending controlado (con histéresis y EMA) que reduce oscilaciones y facilita la convergencia a la pose objetivo.
+\end{itemize}
+
+\noindent Las Ecuaciones \eqref{eq:act}--\eqref{eq:wheels} constituyen el esquema de \textit{Braitenberg} adoptado en este controlador y justifican su mejor comportamiento al integrarse con un controlador de posición.
+
+
+\subparagraph{4. Efecto de la no linealidad en la prioridad de reacción}
+Al usar una no linealidad en la componente frontal (por ejemplo \(A_{\text{front}}^{p}\) con \(p>1\)) y una función saturante para la componente angular (por ejemplo \(\tanh\)), la repulsión permanece pequeña para activaciones leves y crece de forma pronunciada sólo en proximidades críticas. Esto evita que la repulsión “lucha” constantemente con el objetivo por pequeñas detecciones, y garantiza que, cuando la amenaza es real, la corrección sea suficientemente fuerte y prioritaria.
+
+\subparagraph{5. Estrategia híbrida: umbral crítico y blending suavizado}
+Para conciliar seguridad y convergencia se emplea una política híbrida: si la activación frontal supera un umbral crítico \(A_{\text{crit}}\) la repulsión toma prioridad (arbitraje duro); en el rango intermedio se aplica un blending suavizado entre \((V_{\text{goal}},\omega_{\text{goal}})\) y \((v_b,\omega_b)\) con un factor \(\alpha\) filtrado y con histéresis. Matemáticamente:
+
+
+\[
+V = \alpha(t)\,V_{\text{goal}} + (1-\alpha(t))\,v_b,\qquad
+\omega = \alpha(t)\,\omega_{\text{goal}} + (1-\alpha(t))\,\omega_b,
+\]
+
+
+donde \(\alpha(t)\) se actualiza con EMA y se sujeta a una banda de histéresis para evitar conmutaciones por ruido. Esta estrategia reduce la probabilidad de oscilación al impedir cambios bruscos de modo y al dar tiempo al sistema para estabilizarse.
+
+\subparagraph{6. Escalado por intención de avance y limitación de aceleración}
+Escalar la magnitud de la repulsión por la intención de avance (por ejemplo \(\text{scale}=\operatorname{clamp}(|V_{\text{goal}}|/v_{\text{ref}},0,1)\)) evita que la repulsión proponga velocidades incompatibles con la misión (p. ej. invertir el avance cuando el objetivo está cerca). Además, aplicar limitadores de aceleración (slew rate) sobre \(V\) y \(\omega\) impide cambios instantáneos que podrían inducir oscilaciones mecánicas o de control.
+
+\subparagraph{7. Resumen intuitivo}
+En términos sencillos: un Braitenberg completo y sin filtrado actúa como un controlador reactivo de alta ganancia y alta frecuencia que, si se superpone sin cuidado a una planificación o a un controlador de trayectoria, genera conflicto entre intenciones y reacciones. Ese conflicto se traduce en oscilaciones y pérdida de convergencia. La modificación propuesta (salida en \((V,\omega)\), agregación zonal, no linealidad, escalado por intención, blending con histéresis y limitadores) reduce ese conflicto, preserva la seguridad y mantiene la capacidad de converger a una pose objetivo.
+
+\subparagraph{8. Recomendaciones prácticas}
+\begin{itemize}
+  \item Aplicar EMA a las activaciones \(a_i\) y a \(\alpha\) (valores típicos \(0.15\!-\!0.35\)).
+  \item Definir \(A_{\text{crit}}\) y una banda de blending con histéresis (p. ej. \(\Delta=0.02\)).
+  \item Escalar la repulsión por \(|V_{\text{goal}}|\) y limitar las tasas de cambio \((\dot V,\dot\omega)\).
+  \item Registrar logs de \(A_{\text{front}},\alpha,V_{\text{goal}},v_b\) para verificar que la conmutación se produce de forma estable.
+\end{itemize}
+
+Con estas medidas se evita que la reacción sensorial “lucha” constantemente con la planificación, y se consigue un compromiso entre seguridad reactiva y convergencia planificada.
+
+
+\subsubsection*{2.2 Controlador \textit{Braitenberg} zonal y no lineal (integrable con objetivo)}
+Este diseño agrupa las lecturas de los sensores en zonas y genera directamente 
+una salida en el espacio de chasis \((V,\omega)\). Está pensado para integrarse 
+con un controlador de posición que produce \((V_{\text{goal}},\omega_{\text{goal}})\), de modo que la mezcla entre intención y repulsión sea directa y coherente.
+
+\paragraph{Mapeo sensorial y activación}
+El orden de sensores es: trasero izquierdo, izquierdo, frontal izquierdo, frontal, frontal derecho, derecho, trasero derecho, trasero.  
+Cada lectura \(r_i\) se transforma en una activación normalizada \(a_i\in[0,1]\) mediante una inversión lineal:
+
+
+\[
+a_i \;=\; \operatorname{clamp}\!\left(1 - \frac{r_i}{r_{\max}},\,0,1\right),
+\]
+
+
+donde \(r_{\max}=0.25\ \mathrm{m}\) en la implementación. Lecturas inválidas se sustituyen por \(r_{\max}\).
+
+\paragraph{Agregación zonal}
+Se definen activaciones promedio por zona:
+
+
+\[
+A_{\text{front}}=\frac{a_{fl}+a_f+a_{fr}}{3},\qquad
+A_{\text{left}}=\frac{a_{fl}+a_l}{2},\qquad
+A_{\text{right}}=\frac{a_{fr}+a_r}{2}.
+\]
+
+
+
+\paragraph{Salidas reactivas no lineales}
+La componente lineal (frenado/retroceso) y la componente angular (giro) se calculan como
+
+
+\[
+v_{\text{react}} \;=\; -k_{\text{front}}\;A_{\text{front}}^{p},
+\qquad
+\omega_{\text{react}} \;=\; k_{\text{turn}}\;\tanh\!\big(A_{\text{right}}-A_{\text{left}}\big),
+\]
+
+
+donde \(k_{\text{front}}>0\) y \(k_{\text{turn}}>0\) son ganancias ajustables y \(p\) (en el código \(p=1.5\)) controla la no linealidad del frenado. La potencia \(p>1\) hace la respuesta más agresiva cuando la activación frontal es alta; \(\tanh\) limita la salida angular evitando saturaciones abruptas.
+
+\paragraph{Escalado por intención de avance}
+Para mantener coherencia de magnitudes con el controlador de posición, se escala la reacción por un factor derivado de la intención de avanzar:
+
+
+\[
+\text{scale}=\operatorname{clamp}\!\left(\frac{|V_{\text{goal}}|}{v_{\text{ref}}},\,0,1\right),
+\]
+
+
+y se aplica a las componentes reactivas:
+
+
+\[
+v_b = \operatorname{sign}(v_{\text{react}})\,|v_{\text{react}}|\cdot\text{scale},\qquad
+\omega_b = \omega_{\text{react}}\cdot\text{scale}.
+\]
+
+
+Este escalado evita que la repulsión proponga magnitudes incompatibles con la intención de avanzar.
+
+\paragraph{Híbrido umbral + blending}
+Para casos críticos se recomienda un arbitraje duro y, fuera de ellos, un blending suavizado:
+
+
+
+
+\[
+\alpha =
+\begin{cases}
+0, & \text{si } A_{\text{front}} \geq A_{\text{crit}},\\
+\text{valor suavizado en }(0,1), & \text{si } A_{\text{blend}} < A_{\text{front}} < A_{\text{crit}},\\
+1, & \text{si } A_{\text{front}} \leq A_{\text{blend}}.
+\end{cases}
+\]
+
+
+
+
+
+La mezcla final en \((V,\omega)\) es
+
+
+\[
+V=\alpha\,V_{\text{goal}}+(1-\alpha)\,v_b,\qquad
+\omega=\alpha\,\omega_{\text{goal}}+(1-\alpha)\,\omega_b,
+\]
+
+
+con \(\alpha\) filtrado temporalmente (EMA) y con histéresis para evitar conmutaciones por ruido.
+
+\subsubsection*{Comparativa técnica y por qué funciona mejor al integrar con control de posición}
+\begin{tabular}{p{0.40\linewidth} p{0.27\linewidth} p{0.27\linewidth}}
+\textbf{Aspecto} & \textbf{Braitenberg clásico (por rueda)} & \textbf{Braitenberg zonal (no lineal)} \\ \hline
+Salida & \(v_L,v_R\) (velocidades por rueda) & \(V,\omega\) (velocidades de chasis) \\
+Granularidad & Pesos por sensor (alta) & Pesos zonales y ganancias globales (media) \\
+Robustez al ruido & Menor (lecturas aisladas afectan directamente) & Mayor (agregación y no linealidad atenúan picos) \\
+Tunabilidad semántica & Difícil (16 pesos) & Intuitiva (\(k_{\text{front}},k_{\text{turn}},p\)) \\
+Integración con controlador de posición & Requiere conversiones y escalados adicionales & Directa (misma representación \((V,\omega)\)) \\
+Comportamiento ante cercanía crítica & Depende de pesos individuales & Predecible por exponente y \(\tanh\) \\
+\end{tabular}
+
+\paragraph{Razones por las que el enfoque zonal mejora la navegación hacia una pose}
+\begin{enumerate}
+  \item \textbf{Compatibilidad de espacio:} el controlador de posición opera en \((V_{\text{goal}},\omega_{\text{goal}})\). Si la repulsión también está en \((V,\omega)\), la mezcla es directa y evita inconsistencias de magnitud o signo introducidas por conversiones rueda–chasis.
+  \item \textbf{Escalado coherente:} al escalar la repulsión por \(|V_{\text{goal}}|\) o por la distancia al objetivo, la corrección es proporcional a la intención de avanzar, evitando que la repulsión detenga o invierta el movimiento de forma inesperada.
+  \item \textbf{Semántica clara:} \(A_{\text{front}}\) controla frenado y \(A_{\text{right}}-A_{\text{left}}\) controla dirección, lo que facilita reglas híbridas (umbral crítico → prioridad a repulsión; fuera de él → blending suave).
+  \item \textbf{Robustez frente a lecturas aisladas:} la agregación zonal y las funciones no lineales atenúan picos de sensor que en el esquema por-rueda podrían provocar giros erráticos.
+  \item \textbf{Control de saturación natural:} \(\tanh\) y la potencia limitan la salida y reducen trompicones al mezclar con el objetivo.
+\end{enumerate}
+
+\subsubsection*{Recomendaciones de parametrización y ajuste}
+\begin{itemize}
+  \item \(k_{\text{front}}\): empezar con valores moderados (ej. \(0.3\!-\!0.8\)), aumentar si el robot no frena lo suficiente ante obstáculos frontales.
+  \item \(p\) (exponente): valores en \([1.2,2.0]\) ofrecen buen compromiso; \(p>1\) hace la reacción más localizada a cercanías críticas.
+  \item \(k_{\text{turn}}\): ajustar en función de la inercia y la base del robot; valores típicos \(0.8\!-\!1.5\).
+  \item \(v_{\text{ref}}\): fijarlo cercano a la velocidad máxima práctica del controlador de posición (ej. \(0.30\!-\!0.40\ \mathrm{m/s}\)).
+  \item Filtrado: aplicar EMA a \(a_i\), a \(\text{scale}\) y a \(\alpha\) (valores típicos \(0.15\!-\!0.35\)).
+  \item Histeresis en \(\alpha\): evitar conmutaciones por ruido (umbral de histéresis \(0.02\!-\!0.05\)).
+  \item Si se necesita granularidad, ponderar sensores antes de agregarlos a \(A_{\text{front}}\) (dar más peso al sensor frontal central).
+\end{itemize}
+
+\subsubsection*{Logs y métricas recomendadas para afinado}
+Registrar periódicamente (por ejemplo en cada iteración) las siguientes magnitudes facilita el ajuste:
+
+
+\[
+A_{\text{front}},\; A_{\text{left}},\; A_{\text{right}},\; v_{\text{react}},\; \omega_{\text{react}},\; V_{\text{goal}},\; \omega_{\text{goal}},\; \alpha,\; \text{scale}.
+\]
+
+
+Un ejemplo de línea de log compacta:
+\begin{verbatim}
+DBG A_front=%.3f A_left=%.3f A_right=%.3f v_react=%.3f w_react=%.3f Vg=%.3f Wg=%.3f alpha=%.3f scale=%.3f
+\end{verbatim}
+
+\subsubsection*{Conclusión}
+El controlador zonal y no lineal no es simplemente más complejo: aporta \emph{coherencia semántica}, \emph{robustez} y facilita la \emph{integración} con controladores de posición porque opera en el mismo espacio \((V,\omega)\) y porque sus no linealidades priorizan reacciones sólo cuando son realmente necesarias. Para navegación hacia poses concretas evitando obstáculos, este enfoque suele ofrecer un comportamiento más predecible y estable; el esquema clásico por-rueda sigue siendo útil para calibraciones finas o cuando se requiere control sensor‑a‑sensor.

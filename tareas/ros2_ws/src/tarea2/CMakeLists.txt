@@ -16,15 +16,11 @@ include_directories(include)
 
 # Biblioteca con la lógica del controlador y utilidades
 add_library(tarea2_lib
-    src/khepera_controller.cpp
+    src/braitenberg_target_controller.cpp
+    src/braitenberg_controller.cpp
     src/braitenberg.cpp
     src/service_utils.cpp
     src/metrics_utils.cpp
-    src/tang.cpp
-    src/campo_vectorial.cpp
-    src/braitenberg_puro.cpp
-    src/controllers.cpp
-    src/braitenberg_repulsion.cpp
 )
 
 ament_target_dependencies(tarea2_lib
@@ -38,27 +34,19 @@ ament_target_dependencies(tarea2_lib
 )
 
 # Ejecutable principal
-add_executable(khepera_controller src/main.cpp)
-target_link_libraries(khepera_controller tarea2_lib)
+add_executable(braitenberg_target_controller src/main_braitenberg_target_controller.cpp)
+target_link_libraries(braitenberg_target_controller tarea2_lib)
 
 # Instalación
-install(TARGETS khepera_controller
+install(TARGETS braitenberg_target_controller
     DESTINATION lib/${PROJECT_NAME}
 )
 
-add_executable(campo_vectorial src/main2.cpp)
-target_link_libraries(campo_vectorial tarea2_lib)
+add_executable(braitenberg_controller src/main_braitenberg_controller.cpp)
+target_link_libraries(braitenberg_controller tarea2_lib)
 
 # Instalación
-install(TARGETS campo_vectorial
-    DESTINATION lib/${PROJECT_NAME}
-)
-
-add_executable(braitenberg_puro src/main3.cpp)
-target_link_libraries(braitenberg_puro tarea2_lib)
-
-# Instalación
-install(TARGETS braitenberg_puro
+install(TARGETS braitenberg_controller
     DESTINATION lib/${PROJECT_NAME}
 )
 

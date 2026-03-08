@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  8 MAR 2026 12:52
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.10.21)  8 MAR 2026 21:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -786,11 +786,7 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (./main.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
- (./autoria.aux) (./docker.aux) (./tarea1.aux) (./tarea2.aux
-
-LaTeX Warning: Label `fig:t2.escenario1' multiply defined.
-
-) (./anexo_codigo.aux))
+ (./autoria.aux) (./docker.aux) (./tarea1.aux) (./tarea2.aux) (./anexo_codigo.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -1475,40 +1471,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 141--145
 File: Images/tarea2/escenario3.png Graphic file (type bmp)
 <Images/tarea2/escenario3.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--183
+Underfull \hbox (badness 10000) in paragraph at lines 179--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--210
+Underfull \hbox (badness 10000) in paragraph at lines 205--211
 
  []
 
 [27]
-Underfull \hbox (badness 10000) in paragraph at lines 211--219
+Underfull \hbox (badness 10000) in paragraph at lines 212--220
 
  []
 
 
-LaTeX Warning: Citation 'braitenberg_video' on page 28 undefined on input line 232.
+LaTeX Warning: Citation 'braitenberg_video' on page 28 undefined on input line 233.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--233
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 234--237
+Underfull \hbox (badness 10000) in paragraph at lines 232--234
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 238--240
+Underfull \hbox (badness 10000) in paragraph at lines 235--238
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--248
+Underfull \hbox (badness 10000) in paragraph at lines 239--241
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 242--249
 
  []
 
@@ -1520,25 +1516,137 @@ File: Images/tarea2/braitenberg1/v.png Graphic file (type bmp)
 File: Images/tarea2/braitenberg1/w.png Graphic file (type bmp)
 <Images/tarea2/braitenberg1/w.png>
  [29]
-File: Images/tarea2/escenario3.png Graphic file (type bmp)
-<Images/tarea2/escenario3.png>
-) [30
+File: Images/tarea2/escenario1.png Graphic file (type bmp)
+<Images/tarea2/escenario1.png>
+File: Images/tarea2/escenario2.png Graphic file (type bmp)
+<Images/tarea2/escenario2.png>
+
+Underfull \hbox (badness 1082) in paragraph at lines 294--305
+\TU/4.ttf(0)/m/n/12 esquema de \TU/4.ttf(0)/m/it/12 Braitenberg\TU/4.ttf(0)/m/n/12 . El controlador de posición genera una intención de movimiento
+ []
+
+
+Underfull \hbox (badness 1655) in paragraph at lines 294--305
+\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 V[]; ![]\OT1/cmr/m/n/12 )$ \TU/4.ttf(0)/m/n/12 que busca reducir el error de posición y orientación. El esquema clásico de
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 294--305
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--309
+
+ []
+
+
+Underfull \hbox (badness 1895) in paragraph at lines 310--316
+[]\TU/4.ttf(0)/m/n/12 También existen incompatibilidades entre magnitudes. El enfoque clásico actúa sobre las
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 310--316
+
+ []
+
+[30
 
 ]
+Underfull \hbox (badness 3713) in paragraph at lines 383--384
+ []\TU/4.ttf(0)/b/n/12 Limitación y conversión a ruedas[] \TU/4.ttf(0)/m/n/12 Finalmente se aplican saturaciones y limitadores de
+ []
+
+[31]
+Underfull \hbox (badness 1946) in paragraph at lines 404--405
+\TU/4.ttf(0)/m/n/12 de forma pronunciada sólo en proximidades críticas. Esto evita que la repulsión “lucha”
+ []
+
+
+Underfull \hbox (badness 6380) in paragraph at lines 407--408
+ []\TU/4.ttf(0)/b/n/12 5. Estrategia híbrida: umbral crítico y blending suavizado[] \TU/4.ttf(0)/m/n/12 Para conciliar seguridad y
+ []
+
+[32]
+Underfull \hbox (badness 4913) in paragraph at lines 529--529
+[]|\TU/4.ttf(0)/b/n/12 Braitenberg clásico (por
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 529--529
+[]|\TU/4.ttf(0)/b/n/12 Braitenberg zonal (no
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--530
+[]|$\OML/cmm/m/it/12 v[]; v[]$ \TU/4.ttf(0)/m/n/12 (velocidades por
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--531
+[]|$\OML/cmm/m/it/12 V; !$ \TU/4.ttf(0)/m/n/12 (velocidades de
+ []
+
+
+Underfull \hbox (badness 2653) in paragraph at lines 532--532
+[]|\TU/4.ttf(0)/m/n/12 Menor (lecturas aisladas
+ []
+
+
+Underfull \hbox (badness 2334) in paragraph at lines 532--533
+[]|\TU/4.ttf(0)/m/n/12 Mayor (agregación y no
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 534--534
+[]|\TU/4.ttf(0)/m/n/12 Integración con controlador de
+ []
+
+
+Underfull \hbox (badness 1590) in paragraph at lines 534--534
+[]|\TU/4.ttf(0)/m/n/12 Requiere conversiones y
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 534--535
+[]|\TU/4.ttf(0)/m/n/12 Directa (misma
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 535--535
+[]|\TU/4.ttf(0)/m/n/12 Depende de pesos
+ []
+
+
+Overfull \hbox (6.22139pt too wide) in paragraph at lines 528--537
+[][] 
+ []
+
+[33]
+Missing character: There is no → (U+2192) in font [Core/4.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no → (U+2192) in font [Core/4.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+[34]
+Overfull \hbox (152.56964pt too wide) in paragraph at lines 570--570
+[]\TU/lmtt/m/n/12 DBG A_front=%.3f A_left=%.3f A_right=%.3f v_react=%.3f w_react=%.3f Vg=%.3f Wg=%.3f alpha=%.3f scale=%.3f[] 
+ []
+
+Missing character: There is no ‑ (U+2011) in font [Core/4.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no ‑ (U+2011) in font [Core/4.ttf]/OT:script=latn;language=dflt;mapping=tex-text;!
+) [35]
 \openout2 = `anexo_codigo.aux'.
 
  (./anexo_codigo.tex
 File: Images/ucm_uned.png Graphic file (type bmp)
 <Images/ucm_uned.png>
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 6.
- (./Code/dockerfile) (./Code/run.sh) [31
+ (./Code/dockerfile) (./Code/run.sh) [36
 
 
 
-] (./Code/tarea1/script_por_defecto.lua) (./Code/tarea1/publisher_robotPose.lua [32]) (./Code/tarea1/subscriber_cmdVel.lua [33]) (./Code/tarea1/serviceTargetPose.lua)
+] (./Code/tarea1/script_por_defecto.lua) (./Code/tarea1/publisher_robotPose.lua [37]) (./Code/tarea1/subscriber_cmdVel.lua [38]) (./Code/tarea1/serviceTargetPose.lua)
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 23.
- (./Code/tarea1/ExecTraj.txt [34])
+ (./Code/tarea1/ExecTraj.txt [39])
 Overfull \hbox (415.67896pt too wide) in paragraph at lines 30--31
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
@@ -1554,7 +1662,7 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-) (./Code/tarea1/main.cpp) (./Code/tarea1/controller.hpp [35]) (./Code/tarea1/controller.cc [36] [37] [38] [39])
+) (./Code/tarea1/main.cpp) (./Code/tarea1/controller.hpp [40]) (./Code/tarea1/controller.cc [41] [42] [43] [44])
 Underfull \hbox (badness 10000) in paragraph at lines 44--44
 [][]\TU/4.ttf(0)/b/n/14.4 Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
@@ -1564,14 +1672,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 45--45
 []\TU/4.ttf(0)/m/n/12 Código 12: |Cabeceras del módulo encargado de la llamada asíncrona al servicio
  []
 
-(./Code/tarea1/serviceHpp.hpp) (./Code/tarea1/serviceCpp.cpp [40]) (./Code/tarea1/poseHpp.hpp) (./Code/tarea1/metricHpp.hpp [41]) (./Code/tarea1/metricCpp.cpp [42]) (./Code/tarea2/publisher_infrared.lua) [43] (./Code/tarea2/1_params.yaml)) [44]
+(./Code/tarea1/serviceHpp.hpp) (./Code/tarea1/serviceCpp.cpp [45]) (./Code/tarea1/poseHpp.hpp) (./Code/tarea1/metricHpp.hpp [46]) (./Code/tarea1/metricCpp.cpp [47]) (./Code/tarea2/publisher_infrared.lua) [48] (./Code/tarea2/1_params.yaml)) [49]
 File: Images/ucm_uned.png Graphic file (type bmp)
 <Images/ucm_uned.png>
 
 
 LaTeX Warning: Empty bibliography on input line 48.
 
-[45
+[50
 
 
 ] (./main.aux
@@ -1588,10 +1696,16 @@ L3 programming layer <2024-01-22>
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 6A958F2B66FA2C28AB85CBDE2A6256A9;8436.
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 56B9EE7DA5583F74DF6954F0937071B2;8437
+(rerunfilecheck)             After:  01818213EC575AEAF6D5A94F0C642FA9;8437.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                main
@@ -1602,12 +1716,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27037 strings out of 476824
- 533042 string characters out of 5803866
+ 27061 strings out of 476824
+ 533434 string characters out of 5803866
  2102627 words of memory out of 5000000
- 48462 multiletter control sequences out of 15000+600000
+ 48486 multiletter control sequences out of 15000+600000
  566471 words of font info for 99 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
  94i,15n,107p,1247b,6640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (45 pages).
+Output written on main.pdf (50 pages).

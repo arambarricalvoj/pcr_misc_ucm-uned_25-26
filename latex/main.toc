@@ -12,5 +12,23 @@
 \contentsline {section}{Tarea 2: control de posición con evitación de obstáculos.}{24}{section*.56}%
 \contentsline {subsection}{1. Agregar obstáculos al espacio de trabajo, pueden ser paredes, cilindros, etc... \textbf {nota}: habilitar la propiedad “detectable” de los obstáculos para que el robot los pueda detectar con los sensores.}{24}{section*.57}%
 \contentsline {subsection}{2. Implementar el algoritmo de \textit {Braitenberg} por medio de la manipulación de las velocidades del robot.}{25}{section*.60}%
-\contentsline {section}{ANEXO I: código}{31}{section*.69}%
-\contentsline {section}{Referencias}{45}{figure.caption.88}%
+\contentsline {paragraph}{Funciones de activación}{30}{section*.68}%
+\contentsline {paragraph}{Agregación zonal}{31}{section*.69}%
+\contentsline {paragraph}{Componentes reactivas no lineales}{31}{section*.70}%
+\contentsline {paragraph}{Escalado por intención de avance}{31}{section*.71}%
+\contentsline {paragraph}{Arbitraje híbrido (umbral + blending)}{31}{section*.72}%
+\contentsline {paragraph}{Limitación y conversión a ruedas}{31}{section*.73}%
+\contentsline {paragraph}{Comentarios sobre el diseño}{31}{section*.74}%
+\contentsline {subparagraph}{4. Efecto de la no linealidad en la prioridad de reacción}{32}{section*.75}%
+\contentsline {subparagraph}{5. Estrategia híbrida: umbral crítico y blending suavizado}{32}{section*.76}%
+\contentsline {subparagraph}{6. Escalado por intención de avance y limitación de aceleración}{32}{section*.77}%
+\contentsline {subparagraph}{7. Resumen intuitivo}{32}{section*.78}%
+\contentsline {subparagraph}{8. Recomendaciones prácticas}{32}{section*.79}%
+\contentsline {paragraph}{Mapeo sensorial y activación}{33}{section*.81}%
+\contentsline {paragraph}{Agregación zonal}{33}{section*.82}%
+\contentsline {paragraph}{Salidas reactivas no lineales}{33}{section*.83}%
+\contentsline {paragraph}{Escalado por intención de avance}{33}{section*.84}%
+\contentsline {paragraph}{Híbrido umbral + blending}{33}{section*.85}%
+\contentsline {paragraph}{Razones por las que el enfoque zonal mejora la navegación hacia una pose}{34}{section*.87}%
+\contentsline {section}{ANEXO I: código}{36}{section*.92}%
+\contentsline {section}{Referencias}{50}{figure.caption.111}%

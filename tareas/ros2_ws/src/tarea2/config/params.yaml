@@ -1,8 +1,8 @@
-khepera_controller:
+braitenberg_target_controller:
   ros__parameters:
     vmax: 1.0
     wmax: 1.0
-    kp: 0.2
+    kp: 0.15
     controller_type: 0
     ks: 1.0
     k_front: 1.6
@@ -40,43 +40,3 @@ braitenberg_controller:
 
 # controller_type: 0 --> ICC reactivo
 # controller_type: 1 --> ICC geométrico
-
-braitenberg_target_controller:
-  ros__parameters:
-    # Control básico
-    kp: 0.25
-    controller_type: 0       # 0: reactivo (blending), 1: geométrico, 2: (otro)
-    control_hz: 20.0
-
-    # Cinemática / límites
-    wheel_radius: 0.021
-    wheel_base: 0.088
-    v0: 0.1                  # escala para Braitenberg
-    vmin: 0.0
-    vmax: 1.0
-    wmax: 1.0
-
-    # Detección / seguridad
-    max_detection_dist: 0.25
-    max_range_default: 0.25
-    d_safe: 0.15              # distancia segura para blending
-    d_blend: 0.25             # opcional: umbral superior para blending (si lo usas)
-
-    # Braitenberg weights (8 sensores)
-    GL: [0.0, 0.0, 0.0, 0.0, -0.025, -0.0375, -0.05, -0.000625]
-    GR: [-0.000625, -0.05, -0.0375, -0.025, 0.0, 0.0, 0.0, 0.0]
-
-    # Parámetros adicionales (si los usas en otros módulos)
-    max_accel_lin: 0.14
-    max_accel_ang: 0.14
-    ks: 1.0
-    k_front: 1.6
-    k_turn: 4.0
-    k_tan: 10.0
-    k_att: 1.2
-    k_rep: 1.2
-    k_v: 0.6
-    d_dead: 0.6
-    d_min: 0.08
-    F_max: 0.2
-    filter_beta: 0.85

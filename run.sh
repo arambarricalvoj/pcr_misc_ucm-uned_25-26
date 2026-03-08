@@ -12,5 +12,5 @@ docker run -e DISPLAY=$DISPLAY \
            --rm \
            --gpus all \
            --runtime=nvidia \
-           --name coppelia_sim \
+           --name 2coppelia_sim \
            coppelia_sim_ros2:jazzy
