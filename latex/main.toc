@@ -1,24 +1,16 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{Instalación y despliegue}{6}{section*.8}%
-\contentsline {section}{Tarea 1: experimento de control de posición de un robot móvil.}{7}{section*.10}%
-\contentsline {subsection}{1. Descargar el simulador y agregar el modelo del robot al mismo como se explica en el documento Interfaz de la Práctica.}{7}{section*.11}%
-\contentsline {subsection}{2. Al arrastrar el robot desde el panel lateral y soltarlo en el espacio de trabajo, el robot quedará agregado a la simulación.}{7}{section*.12}%
-\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{7}{section*.14}%
-\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{7}{section*.15}%
-\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{8}{section*.17}%
-\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{9}{section*.19}%
-\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{9}{section*.20}%
-\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{9}{section*.21}%
-\contentsline {section}{Tarea 2: control de posición con evitación de obstáculos.}{25}{section*.56}%
-\contentsline {subsection}{1. Agregar obstáculos al espacio de trabajo, pueden ser paredes, cilindros, etc... \textbf {nota}: habilitar la propiedad “detectable” de los obstáculos para que el robot los pueda detectar con los sensores.}{25}{section*.57}%
-\contentsline {subsection}{2. Implementar el algoritmo de \textit {Braitenberg} por medio de la manipulación de las velocidades del robot.}{26}{section*.60}%
-\contentsline {paragraph}{Formalización}{30}{section*.64}%
-\contentsline {paragraph}{Fórmulas concretas usadas}{31}{section*.72}%
-\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{32}{section*.76}%
-\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{32}{section*.77}%
-\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{33}{section*.79}%
-\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{34}{section*.81}%
-\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{34}{section*.82}%
-\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{34}{section*.83}%
-\contentsline {section}{ANEXO I: código}{50}{section*.118}%
-\contentsline {section}{Referencias}{63}{figure.caption.136}%
+\contentsline {section}{Instalación y despliegue}{5}{section*.8}%
+\contentsline {section}{Tarea 1: experimento de control de posición de un robot móvil.}{6}{section*.10}%
+\contentsline {subsection}{1. Descargar el simulador y agregar el modelo del robot al mismo como se explica en el documento Interfaz de la Práctica.}{6}{section*.11}%
+\contentsline {subsection}{2. Al arrastrar el robot desde el panel lateral y soltarlo en el espacio de trabajo, el robot quedará agregado a la simulación.}{6}{section*.12}%
+\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{6}{section*.14}%
+\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{6}{section*.15}%
+\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{7}{section*.17}%
+\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{8}{section*.19}%
+\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{8}{section*.20}%
+\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{8}{section*.21}%
+\contentsline {section}{Tarea 2: control de posición con evitación de obstáculos.}{24}{section*.56}%
+\contentsline {subsection}{1. Agregar obstáculos al espacio de trabajo, pueden ser paredes, cilindros, etc... \textbf {nota}: habilitar la propiedad “detectable” de los obstáculos para que el robot los pueda detectar con los sensores.}{24}{section*.57}%
+\contentsline {subsection}{2. Implementar el algoritmo de \textit {Braitenberg} por medio de la manipulación de las velocidades del robot.}{25}{section*.60}%
+\contentsline {section}{ANEXO I: código}{31}{section*.69}%
+\contentsline {section}{Referencias}{45}{figure.caption.88}%

@@ -35,9 +35,13 @@ private:
     double v0_;
     double vmin_;
     double vmax_;
+    //double wmax_;
     double max_detection_dist_;
     double max_range_default_;
     double control_hz_;
+
+    //double V_;
+    //double W_ = 0;
 
     std::array<double,8> braitenbergL_;
     std::array<double,8> braitenbergR_;
@@ -68,10 +72,10 @@ private:
     double d_safe_ = 0.0;
 
     // limitación de aceleración (parámetros y estado)
-    double max_accel_linear_  = 0.5; // m/s^2
-    double max_accel_angular_ = 1.0; // rad/s^2
-    double prev_v_ = 0.0;
-    double prev_w_ = 0.0;
+    //double max_accel_linear_  = 0.5; // m/s^2
+    //double max_accel_angular_ = 1.0; // rad/s^2
+    //double prev_v_ = 0.0;
+    //double prev_w_ = 0.0;
 
     // tiempo tras el cual se guarda el CSV (segundos)
     double save_after_seconds_;

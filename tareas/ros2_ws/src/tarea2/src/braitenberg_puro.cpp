@@ -7,6 +7,8 @@
 #include <sstream>
 #include <limits>
 
+#include <cmath>
+
 #include "ament_index_cpp/get_package_share_directory.hpp"
 
 using namespace std::chrono_literals;
@@ -20,19 +22,20 @@ BraitenbergController::BraitenbergController()
     this->declare_parameter<double>("v0",           0.6);
     this->declare_parameter<double>("vmin",         0.0);
     this->declare_parameter<double>("vmax",         1.0);
+    //this->declare_parameter<double>("wmax",         1.0);
     this->declare_parameter<double>("max_detection_dist", 0.02);
     this->declare_parameter<double>("max_range_default", 0.25);
     this->declare_parameter<double>("control_hz", 20.0);
 
     // Pesos Braitenberg (vector cargable desde YAML)
-    this->declare_parameter<std::vector<double>>("braitenbergL",
+    this->declare_parameter<std::vector<double>>("GL",
         std::vector<double>{0.0,0.0,0.0,0.0,-0.025,-0.0375,-0.05,-0.000625});
-    this->declare_parameter<std::vector<double>>("braitenbergR",
+    this->declare_parameter<std::vector<double>>("GR",
         std::vector<double>{-0.000625,-0.05,-0.0375,-0.025,0.0,0.0,0.0,0.0});
 
     // Parámetro opcional de obstáculos (declararlo para evitar excepciones si no está en YAML)
     this->declare_parameter<std::vector<double>>("obstacles", std::vector<double>{});
-    // d_safe opcional (no obligatorio para el CSV mínimo)
+    // d_safe opcional (no obligatorio para el CSV_ mínimo)
     this->declare_parameter<double>("d_safe", 0.05);
 
     // Parámetros nuevos: limitación de aceleración y tiempo para guardar métricas
@@ -46,6 +49,7 @@ BraitenbergController::BraitenbergController()
     v0_           = this->get_parameter("v0").as_double();
     vmin_         = this->get_parameter("vmin").as_double();
     vmax_         = this->get_parameter("vmax").as_double();
+    //wmax_         = this->get_parameter("wmax").as_double();
     max_detection_dist_ = this->get_parameter("max_detection_dist").as_double();
     max_range_default_  = this->get_parameter("max_range_default").as_double();
     control_hz_ = this->get_parameter("control_hz").as_double();
@@ -72,6 +76,9 @@ BraitenbergController::BraitenbergController()
 
     // Inicializar rangos IR
     ir_ranges_.fill(max_range_default_);
+
+    //prev_v_ = v0_;
+    //prev_w_ = 0;
 
     // Suscriptores IR
     for (int i = 0; i < 8; ++i) {
@@ -183,53 +190,36 @@ void BraitenbergController::controlLoop()
 
     double dt = 1.0 / control_hz_;
     if (dt <= 0.0) dt = 0.05;
-    // Desired velocities before accel limiting
-    /*double V_des = std::clamp((vRight_lin + vLeft_lin) / 2.0, vmin_, vmax_);
-    double W_des = 0.0;
-    if (wheel_base_ != 0.0) {
-        W_des = (vRight_lin - vLeft_lin) / wheel_base_;
-    }
-
-    // dt para limitación de aceleración
-    double dt = 1.0 / control_hz_;
-    if (dt <= 0.0) dt = 0.05;
-
-    // Limitar aceleración lineal
-    double max_dv = max_accel_linear_ * dt;
-    double dv = V_des - prev_v_;
-    if (dv > max_dv) dv = max_dv;
-    if (dv < -max_dv) dv = -max_dv;
-    double V = prev_v_ + dv;
-
-    // Limitar aceleración angular
-    double max_dw = max_accel_angular_ * dt;
-    double dw = W_des - prev_w_;
-    if (dw > max_dw) dw = max_dw;
-    if (dw < -max_dw) dw = -max_dw;
-    double W = prev_w_ + dw;
-
-    // Asegurar límites finales (por si la limitación dejó fuera de rango)
-    V = std::clamp(V, vmin_, vmax_);
-    W = std::clamp(W, -vmax_ /* reuse vmax_? better to use wmax_ but original MetricsLogger stored wmax_ only ,
-                   vmax_);*/ // si tienes wmax_ real, reemplaza por wmax_
 
     // Clamp para evitar reversa y paradas bruscas: [vmin_, vmax_]
     vLeft_lin  = std::clamp(vLeft_lin,  vmin_, vmax_);
     vRight_lin = std::clamp(vRight_lin, vmin_, vmax_);
 
     // Convertir a velocidad lineal y angular del chasis
-    double V = (vRight_lin + vLeft_lin) / 2.0;
-    double W = (vRight_lin - vLeft_lin) / wheel_base_;
+    double V_ = (vRight_lin + vLeft_lin) / 2.0;
+    double W_ = (vRight_lin - vLeft_lin) / wheel_base_;
+
+    // Acc
+    /*double delta_v = V_ - prev_v_;
+    double delta_w = W_ - prev_w_;
+    if (abs(delta_v) > max_accel_linear_){
+        V_ = prev_v_ + delta_v;
+        prev_v_ = V_;
+    }
+    if (abs(delta_w > max_accel_angular_)){
+        W_ = prev_w_ + delta_w;
+        prev_w_ = W_;
+    }*/
 
     // Publicar Twist
     geometry_msgs::msg::Twist cmd;
-    cmd.linear.x = V;
-    cmd.angular.z = W;
+    cmd.linear.x = V_;
+    cmd.angular.z = W_;
     cmd_pub_->publish(cmd);
 
     // Actualizar prev para la siguiente iteración
-    //prev_v_ = V;
-    //prev_w_ = W;
+    //prev_v_ = V_;
+    //prev_w_ = W_;
 
     // Preparar datos para métricas: solo si tenemos pose
     if (!pose_received_) {
@@ -263,17 +253,17 @@ void BraitenbergController::controlLoop()
             std::numeric_limits<double>::quiet_NaN(), // yt
             std::numeric_limits<double>::quiet_NaN(), // d
             std::numeric_limits<double>::quiet_NaN(), // e_theta
-            V, W
+            V_, W_
         );
     }
 
     // Guardar métricas una sola vez cuando haya pasado save_after_seconds_
     if (!metrics_saved_ && time_elapsed_ >= save_after_seconds_) {
         if (metrics_) {
-            RCLCPP_INFO(this->get_logger(), "%.1f s elapsed — saving metrics CSV now.", save_after_seconds_);
+            RCLCPP_INFO(this->get_logger(), "%.1f s elapsed — saving metrics CSV_ now.", save_after_seconds_);
             metrics_->saveToCSV();
             metrics_saved_ = true;
-            RCLCPP_INFO(this->get_logger(), "Metrics saved to CSV.");
+            RCLCPP_INFO(this->get_logger(), "Metrics saved to CSV_.");
         }
     }
 }

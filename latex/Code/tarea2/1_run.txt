@@ -1,0 +1,1 @@
+ros2 run tarea2 braitenberg_puro --ros-args --params-file src/tarea2/config/params.yaml 

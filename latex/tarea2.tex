@@ -166,1017 +166,125 @@ por el terreno.
     \end{center}
 \end{figure}
 
-La entrada sensorial proviene de ocho sensores IR que entregan distancias \(d_i\). Cada lectura se preprocesa y normaliza a una señal de detección \(\mathrm{detect}_i\in[0,1]\) mediante una inversión lineal entre el umbral mínimo y máximo de detección:
-
-
-\[
+La entrada sensorial proviene de los ocho sensores mencionados.
+Cada lectura se preprocesa y normaliza a una señal de detección
+ \(\mathrm{detect}_i\in[0,1]\) mediante una inversión lineal entre el umbral mínimo
+ y máximo de detección:
+\begin{equation}
 \mathrm{detect}_i \;=\; \operatorname{clamp}\!\left(1 - \frac{d_i - d_{\min}}{d_{\max}-d_{\min}},\,0,1\right),
-\]
+\label{eq:detect}
+\end{equation}
+
+donde \(d_{\min}=\) \texttt{max\_detection\_dist}, es decir,
+la distancia a partir de la que el sensor produce la máxima activación (repulsión = 1.0)
+y \(d_{\max}=\) \texttt{max\_range\_default}, esto es, el límite superior de operación
+del sensor: $0.25$ metros. 
+Las lecturas inválidas o fuera de rango se sustituyen por \(d_{\max}\). \\
 
 
-donde \(d_{\min}=\) \texttt{max\_detection\_dist} y \(d_{\max}=\) \texttt{max\_range\_default}. Lecturas inválidas o fuera de rango se sustituyen por \(d_{\max}\) para mantener estabilidad al arrancar.
+Las velocidades lineales de rueda se calculan ampliando el esquema de las 
+Ecuaciones \ref{eq:braitenberg} al añadir una velocidad base \(v_0\), Ecuaciones
+\ref{eq:braitenberg2}. Esta velocidad base permite que al robot avanzar en línea 
+recta cuando no se encuentra rodeado de obstáculos. Además, para garantizar la 
+seguridad operativa estas velocidades calculadas
+se saturan con los límites configurados, Ecuaciones \ref{eq:braitenberg_sat}.
 
-El mapeo Braitenberg calcula las velocidades lineales de rueda como una velocidad base \(v_0\) más la combinación lineal de las señales de detección por las ganancias:
-
-
-\[
+\begin{equation}
 v_{L,\text{lin}} \;=\; v_0 \;+\; \sum_{i=1}^{8} G_{L,i}\,\mathrm{detect}_i,\qquad
 v_{R,\text{lin}} \;=\; v_0 \;+\; \sum_{i=1}^{8} G_{R,i}\,\mathrm{detect}_i.
-\]
+\label{eq:braitenberg2}
+\end{equation}
 
-
-Para garantizar seguridad operativa estas velocidades se saturan con los límites configurados:
-
-
-\[
+\begin{equation}
 v_{L,\text{lin}} \leftarrow \operatorname{clamp}(v_{L,\text{lin}},\, v_{\min},\, v_{\max}),\qquad
 v_{R,\text{lin}} \leftarrow \operatorname{clamp}(v_{R,\text{lin}},\, v_{\min},\, v_{\max}).
-\]
-
-
-
-La cinemática diferencial del chasis convierte las velocidades de rueda en velocidad lineal \(V\) y velocidad angular \(\omega\) del robot mediante
-
-
-\[
-V \;=\; \frac{v_{R,\text{lin}} + v_{L,\text{lin}}}{2},\qquad
-\omega \;=\; \frac{v_{R,\text{lin}} - v_{L,\text{lin}}}{b},
-\]
-
-
-donde \(b=\) \texttt{wheel\_base}. Como el actuador del robot acepta velocidades angulares de rueda, las velocidades lineales de rueda se transforman a velocidades angulares mediante el radio de rueda \(r=\) \texttt{wheel\_radius}:
-
-
-\[
-\omega_L \;=\; \frac{v_{L,\text{lin}}}{r},\qquad
-\omega_R \;=\; \frac{v_{R,\text{lin}}}{r}.
-\]
-
-
-El comando final se publica como un mensaje \texttt{geometry\_msgs::msg::Twist} con \(\text{linear.x}=V\) y \(\text{angular.z}=\omega\).
-
-Para facilitar reglas reactivas adicionales se dispone de una función que calcula la distancia mínima desde una posición \((x,y)\) a un conjunto de obstáculos circulares \(\{(x_o,y_o,r_o)\}\); para cada obstáculo la distancia al borde se obtiene como
-
-
-\[
-d_{\text{edge}}(x,y;x_o,y_o,r_o) \;=\; \sqrt{(x-x_o)^2 + (y-y_o)^2}\;-\; r_o,
-\]
-
-
-y la distancia mínima sobre todos los obstáculos es \(\min_{o} d_{\text{edge}}(x,y;x_o,y_o,r_o)\). Esta cantidad puede emplearse posteriormente para políticas de seguridad o métricas. En términos de ingeniería, el modelo prioriza la separación clara entre adquisición y preprocesado de sensores, combinación por ganancias y conversión cinemática, y contempla saturaciones para evitar comportamientos no deseados; además las ganancias y la lista de obstáculos son parámetros configurables para permitir ajuste iterativo y experimentación.
-
-
-En la fase de inicialización se declaran y leen parámetros configurables que incluyen las dimensiones físicas del robot (\textbf{wheel\_radius}, \textbf{wheel\_base}), velocidades y límites (\textbf{v0}, \textbf{vmin}, \textbf{vmax}), parámetros de sensores (\textbf{max\_detection\_dist}, \textbf{max\_range\_default}) y la frecuencia de control (\textbf{control\_hz}). Las ganancias del esquema Braitenberg se cargan desde parámetros \textbf{braitenbergL} y \textbf{braitenbergR} y se normalizan a una longitud de ocho entradas, permitiendo afinado desde YAML sin recompilar. Opcionalmente se lee una lista plana de obstáculos \(\{x,y,r\}\) y un umbral seguro \textbf{d\_safe} para usos posteriores.
-
-La arquitectura sensorial consta de ocho suscriptores a tópicos IR que actualizan un arreglo de rangos \texttt{ir\_ranges\_}. Además se suscribe a la pose del robot para disponer de la posición cuando sea necesario. En cada iteración del bucle de control (implementado mediante un \textit{timer} con periodo \(1/\text{control\_hz}\)) las lecturas IR se preprocesan y normalizan a señales de detección \(\text{detect}_i\in[0,1]\). La normalización aplicada corresponde a una inversión lineal entre \(\text{max\_detection\_dist}\) y \(\text{max\_range\_default}\), equivalente a
-
-
-\[
-\text{detect}_i=\operatorname{clamp}\!\left(1-\frac{d_i-d_{\min}}{d_{\max}-d_{\min}},0,1\right),
-\]
-
-
-con \(d_{\min}=\) \texttt{max\_detection\_dist} y \(d_{\max}=\) \texttt{max\_range\_default}. Lecturas inválidas se sustituyen por el rango por defecto para evitar comportamientos indeseados al arrancar.
-
-Las velocidades lineales de rueda se calculan como una velocidad base \(v_0\) más la suma ponderada de las señales de detección por las ganancias Braitenberg:
-
-
-\[
-v_{L,\text{lin}} = v_0 + \sum_{i=1}^{8} G_{L,i}\,\text{detect}_i,\qquad
-v_{R,\text{lin}} = v_0 + \sum_{i=1}^{8} G_{R,i}\,\text{detect}_i.
-\]
-
-
-Estas velocidades se saturan con \(\text{vmin}\) y \(\text{vmax}\) para garantizar límites seguros. A continuación se convierten a velocidad lineal \(V\) y velocidad angular \(\omega\) del chasis mediante
-
-
-\[
-V=\frac{v_{R,\text{lin}}+v_{L,\text{lin}}}{2},\qquad
-\omega=\frac{v_{R,\text{lin}}-v_{L,\text{lin}}}{b},
-\]
-
-
-donde \(b\) es la distancia entre ruedas (\texttt{wheel\_base}). El comando resultante se publica como un mensaje \texttt{geometry\_msgs::msg::Twist} en \texttt{/cmd\_vel}.
-
-En cuanto a aspectos de ingeniería, la implementación incorpora inicialización segura de rangos, \texttt{clamp} para evitar velocidades fuera de rango y una función auxiliar que calcula la distancia mínima desde una posición \((x,y)\) a los obstáculos circulares configurados, lo que facilita añadir reglas reactivas adicionales si se desea. Las ganancias cargables desde YAML y la separación clara entre lectura de sensores, preprocesado, combinación por ganancias y publicación hacen que el controlador sea fácilmente extensible y susceptible de ajuste iterativo. Finalmente, se integra un \texttt{MetricsLogger} para registrar resultados en un directorio \texttt{results} preparado al inicio, lo que permite evaluar métricas como distancia mínima a obstáculos, número de colisiones y velocidad media durante las pruebas.
-
-
-
-
-
-\paragraph{Formalización}
-
-
-\subsubsection*{Preprocesado y buenas prácticas}
-\begin{itemize}
-  \item \textbf{Mapeo distancia \(\to\) activación:} si \(d_i\) es la distancia medida por el sensor \(i\),
-    
-
-\[
-      a_i = \mathrm{clamp}\!\left(\frac{d_{\max}-d_i}{d_{\max}-d_{\min}},0,1\right),
-    \]
-
-
-    y para sensores IR conviene invertir (cercanía \(\rightarrow\) alta activación).
-  \item \textbf{Filtrado exponencial:} \(a_i^{(t)} = \beta\,a_i^{(t-1)} + (1-\beta)\,a_{i,\text{raw}}\) para reducir ruido.
-  \item \textbf{Normalización y saturación:} dividir por \(\sum_i |G_{*i}|\) o aplicar saturación final a \(v_L,v_R\).
-  \item \textbf{Diferenciar sensores:} usar ganancias distintas para frontales y laterales; atenuar lateral en pasillos.
-  \item \textbf{Seguridad:} límites de velocidad, limitación de aceleración y freno por distancia frontal.
-\end{itemize}
-
-\subsubsection*{Ejemplos de matrices de conexión}
-A continuación se muestran matrices de ejemplo para un robot con 8 sensores IR ordenados (RL, L, FL, F, FR, R, RR, Rear). Los valores son ilustrativos; deben ajustarse experimentalmente.
-
-
-
-\[
-G_{\text{contralateral}} =
-\begin{bmatrix}
-G_{L,RL} & G_{L,L} & G_{L,FL} & G_{L,F} & G_{L,FR} & G_{L,R} & G_{L,RR} & G_{L,Rear} \\
-G_{R,RL} & G_{R,L} & G_{R,FL} & G_{R,F} & G_{R,FR} & G_{R,R} & G_{R,RR} & G_{R,Rear}
-\end{bmatrix}
-=
-\begin{bmatrix}
--0.2 & -0.4 & -0.6 & -0.8 & 0.6 & 0.4 & 0.2 & -0.1 \\
-0.2 & 0.4 & 0.6 & 0.8 & -0.6 & -0.4 & -0.2 & 0.1
-\end{bmatrix}
-\]
-
-
-
-
-
-\[
-G_{\text{ipsilateral\_atraccion}} =
-\begin{bmatrix}
-0.3 & 0.4 & 0.5 & 0.6 & 0.5 & 0.4 & 0.3 & 0.1 \\
-0.3 & 0.4 & 0.5 & 0.6 & 0.5 & 0.4 & 0.3 & 0.1
-\end{bmatrix}
-\]
-
-
-
-\subsubsection*{Pseudocódigo (implementación práctica por ciclo de control)}
-\begin{verbatim}
-1. Leer sensores d[i]
-2. a[i] = preprocess(d[i])    // normalizar, invertir, filtrar
-3. vL = sum_i G_L[i] * a[i]
-   vR = sum_i G_R[i] * a[i]
-4. v_brait = (vL + vR)/2
-   w_brait = k_diff * (vR - vL)
-5. (v_field, w_field) = campo_vectorial(...)  // si se usa
-6. v_des = alpha * v_field + (1-alpha) * v_brait
-   w_des = alpha * w_field + (1-alpha) * w_brait
-7. aplicar limitación de aceleración y saturaciones
-8. publicar cmd_vel
-\end{verbatim}
-
-\subsubsection*{Comparativa resumida}
-\begin{table}[h]
-\centering
-\begin{tabular}{l c c l}
-\hline
-Método & Simplicidad & Robustez & Uso típico \\
-\hline
-Directo clásico & Alta & Baja & Robots educativos, prototipos \\
-Cross‑coupled & Alta & Media & Evasión frontal \\
-Mezcla con campo & Media & Alta & Objetivo + evasión \\
-Normalizado/ponderado & Media & Alta & Entornos ruidosos \\
-Híbrido / subsunción & Baja & Muy alta & Sistemas reales \\
-Aprendido & Baja & Variable & Ajuste automático \\
-\hline
-\end{tabular}
-\caption{Comparativa de métodos de implementación de Braitenberg.}
-\end{table}
-
-\subsubsection*{Problemas típicos y mitigaciones}
-\begin{itemize}
-  \item \textbf{Bloqueo en pasillos (mínimos locales):} romper simetría con un \emph{bias} lateral, modo corredor (atenuar repulsión lateral y añadir un pequeño impulso hacia adelante) o activar wall‑following.
-  \item \textbf{Choques por atracción dominante:} mezclar con controlador objetivo con factor \(\alpha\) dependiente de la distancia frontal, aumentar \(k_{\text{rep}}\) o elevar \(d_{\min}\).
-  \item \textbf{Oscilaciones / tumble:} limitar aceleraciones, usar factor de alineamiento \(\cos(e_\theta)\) para reducir avance con gran error angular y añadir término derivativo en la acción angular.
-\end{itemize}
-
-\subsubsection*{Variantes implementadas en este trabajo}
-\begin{enumerate}
-  \item \textbf{Variante A (Braitenberg puro contralateral):} matriz \(G\) contralateral para evasión frontal; activaciones \(a_i\) normalizadas y filtradas; salida directa a ruedas.
-  \item \textbf{Variante B (Braitenberg mezclado con campo vectorial):} salida Braitenberg como término de evasión \((v_{\text{brait}},w_{\text{brait}})\) y campo vectorial como término de objetivo \((v_{\text{field}},w_{\text{field}})\); mezcla ponderada por \(\alpha(d_{\text{front}})\) que disminuye la influencia del campo cuando la distancia frontal es pequeña.
-  \item \textbf{Variante C (fallback wall‑following):} detección de estancamiento en pasillo y conmutación a controlador de seguimiento de pared hasta recuperar anchura libre suficiente.
-\end{enumerate}
-
-\paragraph{Fórmulas concretas usadas}
-
-
-\[
-a_i = \mathrm{clamp}\!\left(\frac{d_{\max}-d_i}{d_{\max}-d_{\min}},0,1\right),\quad
-v_L=\sum_i G_{L,i} a_i,\; v_R=\sum_i G_{R,i} a_i,
-\]
-
-
-
-
-\[
-v = \alpha(d_f)\,v_{\text{field}} + (1-\alpha(d_f))\,\frac{v_L+v_R}{2},
-\quad
-w = \alpha(d_f)\,w_{\text{field}} + (1-\alpha(d_f))\,k_{\Delta}(v_R-v_L),
-\]
-
-
-con \(\alpha(d_f)=\mathrm{clamp}\!\left(\frac{d_f-d_{\text{th}}}{d_{\text{max}}-d_{\text{th}}},0,1\right)\) y \(d_f\) la distancia frontal mínima medida por sensores.
-
-\subsubsection*{Parámetros iniciales recomendados para pruebas}
-\begin{itemize}
-  \item Ganancias Braitenberg: valores iniciales en \([0.2, 1.0]\) según sensor (frontales mayores).
-  \item Filtrado exponencial \(\beta\): \(0.85\)–\(0.95\).
-  \item Límites: \(v_{\max}=0.15\ \mathrm{m/s}\), \(w_{\max}=1.0\ \mathrm{rad/s}\).
-  \item Mezcla adaptativa: \(d_{\text{th}}=0.25\ \mathrm{m}\), \(d_{\max}=0.6\ \mathrm{m}\).
-  \item Limitación de aceleración: \(a_{\max}=0.3\ \mathrm{m/s^2}\).
-\end{itemize}
-
-\subsubsection*{Evaluación experimental}
-Registrar para cada variante: tiempo a meta, distancia mínima a obstáculos, número de estancamientos y número de colisiones/rozamientos. Presentar resultados en tablas y gráficas comparativas y justificar la elección final (por ejemplo, Variante B con \(\alpha\) adaptativa suele ofrecer mejor compromiso entre seguridad y eficiencia).
-
-% Fin de la subsección
-
-
-
-
-
-En la Figura \ref{fig:t1.2} se observa que el robot se 
-ha agregado correctamente a la simulación.
-
-\begin{figure}[H]
-    \begin{center}
-    \includegraphics[scale=0.2, angle=0]{Images/tarea1/robot2.png}
-    \caption{\label{fig:t1.2} Robot \textit{Khepera IV} y objeto que representa el
-    punto de destino agregados a \textit{Coppelia Sim}.}
-    \end{center}
-\end{figure}
-
-\subsection*{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se
-debe este comportamiento?}
-\addcontentsline{toc}{subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se
-debe este comportamiento?}
-
-\subsection*{4. Abrir el script de programación del robot y observar los valores de las
-velocidades izquierda y derecha.}
-\addcontentsline{toc}{subsection}{4. Abrir el script de programación del robot y observar los valores de las
-velocidades izquierda y derecha.}
-
-El robot se mueve dibujando una trayectoria en arco de circunferencia. Haciendo doble click en el script por defecto del robot,
-Figura \ref{fig:t1.3}, se abre el script que se presenta en el Código \ref{cod:t1.3}. Este comportamiento
-se debe a las velocidades angulares ($w_L,\; w_R$) asignadas a cada motor: 3 rad/s al izquierdo y 5 rad/s al derecho,
-respectivamente. Por tanto, el motor izquierdo gira más lento que el derecho y el robot realiza una trayectoria
-en arco de circunferencia de radio $R = 0.176 \text{ metros}$, que se obtiene mediante la Ecuación (1) conociendo
-la distancia entre los centros de las ruedas (\textit{axle track}), $L = 0.088 \text{ metros}$ \cite{kheperaiv_manual_rev3}.
+\label{eq:braitenberg_sat}
+\end{equation} 
+
+Se han utilizado los vectores de ganancias expuestos en las Ecuaciones \ref{eq:ganancias},
+que implementan un control contralateral. El orden de los sensores es el siguiente:
+trasero izquierdo, izquierdo, frontal izquierdo, frontal, frontal derecho,
+derecho, trasero derecho, trasero. Presentan una estructura simétrica donde 
+los sensores frontales y laterales ejercen mayor influencia, 
+mientras que los sensores traseros tienen pesos muy reducidos. \\
+
+En el caso de la rueda izquierda (vector $GL$), los sensores situados en el
+semiplano derecho del robot —frontal derecho, derecho y trasero derecho— poseen
+ganancias negativas. Esto provoca que, ante la detección de un obstáculo en la 
+derecho, la rueda izquierda reduzca su velocidad, generando un giro hacia la izquierda 
+que aleja al robot del obstáculo. De forma análoga, en el vector $GR$ los sensores del
+semiplano izquierdo —frontal izquierda, izquierdo y trasero izquierdo— presentan
+ganancias negativas, induciendo un giro hacia la derecha cuando se detectan obstáculos
+en la izquierda. \\
+
+Los sensores frontales (índices 2, 3 y 4) tienen las ganancias de mayor magnitud,
+lo que refuerza la reacción ante obstáculos frontales en la trayectoria del robot. 
+En ambos casos se ha decidido anular la acción de los sensores traseros, puesto que 
+el robot se desplaza hacia adelante y así se evitan sobreimpulsos repulsivos.
 
 \begin{equation}
-R = \frac{L}{2} \cdot \frac{\omega_R + \omega_L}{\omega_R - \omega_L}
-\end{equation}
+\begin{aligned}
+GL: &[0.0,0.0,0.0,0.0,-0.05,-0.075,-0.1,-0.00125] \\
+GR: &[-0.00125,-0.1,-0.075,-0.05,0.0,0.0,0.0,0.0]
+\end{aligned}
+\label{eq:ganancias}
+\end{equation} 
+Las ganancias se han ajustado mediante ensayo y error \cite{braitenberg_video}. \\
+
+Finalmente, la cinemática diferencial del chasis convierte las velocidades
+de rueda en velocidad lineal \(V\) y velocidad angular \(\omega\) del robot mediante
+las Ecuaciones \ref{eq:3} y \ref{eq:22}. \\
+
+Las velocidades de chasis se publican como un mensaje \texttt{geometry\_msgs::msg::Twist} 
+con \(\text{linear.x}=V\) y \(\text{angular.z}=\omega\) a través del tópico \texttt{/cmd\_vel}. \\
+
+En la Figura \ref{fig:t2_rdo_traj} se presenta la trayectoria resultante sobre el escenario 
+propuesto durante el primer minuto de ejecución, donde se aprecia claramente que el 
+algoritmo implementado dota al robot de la capacidad de esquivar los obstáculos.
+En la Figura \ref{fig:t2_rdo_vels} se muestran las velocidades lineal y angular del robot
+durante la trayectoria anterior, donde se observa que cuando no hay obstáculos detectados
+el robot se desplaza a $0.1 m/s$ y sin velocidad angular. Estos resultados se han 
+obtenido con los parámetros del Código \ref{cod:t2.params_1}. \\
+
+Para ejecutar el controlador, una vez esté cargado el escenario en \textit{CoppeliaSim}
+y la simulación en ejecución, ejecutar el siguiente comando:
+\texttt{ros2 run tarea2 braitenberg\_puro --ros-args --params-file src/tarea2/config/params.yaml}. 
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{Images/tarea1/script.png}
-    \caption{\label{fig:t1.3} Script por defecto del robot.}
-\end{figure}
-
-\begin{comment}
-    \begin{figure}[H]
     \begin{center}
-    \includegraphics[scale=0.5, angle=0]{Images/tarea1/trayectoria_por_defecto.png}
-    \caption{\label{fig:t1.3_2} Trayectoria por defecto.}
+    \includegraphics[scale=0.7, angle=0]{Images/tarea2/braitenberg1/traj.png}
+    \caption{\label{fig:t2_rdo_traj} Trayectoria realizada por el robot con el primer controlador
+    \textit{Braitenberg}.}
     \end{center}
 \end{figure}
 
 \begin{figure}[H]
     \begin{center}
-    \includegraphics[scale=0.5, angle=0]{Images/tarea1/script.png}
-    \caption{\label{fig:t1.3} Script por defecto del robot.}
+    \includegraphics[scale=0.8, angle=0]{Images/tarea2/braitenberg1/v.png} \\
+    \includegraphics[scale=0.8, angle=0]{Images/tarea2/braitenberg1/w.png}
+    \caption{\label{fig:t2_rdo_vels} Velocidades lineal y angular del robot
+    durante la trayectoria del primer controlador \textit{Braitenberg}.}
     \end{center}
 \end{figure}
-\end{comment}
 
-%\lstinputlisting[style=luastyle, caption={Script por defecto del robot.}, label={cod:t1.3}]{Code/tarea1/script_por_defecto.lua}
+\clearpage
 
+%%%%%
+%%%%%
+%%%%%
 
-\subsection*{5. Agregar a la simulación un objeto que represente el punto de destino del
-robot.}
-\addcontentsline{toc}{subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del
-robot.}
-
-Se ha añadido una esfera con las propiedades descritas en la Figura \ref{fig:t1.5} y en la posición
-$(x,\; y,\; z) = (0.75,\; 1.0,\; 0.05)$, como se observa en la Figura \ref{fig:t1.2}.
+\subsubsection*{2.2 Controlador \textit{Braitenberg} con posición objetivo.}
+Este controlador sigue el esquema reactivo clásico de las Ecuaciones \ref{eq:braitenberg}. 
+Está diseñado para evitar obstáculos sin perseguir una meta explícita, esto es,
+que el robot esté en movimiento continuo sin colisionarse mediante la 
+esquivación eficaz de los objetos y las paredes. Por ello, 
+este sistema opera sobre el escenario de la Figura \ref{fig:t2.escenario1}, 
+que consta de un entorno cerrado por paredes y cuatro obstáculos repartidos 
+por el terreno.
 
 \begin{figure}[H]
     \begin{center}
-    \includegraphics[scale=0.5, angle=0]{Images/tarea1/esfera.png}
-    \caption{\label{fig:t1.5} Propiedades de la esfera añadida como punto de destino.}
+    \includegraphics[scale=0.3, angle=0]{Images/tarea2/escenario3.png}
+    \caption{\label{fig:t2.escenario1} Escenario para el primer controlador.}
     \end{center}
 \end{figure}
-
-
-\subsection*{6. Con las coordenadas del punto de destino y las del robot, calcular las
-velocidades angular y lineal para controlar su posición.}
-\addcontentsline{toc}{subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las
-velocidades angular y lineal para controlar su posición.}
-\subsection*{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como
-resultado del modelo diferencial. Sugerencia: se puede comenzar solamente
-controlando la velocidad angular del robot a través el ángulo orientación
-hacia el punto y manteniendo la velocidad lineal constante, por medio de un
-control proporcional (P) sencillo. (\textit{v}=cte, \textit{w}=$\boldsymbol{K_{p}}$*(error ángulo)).}
-\addcontentsline{toc}{subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como
-resultado del modelo diferencial.}
-\subsection*{8. Implementar una ley de control diferente a la proporcionada y comparar
-ambas usando los Índices de Comportamiento (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}).}
-\addcontentsline{toc}{subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar
-ambas usando los Índices de Comportamiento (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}).}
-
-Dado que la implementación propuesta se ha realizado mediante \textit{ROS2}, el primer paso es
-diseñar y definir el sistema de comunicación en \textit{CoppeliaSim}. Para ello, se definen 
-los siguiente requisitos:
-\begin{itemize}
-    \item Se necesita obtener la posición del punto objetivo. Este destino es fijo, 
-    por lo que con obtener su posición al comienzo del programa es suficiente.
-    \item Se necesita conocer la posición del robot en cada momento, ya que 
-    irá variando según las velocidades aplicadas.
-    \item Se necesita accionar el robot con diferentes velocidades en cada momento,
-    según el error calculado y la distancia restante.
-\end{itemize}
-
-En \textit{ROS2} se dispone de tres vías de comunicación distintas: tópicos,
-servicios y acciones. \\
-
-Un tópico es un canal de comunicación que permite el intercambio de mensajes
-de manera asíncrona, siguiendo el modelo publicador-suscriptor. Cada tópico está
-asociado a un tipo de mensaje específico. Los tópicos se utilizan, por ejemplo,
-para recibir información en tiempo real de los diferentes sensores del robot. \\
-
-Un servicio es un mecanismo de comunicación síncrona basado en el modelo cliente-servidor
-que permite que un cliente envíe una petición a un servidor. El servidor
-procesa la solicitud y devuelve una respuesta al cliente. Son útiles para
-operaciones puntuales que requieren una respuesta inmediata, como pedir el estado de
-un sensor o sacar una foto. La comunicación mediante servicios involucra un mensaje de
-petición y otro de respuesta. \\
-
-Una acción es una interfaz de comunicación asíncrona basada en tópicos y servicios
-diseñada para desempeñar operaciones largas y prolongadas en el tiempo que necesitan
-seguimiento. Para ejecutar una acción un cliente solicita a un servidor la
-ejecución, recibe retroalimentación periódica sobre el progreso a través de un tópico y
-tiene la opción de cancelar la tarea antes de que finalice. Son ideales para tareas como
-mover un robot a una posición determinada, donde es necesario monitorizar el avance y
-poder interrumpir la ejecución si es necesario. La comunicación de una acción involucra
-mensajes de objetivo, retroalimentación y resultado final. \\
-
-Consecuentemente, el diseño de la arquitectura planteado, Figura \ref{fig:arquitectura_esquema},
-es el siguiente:
-\begin{itemize}
-    \item Un tópico para publicar la posición del robot. El tópico se llama 
-    \texttt{/robot\_pose} y utiliza el tipo de mensaje estándar \texttt{geometry\_msgs/msg/Pose}.
-    Este mensaje se compone de dos campos: un objeto \textit{Point} (que se compone de 
-    tres números; x, y, z; en formato \texttt{float64}) y un objeto 
-    \textit{Quaternion} (que se compone de 
-    cuatro números; x, y, z, w; en formato \texttt{float64}). Su documentación 
-    está accesible en el siguiente enlace:
-    \url{https://docs.ros.org/en/jazzy/p/geometry_msgs/__message_definitions.html}.
-
-    En \textit{CoppeliaSim}, el robot tiene un script \textit{Lua} llamado \texttt{publisher\_robotPose}
-    que ejerce de publicador de la posición, Código \ref{cod:t1_pubRobotPose}, mientras 
-    que el nodo o programa \textit{ROS2} 
-    \texttt{khepera\_controller}, externo a \textit{CoppeliaSim}, Código \ref{cod:t1_controller},
-    se suscribe al tópico.
-
-    \item Un tópico para recibir los comandos de velocidad lineal y angular 
-    del robot. El tópico se llama 
-    \texttt{/cmd\_vel} y utiliza el tipo de mensaje estándar \texttt{geometry\_msgs/msg/Twist}.
-    Este mensaje se compone de dos objetos \textit{Vector3}: \textit{linear} y \textit{angular}. 
-    Ambos objetos se componen de tres campos cada uno; x, y, z; y representan la velocidad 
-    lineal o angular a aplicar en cada uno de los ejes. Su documentación 
-    también está accesible en el enlace anterior.
-
-    En \textit{CoppeliaSim}, el robot tiene un script \textit{Lua} llamado \texttt{subscriber\_cmdVel}
-    que ejerce de suscriptor de la velocidad, Código \ref{cod:t1_subsCmdVel}, mientras que el nodo o programa 
-    \textit{ROS2} \texttt{khepera\_controller}, externo a \textit{CoppeliaSim}, Código \ref{cod:t1_controller},
-    publica en el tópico la velocidad deseada para comandar la velocidad al robot.
-
-    Es importante destacar que el suscriptor implementado en \textit{CoppeliaSim}
-    transforma las velocidades lineales y angulares del robot comandadas en el tópico 
-    \texttt{/cmd\_vel} en las velocidades individuales que debe ejecutar cada una 
-    de las ruedas del robot diferencial. La relación entre la velocidad 
-    lineal \(v\) y la velocidad angular \(\omega\) del chasis con respecto a las 
-    velocidades angulares de las ruedas izquierda, \(\omega_L\), y derecha, \(\omega_R\)
-    viene dada por el modelo cinemático, Ecuaciones 2 en caso de utilizar velocidades
-    angulares en cada rueda, o Ecuaciones 3 en caso de utilizar velocidades lineales,
-    \(v_L\) y \(v_R\), en cada rueda, donde \(r\) es el radio de las ruedas y
-    \(L\) es la distancia entre ruedas. En este caso, se utilizan las Ecuaciones 2 porque
-    el robot en uso controla los motores mediante velocidades angulares.
-
-    \begin{equation}
-        v = \frac{r}{2}(\omega_R + \omega_L)
-        \qquad
-        \omega = \frac{r}{L}(\omega_R - \omega_L)
-    \end{equation}
-
-    \begin{equation}
-        v = \frac{v_L + v_R}{2}
-        \qquad
-        \omega = \frac{v_R - v_L}{L/2}
-    \end{equation}
-
-    Finalmente, despejando las velocidades angulares de cada rueda se obtiene la expresión
-    necesaria para calcularlas, Ecuaciones 4.
-    \begin{equation}
-        \omega_L = \frac{v - \omega \frac{L}{2}}{r}
-        \qquad
-        \omega_R = \frac{v + \omega \frac{L}{2}}{r}
-    \end{equation}
-
-
-    \item Un servicio para solicitar la posición del objeto que representa 
-    el punto de destino en la trayectoria. El servicio se llama 
-    \texttt{/get\_target\_pose} y utiliza el tipo estándar 
-    \texttt{std\_srvs/srv/Trigger}. Este tipo de servicio no recibe parámetros 
-    de entrada y devuelve una respuesta compuesta por dos campos: 
-    \texttt{success} (booleano) y \texttt{message} (cadena de texto). Su documentación 
-    está accesible en el siguiente enlace:
-    \url{https://docs.ros.org/en/jazzy/p/std_srvs/index.html}.
-
-    En \textit{CoppeliaSim}, la esfera que representa el punto de destino 
-    dispone de un script \textit{Lua} llamado 
-    \texttt{serviceServer\_pose} que implementa el servidor del servicio, 
-    Código \ref{cod:t1_serviceTargetPose}. Cuando el servicio es invocado desde 
-    el nodo \textit{ROS2} externo \texttt{khepera\_controller}, el servidor obtiene la posición y
-    orientación del objeto. A continuación, empaqueta esta información en formato
-    JSON dentro del campo \texttt{message} de la respuesta del servicio.
-
-    Por su parte, el nodo ROS2 \texttt{khepera\_controller}, 
-    Código \ref{cod:t1_controller}, realiza la llamada al servicio 
-    \texttt{/get\_target\_pose} cada vez que necesita conocer la pose del punto 
-    de destino para actualizar la ley de control o generar la trayectoria 
-    correspondiente.
-
-    \item Una acción para solicitar la ejecución de una trayectoria hacia un punto 
-    de destino. La acción se llama \texttt{/execute\_trajectory} y utiliza el tipo 
-    personalizado \texttt{interfaces/action/ExecuteTrajectory}, Código \ref{cod:ExecuteTraj}. 
-    Esta acción está compuesta 
-    por tres estructuras: \textit{Goal}, \textit{Feedback} y \textit{Result}. Su 
-    documentación está accesible en el siguiente enlace:
-    \url{https://design.ros2.org/articles/actions.html}.
-
-    La estructura \textit{Goal} de esta acción contiene un campo de tipo \texttt{geometry\_msgs/msg/Pose}.
-    Si se le indica una posición, el robot inicia la trayectoria a esa posición. Si no se le indica,
-    obtiene la posición de destino mediante el servicio \texttt{/get\_target\_pose}, 
-    solicitando de forma asíncrona la posición del punto de destino al servidor del servicio, evitando 
-    bloqueos en el \textit{callback} de la acción. Como el movimiento se desarrolla 
-    en los ejes X e Y, no se tiene en cuenta el valor de Z (poner 0.0 por defecto).
-
-    La estructura \textit{Feedback} contiene información relevante sobre la evolución 
-    de la trayectoria en tiempo real. En concreto, incluye:
-    \begin{itemize}
-        \item \texttt{distance}: distancia actual del robot al objetivo.
-        \item \texttt{e\_theta}: error angular entre la orientación del robot y la 
-        dirección hacia el objetivo.
-        \item \texttt{v}: velocidad lineal que el controlador está aplicando.
-        \item \texttt{w}: velocidad angular aplicada.
-        \item \texttt{time\_elapsed}: tiempo transcurrido desde el inicio de la acción.
-    \end{itemize}
-
-    Esta información se publica periódicamente mientras el robot avanza hacia el 
-    objetivo, permitiendo monitorizar la evolución del control en tiempo real.
-
-    La estructura \textit{Result} contiene dos campos:
-    \begin{itemize}
-        \item \texttt{success}: booleano que indica si el robot ha alcanzado el 
-        objetivo.
-        \item \texttt{message}: cadena de texto con información adicional sobre el 
-        resultado de la acción.
-    \end{itemize}
-
-    El nodo \textit{ROS2} externo \texttt{khepera\_controller}, 
-    Código \ref{cod:t1_controller}, implementa el servidor de la acción. Cuando un 
-    cliente envía una petición a \texttt{/execute\_trajectory}, el servidor:
-    \begin{enumerate}
-        \item Acepta la meta.
-        \item Solicita de forma asíncrona la posición del objetivo mediante el 
-        servicio \texttt{/get\_target\_pose}.
-        \item Una vez recibida la posición, inicia el bucle de control periódico.
-        \item Publica \textit{feedback} en cada iteración.
-        \item Finaliza la acción cuando el robot alcanza el objetivo o si se produce 
-        una cancelación.
-    \end{enumerate}
-
-    Para realizar la solicitud de la acción desde terminal, 
-    ejecutar el Código \ref{cod:actionClient}. En dicho código 
-    aparece tanto la llamada indicando una posición como sin indicarla, en 
-    la que es suficiente con establecer el valor de cualquiera de los campos 
-    a ``nan'' para que obtenga mediante el servicio la posición del objeto como punto de destino.
-
-    \item Un nodo \textit{ROS2} encargado de implementar la lógica de control del robot y 
-coordinar los distintos mecanismos descritos anteriormente. Este nodo, llamado 
-\texttt{khepera\_controller}, Código \ref{cod:t1_controller}, actúa como elemento central del sistema, ya que:
-
-\begin{itemize}
-    \item se suscribe al tópico \texttt{/robot\_pose} para recibir la pose del robot,
-    \item publica comandos de velocidad en el tópico \texttt{/cmd\_vel},
-    \item invoca el servicio \texttt{/get\_target\_pose} para obtener la posición del objetivo,
-    \item y expone la acción \texttt{/execute\_trajectory} para permitir que un cliente
-    solicite la ejecución de una trayectoria hacia dicho objetivo.
-\end{itemize}
-
-El nodo implementa un servidor de la acción \texttt{ExecuteTrajectory}. Cuando un 
-cliente envía una petición, el nodo acepta la meta y solicita de forma asíncrona 
-la posición del objetivo mediante el servicio \texttt{/get\_target\_pose}. Este 
-diseño evita bloquear el \textit{callback} de la acción y permite que el nodo 
-continúe procesando otros eventos mientras espera la respuesta del servicio.
-
-Una vez recibida la posición del objetivo, el nodo activa un bucle de control 
-hasta alcanzar el objetivo. En cada iteración del bucle:
-
-\begin{enumerate}
-    \item Se obtiene la pose actual del robot a partir del último mensaje recibido 
-    en el tópico \texttt{/robot\_pose}.
-    \item Se calcula el error de posición y orientación respecto al objetivo.
-    \item Se aplica la ley de control seleccionada, generando las velocidades lineal \(v\) y angular \(\omega\).
-    \item Se publican dichas velocidades en el tópico \texttt{/cmd\_vel}.
-    \item Se envía al cliente de la acción un mensaje de \textit{feedback} con 
-    información sobre la evolución de la trayectoria: distancia al objetivo, 
-    error angular, velocidades aplicadas y tiempo transcurrido.
-\end{enumerate}
-
-El nodo considera que el objetivo ha sido alcanzado cuando la distancia al punto 
-de destino es inferior a un umbral predefinido (por ejemplo, 5 centímetros). 
-
-Además, este nodo incorpora un módulo específico para la 
-evaluación cuantitativa del rendimiento del controlador. Este módulo, implementado 
-en la clase \texttt{MetricsLogger}, Códigos \ref{cod:metricHpp} y \ref{cod:metricCpp}, registra en cada iteración del bucle de control 
-tanto las variables relevantes del estado del robot (posición, orientación, 
-distancia al objetivo y errores de control) como las velocidades lineal y angular 
-aplicadas. A partir de estos datos, el sistema calcula varias métricas clásicas de 
-evaluación de control, tales como el \textit{Integral of Absolute Error} (\textit{IAE}), 
-el \textit{Integral of Squared Error} (\textit{ISE}), el \textit{Integral of Time-weighted 
-Absolute Error} (\textit{ITAE}) y el \textit{Integral of Time-weighted Squared Error} (\textit{ITSE}). 
-Estas métricas permiten analizar la calidad de la trayectoria ejecutada y comparar 
-el comportamiento de distintos parámetros o estrategias de control.
-
-Al finalizar la acción, el nodo almacena toda esa información en un fichero \textit{CSV}, 
-incluyendo una fila por cada instante de tiempo con las variables medidas y 
-calculadas, seguida de un bloque final con los valores agregados de las métricas 
-y los parámetros del controlador utilizados (\texttt{kp}, \texttt{vmax}, 
-\texttt{wmax} y el tipo de controlador seleccionado).
-
-Por último, mencionar que para facilitar la depuración y modularidad del código,
-en lugar de implementar todas las responsabilidades en el propio \texttt{khepera\_controller},
-se han definido tanto las cabeceras como las funciones en distintos módulos.
-
-El módulo \texttt{service\_utils.hpp/.cpp} contiene las funciones auxiliares 
-para realizar la llamada asíncrona al servicio \texttt{/get\_target\_pose}, 
-Códigos \ref{cod:serviceHpp} y \ref{cod:serviceCpp}, el módulo \texttt{pose\_utils.hpp} proporciona utilidades para 
-extraer y manipular la pose del robot (posición y orientación) a partir de los 
-mensajes recibidos, Código \ref{cod:poseHpp}, y el módulo \texttt{metrics\_utils.hpp/.cpp} 
-implementa el sistema de evaluación y registro de métricas, Códigos \ref{cod:metricHpp}
-y \ref{cod:metricCpp}. 
-    
-\end{itemize}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.25]{Images/tarea1/arquitectura.png}
-    \caption{\label{fig:arquitectura_esquema} Esquema de la arquitectura propuesta.}
-\end{figure}
-
-\subsubsection*{Controladores implementados}
-
-En esta práctica se implementan y comparan dos controladores cinemáticos para un 
-robot diferencial basados en el concepto de \textit{Instantaneous Center of Curvature} (ICC). 
-El primero es un controlador proporcional reactivo (control-P) hacia un objetivo, 
-mientras que el segundo es un controlador geométrico basado en curvatura, equivalente 
-al enfoque \textit{Pure Pursuit} puntual. Ambos enfoques están ampliamente descritos 
-en la literatura clásica de control de robots móviles \cite{choset2005, siegwart2011, siciliano2009}.
-
-\subsubsection*{Geometría del problema}
-Sea la posición del robot $(x_r, y_r)$ y la del objetivo $(x_t, y_t)$, se define:
-\begin{equation}
-    d = \sqrt{(x_t - x_r)^2 + (y_t - y_r)^2}
-\end{equation}
-
-\begin{equation}
-    \theta_d = \operatorname{atan2}(y_t - y_r,\; x_t - x_r)
-\end{equation}
-
-\begin{equation}
-    e_\theta = \theta_d - \theta_r
-\end{equation}
-
-donde $d$ es la distancia al objetivo, $e_\theta$ el error de orientación del robot
-respecto del objetivo,
-$\theta_d$ el ángulo absoluto definido en el marco global de la orientación de la línea recta
-que une la posición del robot con la del objetivo y $\theta_r$ la orientación actual del robot. 
-De este modo, $\theta_d$ indica la dirección hacia la que 
-debería orientarse el robot para apuntar directamente al objetivo, mientras que 
-el error angular $e_\theta = \theta_d - \theta_r$ mide la diferencia entre dicha 
-orientación deseada y la orientación actual del robot. Esta formulación es 
-estándar en control cinemático de robots diferenciales 
-\cite{otero2005, morin2016}. \\
-
-En la Figura \ref{fig:t1_esquemaRobot} se presenta el esquema de un robot
-móvil diferencial con ruedas.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.33]{Images/tarea1/esquema_robot.png}
-    \caption{\label{fig:t1_esquemaRobot} Esquema de un robot móvil diferencial con ruedas \cite{FARIAS20179150}.}
-\end{figure}
-
-
-\subsubsection*{1. Controlador proporcional reactivo}
-El controlador reactivo utiliza una ley proporcional para la velocidad lineal,
-\begin{equation}
-    v = K_p \cdot d\;,
-\end{equation}
-
-saturada por la velocidad máxima del robot:
-\begin{equation}
-    v = \min(v,\; v_{\max})\;.
-\end{equation}
-
-La velocidad angular se calcula como:
-\begin{equation}
-    \omega = \omega_{\max} \cdot \sin(e_\theta)
-\end{equation}
-
-Este tipo de controlador proporcional basado en errores de pose es ampliamente 
-utilizado en robots uniciclo y se describe en \cite{choset2005, siegwart2011}.
-
-\subsubsection*{2. Controlador geométrico basado en curvatura o \textit{Pure Pursuit} puntual}
-El controlador geométrico impone que el robot siga un arco de circunferencia que 
-conecta su pose actual con el objetivo. El radio del arco viene dado por:
-\begin{equation}
-    R = \frac{d}{2 \sin(e_\theta)}
-\end{equation}
-
-La velocidad angular se obtiene mediante la relación cinemática:
-\begin{equation}
-    \omega = \frac{v}{R}
-\end{equation}
-
-%Y la velocidad lineal calculada es proporcional a la velocidad
-%lineal de referencia, que en este caso la referencia es la velocidad máxima:
-%\begin{equation}
-%    v = K_p \cdot v_{max}\;,
-%\end{equation}
-
-Este enfoque corresponde a la formulación puntual del algoritmo \textit{Pure Pursuit}, 
-descrito originalmente en \cite{coulter1992} y ampliamente analizado en 
-\cite{otero2005, morin2016, corke2017}. A diferencia del controlador reactivo, la forma de la 
-trayectoria depende únicamente de la geometría del problema.
-
-\subsubsection*{Evaluación}
-Para comparar ambos controladores se han ejecutado trayectorias
-desde la posición inicial del robot, ($x = 0.27887, \; y = 0.525$), 
-hasta la posición de destino, ($x = 0.75, \; y = 1.0$), estableciendo
-la velocidad máxima del robot a $1 m/s$, \cite{kheperaiv_manual_rev3} y realizando un 
-barrido del valor de $K_p$, comenzando en $0.1$ y aumentando 
-en $0.05$ hasta $0.6$, ya que con una ganancia superior la aceleración del robot 
-es excesiva y provoca el volcado del mismo. El control de la aceleración queda 
-fuera del alcance de esta tarea.\\ 
-
-La evaluación de los controladores se basa en el cálculo y 
-comparación de las siguientes métricas estándar en control:
-
-\begin{itemize}
-    \item \textbf{Integral del Error Absoluto (\textit{IAE})}: mide el error acumulado a lo largo del tiempo, 
-    proporcionando una valoración global del desempeño sin penalizar en exceso los errores grandes. 
-    Es adecuada cuando se desea evaluar el comportamiento medio del sistema o cuando los errores 
-    puntuales no son críticos.
-    \begin{equation}
-        \mathrm{\textit{IAE}} = \int_0^T |e(t)| \, dt
-    \end{equation}
-
-    \item \textbf{Integral del Error Cuadrático (\textit{ISE})}: penaliza de forma más severa los errores grandes, 
-    siendo útil para evaluar controladores que deben minimizar desviaciones significativas o evitar 
-    comportamientos agresivos. Es apropiada cuando los errores grandes son especialmente indeseables.
-    \begin{equation}
-        \mathrm{\textit{ISE}} = \int_0^T e(t)^2 \, dt
-    \end{equation}
-
-    \item \textbf{Integral del Error Absoluto Ponderado por el Tiempo (\textit{ITAE})}: penaliza especialmente 
-    los errores que persisten en el tiempo, favoreciendo respuestas rápidas y con menor cola temporal. 
-    Se utiliza cuando el objetivo es minimizar el tiempo de asentamiento y mejorar la rapidez de convergencia.
-    \begin{equation}
-        \mathrm{\textit{ITAE}} = \int_0^T t \, |e(t)| \, dt
-    \end{equation}
-
-    \item \textbf{Integral del Error Cuadrático Ponderado por el Tiempo (\textit{ITSE})}: combina la penalización 
-    de errores grandes con la penalización de errores tardíos, siendo útil para evaluar estabilidad y 
-    convergencia en sistemas no lineales. Es adecuada cuando interesa evitar tanto errores grandes como 
-    oscilaciones prolongadas.
-    \begin{equation}
-        \mathrm{\textit{ITSE}} = \int_0^T t \, e(t)^2 \, dt
-    \end{equation}
-
-\end{itemize}
-
-
-En la práctica, estas métricas deben implementarse de manera discreta,
-por lo que dado el periodo de muestreo $\Delta t$, las métricas se aproximan mediante sumas:
-\begin{equation}
-    \mathrm{\textit{IAE}} \approx \sum_{k=0}^{N} |e_k| \, \Delta t
-\end{equation}
-
-\begin{equation}
-    \mathrm{\textit{ISE}} \approx \sum_{k=0}^{N} e_k^2 \, \Delta t
-\end{equation}
-
-\begin{equation}
-    \mathrm{\textit{ITAE}} \approx \sum_{k=0}^{N} t_k \, |e_k| \, \Delta t
-\end{equation}
-
-\begin{equation}
-    \mathrm{\textit{ITSE}} \approx \sum_{k=0}^{N} t_k \, e_k^2 \, \Delta t
-\end{equation}
-
-Estas métricas permiten comparar objetivamente el rendimiento de ambos controladores 
-bajo diferentes valores de $K_p$.
-
-\subsubsection*{Registro de datos}
-En cada iteración del controlador se almacena el tiempo $t$,
-la pose del robot $(x_r, y_r, \theta_r)$, la pose del objetivo $(x_t, y_t)$,
-error de distancia $d$, error de orientación $e_\theta$ y velocidades $v$ y $\omega$. \\
-
-Al finalizar la acción, el sistema añade al fichero \textit{CSV} las métricas globales 
-calculadas (\textit{IAE}, \textit{ISE}, \textit{ITAE}, \textit{ITSE}) y los parámetros utilizados ($K_p$, $v_{\max}$, 
-$\omega_{\max}$ y tipo de controlador). Este registro permite realizar comparativas 
-rigurosas mediante tablas y gráficas.
-
-\subsubsection*{Resultados}
-En las Figuras \ref{fig:rdo_0_0.1} a \ref{fig:rdo_0_0.6} se presentan las gráficas que dibujan 
-las distintas señales medidas durante la ejecución de la trayectoria del primer 
-controlador. \\
-
-En las Figuras \ref{fig:rdo_1_0.1} a \ref{fig:rdo_1_0.6} se presentan las gráficas que dibujan 
-las distintas señales medidas durante la ejecución de la trayectoria del segundo 
-controlador. \\
-
-En la Tabla \ref{tab:controladores_desempeno} se muestran las cuatro métricas de 
-evaluación calculadas para cada controlador y cada configuración, donde se ha 
-coloreado en amarillo los valores más bajos obtenidos para cada métrica. \\
-
-Estos resultados evidencian que el controlador proporcional reactivo mantiene
-un desempeño consistente a lo largo de distintos valores de $K_p$, con reducciones
-progresivas en todas las métricas al aumentar la ganancia, por lo que disminuyen
-tanto los errores acumulados como los errores tardíos y los picos de error, 
-reflejando un comportamiento estable y uniforme. \\
-
-El controlador geométrico basado en curvatura, por su parte, presenta
-inicialmente valores de error mayores, especialmente en \textit{IAE} e \textit{ITAE}, lo
-que refleja errores acumulados y tardíos superiores para valores bajos de 
-$K_p$. Sin embargo, a medida que la ganancia aumenta, la reducción de todas 
-las métricas es más pronunciada que en el controlador proporcional. 
-Esta mayor pendiente de mejora indica que, aunque al principio su desempeño es inferior,
-el controlador geométrico alcanza rápidamente un rendimiento superior. De hecho, para
-$K_p = 0.5$, logra los menores valores en todas las métricas, lo que demuestra que 
-minimiza eficazmente todos los errores, superando al controlador proporcional reactivo
-en precisión y rapidez de convergencia. \\
-
-\subsubsection*{Conclusiones}
-La comparación evidencia que el controlador proporcional reactivo es más estable
-y uniforme a lo largo de los valores de la ganancia $K_p$, mientras que el controlador
-geométrico tiene un desempeño más sensible a la ganancia, pero capaz de superar al
-reactivo cuando la ganancia alcanza valores óptimos.
-Esta situación resalta la importancia de ajustar correctamente las ganancias 
-para aprovechar la mayor capacidad de seguimiento del controlador geométrico, 
-especialmente cuando se busca minimizar errores tardíos y grandes y maximizar la
-precisión global en la trayectoria.
-
-\begin{comment}
-   \begin{table}[]
-\begin{tabular}{|cc|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\textbf{}}                                                                             & \textbf{0.1} & \textbf{0.15} & \textbf{0.2} & \textbf{0.25} & \textbf{0.3} & \textbf{0.35} & \textbf{0.4} & \textbf{0.45} & \textbf{0.5}                 & \textbf{0.55} & \textbf{0.6} \\ \hline
-\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{IAE}}  & 2.83         & 1.91          & 1.46         & 1.18          & 1.03         & 0.92          & 0.81         & 0.74          & 0.76                         & 0.86          & 0.85         \\ \cline{2-13} 
-\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ISE}}  & 1.05         & 0.73          & 0.56         & 0.46          & 0.42         & 0.38          & 0.33         & 0.31          & 0.33                         & 0.39          & 0.43         \\ \cline{2-13} 
-\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ITAE}} & 9.99         & 4.47          & 2.58         & 1.66          & 1.21         & 0.97          & 0.74         & 0.61          & 0.63                         & 0.75          & 0.66         \\ \cline{2-13} 
-\multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{Controlador proporcional reactivo}}}          & \textbf{\textit{ITSE}} & 2.29         & 1.06          & 0.61         & 0.41          & 0.31         & 0.25          & 0.19         & 0.17          & 0.18                         & 0.24          & 0.24         \\ \hline
-\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{IAE}}  & 3.16         & 2.16          & 1.64         & 1.28          & 1.05         & 0.95          & 0.76         & 0.77          & \cellcolor[HTML]{FFFE65}0.7  & 0.75          & 0.88         \\ \cline{2-13} 
-\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ISE}}  & 1.21         & 0.83          & 0.64         & 0.51          & 0.42         & 0.38          & 0.31         & 0.32          & \cellcolor[HTML]{FFFE65}0.3  & 0.34          & 0.45         \\ \cline{2-13} 
-\multicolumn{1}{|c|}{}                                                                      & \textbf{\textit{ITAE}} & 11.94        & 5.57          & 3.17         & 1.92          & 1.29         & 1.03          & 0.67         & 0.67          & \cellcolor[HTML]{FFFE65}0.55 & 0.59          & 0.7          \\ \cline{2-13} 
-\multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{Controlador geométrico basado en curvatura}}} & \textbf{\textit{ITSE}} & 2.9          & 1.36          & 0.79         & 0.48          & 0.33         & 0.27          & 0.17         & 0.18          & \cellcolor[HTML]{FFFE65}0.15 & 0.18          & 0.26         \\ \hline
-\end{tabular}
-\end{table} 
-\end{comment}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|cc|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\textbf{}} & \textbf{0.1} & \textbf{0.15} & \textbf{0.2} & \textbf{0.25} & \textbf{0.3} & \textbf{0.35} & \textbf{0.4} & \textbf{0.45} & \textbf{0.5} & \textbf{0.55} & \textbf{0.6} \\ \hline
-
-% Controlador proporcional reactivo
-\multicolumn{1}{|c|}{} & \textbf{\textit{IAE}}  & 2.83 & 1.91 & 1.46 & 1.18 & 1.03 & 0.92 & 0.81 & 0.74 & 0.76 & 0.86 & 0.85 \\ \cline{2-13} 
-\multicolumn{1}{|c|}{} & \textbf{\textit{ISE}}  & 1.05 & 0.73 & 0.56 & 0.46 & 0.42 & 0.38 & 0.33 & 0.31 & 0.33 & 0.39 & 0.43 \\ \cline{2-13} 
-\multicolumn{1}{|c|}{} & \textbf{\textit{ITAE}} & 9.99 & 4.47 & 2.58 & 1.66 & 1.21 & 0.97 & 0.74 & 0.61 & 0.63 & 0.75 & 0.66 \\ \cline{2-13} 
-\multicolumn{1}{|c|}{\multirow{-4}{*}{\shortstack{\textbf{Cont. prop.}\\\textbf{reactivo}}}} & \textbf{\textit{ITSE}} & 2.29 & 1.06 & 0.61 & 0.41 & 0.31 & 0.25 & 0.19 & 0.17 & 0.18 & 0.24 & 0.24 \\ \hline
-
-% Controlador geométrico basado en curvatura
-\multicolumn{1}{|c|}{} & \textbf{\textit{IAE}}  & 3.16 & 2.16 & 1.64 & 1.28 & 1.05 & 0.95 & 0.76 & 0.77 & \cellcolor[HTML]{FFFE65}0.7  & 0.75 & 0.88 \\ \cline{2-13} 
-\multicolumn{1}{|c|}{} & \textbf{\textit{ISE}}  & 1.21 & 0.83 & 0.64 & 0.51 & 0.42 & 0.38 & 0.31 & 0.32 & \cellcolor[HTML]{FFFE65}0.3  & 0.34 & 0.45 \\ \cline{2-13} 
-\multicolumn{1}{|c|}{} & \textbf{\textit{ITAE}} & 11.94 & 5.57 & 3.17 & 1.92 & 1.29 & 1.03 & 0.67 & 0.67 & \cellcolor[HTML]{FFFE65}0.55 & 0.59 & 0.7 \\ \cline{2-13} 
-\multicolumn{1}{|c|}{\multirow{-4}{*}{\shortstack{\textbf{Cont. geom.}\\\textbf{}}}} & \textbf{\textit{ITSE}} & 2.9 & 1.36 & 0.79 & 0.48 & 0.33 & 0.27 & 0.17 & 0.18 & \cellcolor[HTML]{FFFE65}0.15 & 0.18 & 0.26 \\ \hline
-\end{tabular}
-\caption{Evaluación de los controladores con las cuatro métricas propuestas para 
-distintos valores de $K_p$.}
-\label{tab:controladores_desempeno}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.1_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.1_tiempo.png}
-\caption{\label{fig:rdo_0_0.1} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.1$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.15_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.15_tiempo.png}
-\caption{\label{fig:rdo_0_0.15} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.15$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.2_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.2_tiempo.png}
-\caption{\label{fig:rdo_0_0.2} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.2$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.25_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.25_tiempo.png}
-\caption{\label{fig:rdo_0_0.25} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.25$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.3_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.3_tiempo.png}
-\caption{\label{fig:rdo_0_0.3} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.3$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.35_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.35_tiempo.png}
-\caption{\label{fig:rdo_0_0.35} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.35$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.4_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.4_tiempo.png}
-\caption{\label{fig:rdo_0_0.4} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.4$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.45_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.45_tiempo.png}
-\caption{\label{fig:rdo_0_0.45} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.45$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.5_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.5_tiempo.png}
-\caption{\label{fig:rdo_0_0.5} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.5$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.55_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.55_tiempo.png}
-\caption{\label{fig:rdo_0_0.55} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.55$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.6_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_reactivo_Kv0.6_tiempo.png}
-\caption{\label{fig:rdo_0_0.6} Trayectoria y señales de velocidades y error con 
-el controlador reactivo y $K_p = 0.6$.}
-\end{figure}
-
-% --
-% --
-% --
-% --
-% --
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.1_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.1_tiempo.png}
-\caption{\label{fig:rdo_1_0.1} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.1$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.15_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.15_tiempo.png}
-\caption{\label{fig:rdo_1_0.15} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.15$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.2_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.2_tiempo.png}
-\caption{\label{fig:rdo_1_0.2} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.2$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.25_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.25_tiempo.png}
-\caption{\label{fig:rdo_1_0.25} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.25$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.3_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.3_tiempo.png}
-\caption{\label{fig:rdo_1_0.3} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.3$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.35_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.35_tiempo.png}
-\caption{\label{fig:rdo_1_0.35} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.35$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.4_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.4_tiempo.png}
-\caption{\label{fig:rdo_1_0.4} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.4$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.45_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.45_tiempo.png}
-\caption{\label{fig:rdo_1_0.45} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.45$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.5_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.5_tiempo.png}
-\caption{\label{fig:rdo_1_0.5} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.5$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.55_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.55_tiempo.png}
-\caption{\label{fig:rdo_1_0.55} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.55$.}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.6_trayectoria.png}
-\includegraphics[scale=0.42]{Images/tarea1/graf/icc_geometrico_Kv0.6_tiempo.png}
-\caption{\label{fig:rdo_1_0.6} Trayectoria y señales de velocidades y error con 
-el controlador geométrico y $K_p = 0.6$.}
-\end{figure}
-
-\begin{comment}
-    Figura \ref{fig:t1.3_2}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.33]{Images/tarea1/traj1.png}
-\includegraphics[scale=0.33]{Images/tarea1/traj2.png}
-\includegraphics[scale=0.33]{Images/tarea1/traj3.png}
-\includegraphics[scale=0.33]{Images/tarea1/traj4.png}
-\caption{\label{fig:t1.3_2} Trayectoria por defecto.}
-\end{figure}
-\end{comment}

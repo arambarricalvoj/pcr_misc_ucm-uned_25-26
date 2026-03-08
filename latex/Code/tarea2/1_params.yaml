@@ -1,0 +1,13 @@
+braitenberg_controller:
+  ros__parameters:
+    wheel_radius: 0.021
+    wheel_base: 0.088
+    v0: 0.1
+    vmin: 0.0
+    vmax: 0.2
+    max_detection_dist: 0.15
+    max_range_default: 0.25
+    control_hz: 20.0
+    save_after_seconds: 60.0
+    GL: [0.0,0.0,0.0,0.0,-0.05,-0.075,-0.1,-0.00125]
+    GR: [-0.00125,-0.1,-0.075,-0.05,0.0,0.0,0.0,0.0]
