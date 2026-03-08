@@ -72,8 +72,8 @@ private:
     double d_safe_ = 0.0;
 
     // limitación de aceleración (parámetros y estado)
-    //double max_accel_linear_  = 0.5; // m/s^2
-    //double max_accel_angular_ = 1.0; // rad/s^2
+    double max_accel_linear_  = 0.5; // m/s^2
+    double max_accel_angular_ = 1.0; // rad/s^2
     //double prev_v_ = 0.0;
     //double prev_w_ = 0.0;
 

@@ -54,8 +54,8 @@ BraitenbergController::BraitenbergController()
     max_range_default_  = this->get_parameter("max_range_default").as_double();
     control_hz_ = this->get_parameter("control_hz").as_double();
 
-    auto Lvec = this->get_parameter("braitenbergL").as_double_array();
-    auto Rvec = this->get_parameter("braitenbergR").as_double_array();
+    auto Lvec = this->get_parameter("GL").as_double_array();
+    auto Rvec = this->get_parameter("GR").as_double_array();
 
     d_safe_ = this->get_parameter("d_safe").as_double();
 

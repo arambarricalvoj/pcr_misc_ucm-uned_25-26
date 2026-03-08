@@ -23,6 +23,8 @@ add_library(tarea2_lib
     src/tang.cpp
     src/campo_vectorial.cpp
     src/braitenberg_puro.cpp
+    src/controllers.cpp
+    src/braitenberg_repulsion.cpp
 )
 
 ament_target_dependencies(tarea2_lib

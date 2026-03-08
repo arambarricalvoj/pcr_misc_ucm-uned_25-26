@@ -1,27 +1,31 @@
 #pragma once
 
 #include <array>
+#include <vector>
+#include <memory>
+#include <string>
+#include <limits>
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
 
 #include "std_srvs/srv/trigger.hpp"
+#include "sensor_msgs/msg/range.hpp"
 #include "geometry_msgs/msg/pose.hpp"
 #include "geometry_msgs/msg/twist.hpp"
-#include "sensor_msgs/msg/range.hpp"   // ← NUEVO
 
 #include "tarea2/metrics_utils.hpp"
+#include "tarea2/braitenberg_repulsion.hpp"
+#include "tarea2/controllers.hpp"
 #include "interfaces/action/execute_trajectory.hpp"
 
-#include "tarea2/braitenberg.hpp"      // ← NUEVO (tu módulo puro)
-
-class ICCController : public rclcpp::Node
+class BraitenbergTargetController : public rclcpp::Node
 {
 public:
     using ExecuteTrajectory = interfaces::action::ExecuteTrajectory;
     using GoalHandleExecuteTrajectory = rclcpp_action::ServerGoalHandle<ExecuteTrajectory>;
 
-    ICCController();
+    BraitenbergTargetController();
 
 private:
     // -------------------------
@@ -46,8 +50,15 @@ private:
     // -------------------------
     // ROS CALLBACKS
     // -------------------------
+    void irCallback(size_t idx, sensor_msgs::msg::Range::SharedPtr msg);
     void robotPoseCallback(const geometry_msgs::msg::Pose::SharedPtr msg);
     void controlLoop();
+
+    // -------------------------
+    // UTIL
+    // -------------------------
+    std::unique_ptr<BraitenbergRepulsion> repulsion_;
+    std::unique_ptr<BaseController> controller_;
 
     // -------------------------
     // ESTADO INTERNO
@@ -55,6 +66,10 @@ private:
     double xt_, yt_;
     bool target_received_ = false;
     bool pose_received_   = false;
+    double time_elapsed_ = 0.0;
+
+    std::array<double,8> ir_ranges_;
+    std::array<rclcpp::Subscription<sensor_msgs::msg::Range>::SharedPtr,8> ir_subs_;
 
     geometry_msgs::msg::Pose robot_pose_;
 
@@ -73,35 +88,25 @@ private:
     // -------------------------
     // PARÁMETROS
     // -------------------------
-    double kp_, vmax_, wmax_, ks_, k_tan_;
+    double kp_;
     int controller_type_;
+    double wheel_radius_;
+    double wheel_base_;
+    double v0_;
+    double vmin_;
+    double vmax_;
+    double wmax_;
+    double max_detection_dist_;
+    double max_range_default_;
+    double control_hz_;
+    double d_safe_ = 0.0;
 
-    // Parámetros Braitenberg (NUEVO)
-    double k_front_;   // freno reactivo
-    double k_turn_;    // giro reactivo
-
-    // -------------------------
-    // SENSORES IR (NUEVO)
-    // -------------------------
-    std::array<double, 8> ir_ranges_;   // lecturas IR
-    std::array<
-        rclcpp::Subscription<sensor_msgs::msg::Range>::SharedPtr,
-        8
-    > ir_subs_;                          // suscriptores IR
+    std::array<double,8> GL_;
+    std::array<double,8> GR_;
 
     // -------------------------
     // MÉTRICAS
     // -------------------------
     std::unique_ptr<MetricsLogger> metrics_;
-    double time_elapsed_ = 0.0;
-
-    // -------------------------
-    // UTILIDAD
-    // -------------------------
-    double normalizeAngle(double a)
-    {
-        while (a > M_PI)  a -= 2.0 * M_PI;
-        while (a < -M_PI) a += 2.0 * M_PI;
-        return a;
-    }
+    
 };
