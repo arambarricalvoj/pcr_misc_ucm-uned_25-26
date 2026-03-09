@@ -1,34 +1,20 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{Instalación y despliegue}{5}{section*.8}%
-\contentsline {section}{Tarea 1: experimento de control de posición de un robot móvil.}{6}{section*.10}%
-\contentsline {subsection}{1. Descargar el simulador y agregar el modelo del robot al mismo como se explica en el documento Interfaz de la Práctica.}{6}{section*.11}%
-\contentsline {subsection}{2. Al arrastrar el robot desde el panel lateral y soltarlo en el espacio de trabajo, el robot quedará agregado a la simulación.}{6}{section*.12}%
-\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{6}{section*.14}%
-\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{6}{section*.15}%
-\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{7}{section*.17}%
-\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{8}{section*.19}%
-\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{8}{section*.20}%
-\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{8}{section*.21}%
-\contentsline {section}{Tarea 2: control de posición con evitación de obstáculos.}{24}{section*.56}%
-\contentsline {subsection}{1. Agregar obstáculos al espacio de trabajo, pueden ser paredes, cilindros, etc... \textbf {nota}: habilitar la propiedad “detectable” de los obstáculos para que el robot los pueda detectar con los sensores.}{24}{section*.57}%
-\contentsline {subsection}{2. Implementar el algoritmo de \textit {Braitenberg} por medio de la manipulación de las velocidades del robot.}{25}{section*.60}%
-\contentsline {paragraph}{Funciones de activación}{30}{section*.68}%
-\contentsline {paragraph}{Agregación zonal}{31}{section*.69}%
-\contentsline {paragraph}{Componentes reactivas no lineales}{31}{section*.70}%
-\contentsline {paragraph}{Escalado por intención de avance}{31}{section*.71}%
-\contentsline {paragraph}{Arbitraje híbrido (umbral + blending)}{31}{section*.72}%
-\contentsline {paragraph}{Limitación y conversión a ruedas}{31}{section*.73}%
-\contentsline {paragraph}{Comentarios sobre el diseño}{31}{section*.74}%
-\contentsline {subparagraph}{4. Efecto de la no linealidad en la prioridad de reacción}{32}{section*.75}%
-\contentsline {subparagraph}{5. Estrategia híbrida: umbral crítico y blending suavizado}{32}{section*.76}%
-\contentsline {subparagraph}{6. Escalado por intención de avance y limitación de aceleración}{32}{section*.77}%
-\contentsline {subparagraph}{7. Resumen intuitivo}{32}{section*.78}%
-\contentsline {subparagraph}{8. Recomendaciones prácticas}{32}{section*.79}%
-\contentsline {paragraph}{Mapeo sensorial y activación}{33}{section*.81}%
-\contentsline {paragraph}{Agregación zonal}{33}{section*.82}%
-\contentsline {paragraph}{Salidas reactivas no lineales}{33}{section*.83}%
-\contentsline {paragraph}{Escalado por intención de avance}{33}{section*.84}%
-\contentsline {paragraph}{Híbrido umbral + blending}{33}{section*.85}%
-\contentsline {paragraph}{Razones por las que el enfoque zonal mejora la navegación hacia una pose}{34}{section*.87}%
-\contentsline {section}{ANEXO I: código}{36}{section*.92}%
-\contentsline {section}{Referencias}{50}{figure.caption.111}%
+\contentsline {section}{Instalación y despliegue}{6}{section*.8}%
+\contentsline {section}{Tarea 1: experimento de control de posición de un robot móvil.}{7}{section*.10}%
+\contentsline {subsection}{1. Descargar el simulador y agregar el modelo del robot al mismo como se explica en el documento Interfaz de la Práctica.}{7}{section*.11}%
+\contentsline {subsection}{2. Al arrastrar el robot desde el panel lateral y soltarlo en el espacio de trabajo, el robot quedará agregado a la simulación.}{7}{section*.12}%
+\contentsline {subsection}{3. Iniciar la simulación y observar el comportamiento del robot. ¿A qué se debe este comportamiento?}{7}{section*.14}%
+\contentsline {subsection}{4. Abrir el script de programación del robot y observar los valores de las velocidades izquierda y derecha.}{7}{section*.15}%
+\contentsline {subsection}{5. Agregar a la simulación un objeto que represente el punto de destino del robot.}{8}{section*.17}%
+\contentsline {subsection}{6. Con las coordenadas del punto de destino y las del robot, calcular las velocidades angular y lineal para controlar su posición.}{9}{section*.19}%
+\contentsline {subsection}{7. Obtener las velocidades que se envían al robot (izquierda y derecha) como resultado del modelo diferencial.}{9}{section*.20}%
+\contentsline {subsection}{8. Implementar una ley de control diferente a la proporcionada y comparar ambas usando los Índices de Comportamiento (\textit {IAE}, \textit {ISE}, \textit {ITAE}, \textit {ITSE}).}{9}{section*.21}%
+\contentsline {section}{Tarea 2: control de posición con evitación de obstáculos.}{25}{section*.56}%
+\contentsline {subsection}{1. Agregar obstáculos al espacio de trabajo, pueden ser paredes, cilindros, etc... \textbf {nota}: habilitar la propiedad “detectable” de los obstáculos para que el robot los pueda detectar con los sensores.}{25}{section*.57}%
+\contentsline {subsection}{2. Implementar el algoritmo de \textit {Braitenberg} por medio de la manipulación de las velocidades del robot.}{26}{section*.60}%
+\contentsline {paragraph}{Funciones de activación}{31}{section*.68}%
+\contentsline {paragraph}{Agregación zonal}{32}{section*.69}%
+\contentsline {paragraph}{Componentes reactivas no lineales}{32}{section*.70}%
+\contentsline {paragraph}{Escalado proporcional a la distancia al objetivo}{32}{section*.72}%
+\contentsline {section}{ANEXO I: código}{36}{section*.79}%
+\contentsline {section}{Referencias}{50}{figure.caption.99}%

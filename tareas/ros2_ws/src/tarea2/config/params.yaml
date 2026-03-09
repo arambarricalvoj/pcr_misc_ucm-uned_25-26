@@ -3,7 +3,7 @@ braitenberg_target_controller:
     vmax: 1.0
     wmax: 1.0
     kp: 0.15
-    controller_type: 0
+    controller_type: 1
     ks: 1.0
     k_front: 1.6
     k_turn: 4.0

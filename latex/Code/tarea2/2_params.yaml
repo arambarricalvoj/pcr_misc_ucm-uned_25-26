@@ -1,0 +1,17 @@
+braitenberg_target_controller:
+  ros__parameters:
+    vmax: 1.0
+    wmax: 1.0
+    kp: 0.15
+    controller_type: 0
+    ks: 1.0
+    k_front: 1.6
+    k_turn: 4.0
+    k_tan: 10.0
+    k_att: 1.2
+    k_rep: 1.2
+    k_v: 0.6
+    d_dead: 0.6
+    d_min: 0.08
+    F_max: 0.2
+    filter_beta: 0.85 
