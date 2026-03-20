@@ -1,0 +1,13 @@
+formation_controller:
+  ros__parameters:
+    kf: 1.0
+
+khepera_controller:
+  ros__parameters:
+    vmax: 1.0
+    wmax: 1.0
+    kp: 0.65
+    controller_type: 1
+
+# controller_type: 0 --> ICC reactivo
+# controller_type: 1 --> ICC geométrico

@@ -65,6 +65,18 @@ ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{
 ros2 action send_goal /execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: .nan, y: .nan, z: .nan}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}"
 ```
 
+# Ejecución del controller para la tarea 3
+```bash
+source /opt/ros/jazzy/setup.bash
+cd /home/javierac/pcr_misc/tareas/ros2_ws/
+colcon build
+source /home/javierac/pcr_misc/tareas/ros2_ws/install/setup.bash
+
+ros2 run tarea3 formation_controller --ros-args -p kf:=1.0
+ros2 run tarea3 pose_controller --ros-args --params-file src/tarea3/config/params.yaml 
+ros2 action send_goal /master_khepera_iv/execute_trajectory interfaces/action/ExecuteTrajectory "{target_pose: {position: {x: .75, y: 0.0, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 0.05, w: 1.0}}}" --feedback
+```
+
 # Referencias
 [https://www.coppeliarobotics.com/#](https://www.coppeliarobotics.com/#)
 
