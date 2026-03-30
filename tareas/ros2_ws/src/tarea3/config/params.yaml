@@ -9,5 +9,11 @@ khepera_controller:
     kp: 0.65
     controller_type: 1
 
+formation_controller:
+  ros__parameters:
+    formation_type: "line"
+    kf: 1.0
+
+
 # controller_type: 0 --> ICC reactivo
 # controller_type: 1 --> ICC geométrico
