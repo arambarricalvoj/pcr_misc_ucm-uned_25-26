@@ -121,7 +121,7 @@ std::tuple<double,double,double> FormationController::getAnglesForFormation()
 {
     if (formation_type_ == "cross") {
         // T: izquierda, derecha, delante
-        return { 90.0, -90.0, 0.0 };
+        return { 90.0, -90.0, 180.0 };
     }
     else if (formation_type_ == "circle") {
         // Y: izquierda, derecha, detrás

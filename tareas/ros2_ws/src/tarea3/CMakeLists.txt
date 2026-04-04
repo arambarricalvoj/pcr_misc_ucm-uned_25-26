@@ -17,6 +17,7 @@ include_directories(include)
 add_library(tarea3_lib
     src/pose_controller.cpp
     src/formation_controller.cpp
+    src/coordinated_formation_controller.cpp
     src/service_utils.cpp
     src/metrics_utils.cpp
 )
@@ -44,6 +45,14 @@ target_link_libraries(formation_controller tarea3_lib)
 
 # Instalación
 install(TARGETS formation_controller
+    DESTINATION lib/${PROJECT_NAME}
+)
+
+add_executable(coordinated_formation_controller src/main_coordinated_formation_controller.cpp)
+target_link_libraries(coordinated_formation_controller tarea3_lib)
+
+# Instalación
+install(TARGETS coordinated_formation_controller
     DESTINATION lib/${PROJECT_NAME}
 )
 
