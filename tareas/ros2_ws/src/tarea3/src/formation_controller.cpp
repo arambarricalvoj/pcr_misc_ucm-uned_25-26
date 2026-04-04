@@ -1,4 +1,8 @@
 #include "tarea3/formation_controller.hpp"
+#include <ament_index_cpp/get_package_share_directory.hpp>
+#include <filesystem>
+#include <iostream>
+#include <iomanip>
 #include <chrono>
 #include <cmath>
 
@@ -42,6 +46,15 @@ FormationController::FormationController()
     timer_ = create_wall_timer(
         50ms,
         std::bind(&FormationController::controlLoop, this));
+
+    std::string pkg_share = ament_index_cpp::get_package_share_directory("tarea3");
+    std::filesystem::path pkg_path = std::filesystem::path(pkg_share)
+        .parent_path().parent_path().parent_path().parent_path();
+
+    std::string results_dir = (pkg_path / "src" / "tarea3" / "results").string() + "/";
+    std::filesystem::create_directories(results_dir);
+
+    logger_ = std::make_unique<FormationLogger>(results_dir + "formation_log.csv");
 }
 
 void FormationController::masterCallback(const geometry_msgs::msg::Pose::SharedPtr msg)
@@ -93,6 +106,29 @@ void FormationController::controlLoop()
     publishCmd(slave1_pub_, slave1_pose_, x1d, y1d);
     publishCmd(slave2_pub_, slave2_pose_, x2d, y2d);
     publishCmd(slave3_pub_, slave3_pose_, x3d, y3d);
+
+    time_elapsed_ += 0.05;
+    xL = master_pose_.position.x;
+    yL = master_pose_.position.y;
+    thetaL = extractYaw(master_pose_);
+
+    double x1 = slave1_pose_.position.x;
+    double y1 = slave1_pose_.position.y;
+    double th1 = extractYaw(slave1_pose_);
+
+    double x2 = slave2_pose_.position.x;
+    double y2 = slave2_pose_.position.y;
+    double th2 = extractYaw(slave2_pose_);
+
+    double x3 = slave3_pose_.position.x;
+    double y3 = slave3_pose_.position.y;
+    double th3 = extractYaw(slave3_pose_);
+
+    logger_->log(time_elapsed_,
+                xL, yL, thetaL,
+                x1, y1, th1,
+                x2, y2, th2,
+                x3, y3, th3);
 }
 
 
@@ -166,7 +202,17 @@ void FormationController::publishCmd(
         while (e_theta > M_PI)  e_theta -= 2*M_PI;
         while (e_theta < -M_PI) e_theta += 2*M_PI;
 
-        cmd.linear.x  = std::clamp(0.5 * dist, -0.12, 0.12);
+        //double v = 0.5 * dist * cos(e_theta);   // velocidad lineal
+        //double w = 1.5 * e_theta;               // velocidad angular
+
+        //if (v < 0)
+        //    w = -w;
+
+        //cmd.linear.x  = std::clamp(v, -0.12, 0.12);
+        //cmd.angular.z = std::clamp(w, -1.0, 1.0);
+
+        //cmd.linear.x  = std::clamp(0.5 * dist, -0.12, 0.12);
+        cmd.linear.x = std::clamp(0.5 * dist * cos(e_theta), -0.12, 0.12);
         cmd.angular.z = std::clamp(1.5 * e_theta, -1.0, 1.0);
 
         pub->publish(cmd);

@@ -1,4 +1,8 @@
 #include "tarea3/coordinated_formation_controller.hpp"
+#include <ament_index_cpp/get_package_share_directory.hpp>
+#include <filesystem>
+#include <iostream>
+#include <iomanip>
 #include <chrono>
 #include <cmath>
 
@@ -55,6 +59,16 @@ CoordinatedFormationController::CoordinatedFormationController()
     timer_ = create_wall_timer(
         50ms,
         std::bind(&CoordinatedFormationController::controlLoop, this));
+    
+    std::string pkg_share = ament_index_cpp::get_package_share_directory("tarea3");
+    std::filesystem::path pkg_path = std::filesystem::path(pkg_share)
+        .parent_path().parent_path().parent_path().parent_path();
+
+    std::string results_dir = (pkg_path / "src" / "tarea3" / "results").string() + "/";
+    std::filesystem::create_directories(results_dir);
+
+    logger_ = std::make_unique<FormationLogger>(results_dir + "formation_log.csv");
+
 }
 
 // ---------------- CALLBACKS ----------------
@@ -109,6 +123,30 @@ void CoordinatedFormationController::controlLoop()
     publishRigid(slave1_pub_, slave1_pose_, x1d, y1d, x1_rel, y1_rel);
     publishRigid(slave2_pub_, slave2_pose_, x2d, y2d, x2_rel, y2_rel);
     publishRigid(slave3_pub_, slave3_pose_, x3d, y3d, x3_rel, y3_rel);
+
+    time_elapsed_ += 0.05;
+    double xL = master_pose_.position.x;
+    double yL = master_pose_.position.y;
+    double thL = extractYaw(master_pose_);
+
+    double x1 = slave1_pose_.position.x;
+    double y1 = slave1_pose_.position.y;
+    double th1 = extractYaw(slave1_pose_);
+
+    double x2 = slave2_pose_.position.x;
+    double y2 = slave2_pose_.position.y;
+    double th2 = extractYaw(slave2_pose_);
+
+    double x3 = slave3_pose_.position.x;
+    double y3 = slave3_pose_.position.y;
+    double th3 = extractYaw(slave3_pose_);
+
+    logger_->log(time_elapsed_,
+                xL, yL, thL,
+                x1, y1, th1,
+                x2, y2, th2,
+                x3, y3, th3);
+
 }
 
 // ---------------- FORMACIÓN ----------------

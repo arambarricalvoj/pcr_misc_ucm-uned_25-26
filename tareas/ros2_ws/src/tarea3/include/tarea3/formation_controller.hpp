@@ -4,6 +4,8 @@
 #include "geometry_msgs/msg/pose.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 
+#include "formation_logger.hpp"
+
 class FormationController : public rclcpp::Node
 {
 public:
@@ -20,6 +22,9 @@ private:
     void controlLoop();
 
     // Utilidades
+    std::unique_ptr<FormationLogger> logger_;
+    double time_elapsed_ = 0.0;
+
     double extractYaw(const geometry_msgs::msg::Pose &pose);
 
     // Nueva función basada en el paper (ecuación 12)

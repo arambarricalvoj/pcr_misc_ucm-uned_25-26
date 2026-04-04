@@ -7,6 +7,8 @@
 #include <tuple>
 #include <string>
 
+#include "formation_logger.hpp"
+
 class CoordinatedFormationController : public rclcpp::Node
 {
 public:
@@ -43,6 +45,9 @@ private:
     void normalizeAngle(double &a);
 
     // Variables
+    std::unique_ptr<FormationLogger> logger_;
+    double time_elapsed_ = 0.0;
+    
     std::string formation_type_;
 
     geometry_msgs::msg::Pose master_pose_;

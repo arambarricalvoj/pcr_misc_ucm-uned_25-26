@@ -7,7 +7,7 @@ khepera_controller:
 
 formation_controller:
   ros__parameters:
-    formation_type: "line"
+    formation_type: "cross"
     kf: 1.0
 
 

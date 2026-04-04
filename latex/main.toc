@@ -16,5 +16,15 @@
 \contentsline {paragraph}{Agregación zonal}{32}{section*.69}%
 \contentsline {paragraph}{Componentes reactivas no lineales}{32}{section*.70}%
 \contentsline {paragraph}{Escalado proporcional a la distancia al objetivo}{32}{section*.72}%
-\contentsline {section}{ANEXO I: código}{36}{section*.79}%
-\contentsline {section}{Referencias}{50}{figure.caption.99}%
+\contentsline {section}{Tarea 3: Control de formaciones}{36}{section*.78}%
+\contentsline {subsection}{1. Descripción del experimento}{36}{section*.79}%
+\contentsline {subsection}{2. Controlador de formación básico}{36}{section*.80}%
+\contentsline {subsection}{3. Controlador de formación coordinado}{37}{section*.81}%
+\contentsline {paragraph}{Posición objetivo}{37}{section*.82}%
+\contentsline {paragraph}{Control cinemático}{37}{section*.83}%
+\contentsline {paragraph}{Modos de operación}{37}{section*.84}%
+\contentsline {subsection}{4. Implementación en ROS2}{38}{section*.85}%
+\contentsline {subsection}{5. Resultados}{38}{section*.86}%
+\contentsline {subsection}{6. Conclusiones}{44}{section*.99}%
+\contentsline {section}{ANEXO I: código}{45}{section*.101}%
+\contentsline {section}{Referencias}{59}{figure.caption.121}%
